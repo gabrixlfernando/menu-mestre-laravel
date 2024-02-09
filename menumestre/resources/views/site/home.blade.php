@@ -389,7 +389,7 @@
         <div class="detail-box">
           <div class="heading_container">
             <h2>
-              Nós somos Menu Mestre              </h2>
+              Nós somos Menu Mestre            </h2>
           </div>
           <p>
             Existem muitas variações de passagens de Lorem Ipsum disponíveis, mas a maioria sofreu alterações
