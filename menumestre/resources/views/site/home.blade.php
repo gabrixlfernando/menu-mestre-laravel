@@ -19,7 +19,7 @@
                                 <div class="col-md-7 col-lg-6 ">
                                     <div class="detail-box">
                                         <h1>
-                                            Restaurante fast food
+                                            Restaurante Menu Mestre
                                         </h1>
                                         <p>
                                             Doloremque, itaque aperiam facilis rerum, comodi, temporibus sapiente ad
@@ -28,7 +28,7 @@
                                         </p>
                                         <div class="btn-box">
                                             <a href="" class="btn1">
-                                                Peça agora
+                                                Conheça Nosso Menu
                                             </a>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
 
     <!-- offer section -->
 
-    <section class="offer_section layout_padding-bottom">
+    <section class="offer_section layout_padding-bottom" id="menu">
         <div class="offer_container">
             <div class="container ">
                 <div class="row">
@@ -177,7 +177,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $20
+                                            R$20
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -201,7 +201,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $15
+                                            R$15
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -225,7 +225,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $17
+                                            R$17
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -249,7 +249,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $18
+                                            R$18
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -273,7 +273,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $10
+                                            R$10
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -297,7 +297,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $15
+                                            R$15
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -321,7 +321,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $12
+                                            R$12
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -345,7 +345,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $14
+                                            R$14
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -369,7 +369,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            $10
+                                            R$10
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -391,7 +391,7 @@
 
     <!-- about section -->
 
-    <section class="about_section layout_padding">
+    <section class="about_section layout_padding" id="sobre">
         <div class="container  ">
 
             <div class="row">
@@ -426,7 +426,7 @@
     <!-- end about section -->
 
     <!-- book section -->
-    <section class="book_section layout_padding">
+    <section class="book_section layout_padding" id="contato">
         <div class="container">
             <div class="heading_container">
                 <h2>
@@ -484,7 +484,7 @@
     <!-- end book section -->
 
     <!-- client section -->
-
+{{--
     <section class="client_section layout_padding-bottom">
         <div class="container">
             <div class="heading_container heading_center psudo_white_primary mb_45">
@@ -533,7 +533,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- end client section -->
 

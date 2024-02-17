@@ -43,7 +43,7 @@
     <header class="header_section">
         <div class="container">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ url('/') }}">
               <span>
                 Menu Mestre
               </span>
@@ -56,23 +56,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav  mx-auto ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Início <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{ url('/') }}">Início <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="menu.html">Menu</a>
+                  <a class="nav-link" href="#menu">Menu</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html">Sobre</a>
+                  <a class="nav-link" href="#sobre">Sobre</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="book.html">Contato</a>
+                  <a class="nav-link" href="#contato">Contato</a>
                 </li>
               </ul>
-              <div class="user_option">
-                <!-- <a href="" class="user_link">
+              {{-- <div class="user_option">
+                 <a href="" class="user_link">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                </a> -->
-                <a class="cart_link" href="#">
+                </a>
+                 <a class="cart_link" href="#">
                   <i class="fa-solid fa-cart-shopping"></i>
                 </a>
                 <form class="form-inline">
@@ -83,7 +83,7 @@
                 <a href="" class="order_online">
                   <i class="fa fa-user" aria-hidden="true"></i>Login
                 </a>
-              </div>
+              </div> --}}
             </div>
           </nav>
         </div>
@@ -158,7 +158,7 @@
                 Diariamente
               </p>
               <p>
-                10.00 Am -10.00 Pm
+                10 horas - 22 horas
               </p>
             </div>
           </div>
