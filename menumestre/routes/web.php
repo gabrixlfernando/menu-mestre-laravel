@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdministrativoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Middleware\AutRestauranteMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +23,26 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
+
+// login
+
+Route::get('/admin', [LoginController::class, 'index'])->name('login');
+
+// autenticação
+Route::post('/admin', [LoginController::class, 'autenticar'])->name('login');
+
+Route::middleware(['autenticacao:administrativo'])->group(function(){
+
+    Route::get('/dashboard/administrativo', [AdministrativoController::class, 'index'])->name('dashboard.administrativo');
+
+});
+
+
+// Route::get('/dashboard/administrativo', [AdministrativoController::class, 'index'])->name('dashboard.administrativo');
+
+
+// logout
+Route::get('/sair', function(){
+    session()->flush();
+    return redirect('/');
+})->name('sair');
