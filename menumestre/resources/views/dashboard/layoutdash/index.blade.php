@@ -21,8 +21,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.12.6/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.12.6/dist/sweetalert2.min.css">
 
+     <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/bootstrap.css ')}}" />
+
+  <link rel="stylesheet" href="{{ asset('../assets/css/home.css')}}">
+
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('../assets/css/dashboard.css')}}">
+
+
 
 </head>
 
@@ -38,47 +45,47 @@
                         <span title="Ativo!"></span>
                     </div>
                     <div class="perfil-title">
-                        <span class="perfil-nome">{{ $funcionario->nomeFuncionario }}</span>
-                        <span class="perfil-cargo">{{ $funcionario->tipoFuncionario }}</span>
+                        <span class="perfil-nome">nome</span>
+                        <span class="perfil-cargo">tipo</span>
                     </div>
                 </div>
-                <form class="login" action="logout.php" method="POST">
-                    <button class="btn-sair" title="Sair"><span class="sair-icon"><i class="ri-logout-circle-r-line"></i></span></i><span>Sair</span></button>
-                </form>
+
+                   <a class="btn btn-danger" href="{{ route('sair') }}"><i class="ri-logout-circle-r-line"></i>Sair</a>
+
             </div>
         </header>
-        {{-- <nav id="menu">
+        <nav id="menu">
             <div class="navbar">
                 <ul>
 
-                    <li><a href="index.php?p=home"><span class="nav-icon"><i class="ri-home-3-line"></i></span><span class="nav-title">Dashboard</span></a></li>
+                    <li><a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i class="ri-home-3-line"></i></span><span class="nav-title">Dashboard</span></a></li>
                     <li><a href="index.php?p=pedido"><span class="nav-icon"><i class="ri-notification-3-line"></i></span><span class="nav-title">Pedidos</span></a></li>
 
-                    <!-- Verificação se é Gerente ou Chef de Cozinha -->
-                    <?php if ($dadosFuncionario['especialidadeFuncionario'] === 'Chef de Cozinha') : ?>
-                        <li class="acesso-negado" >
+                     <!-- Verificação se é Gerente ou Chef de Cozinha -->
+
+                        {{-- <li class="acesso-negado" >
                             <a href="#" onclick="acessoNegado(); return false;">
                                 <span class="nav-icon"><i class="ri-restaurant-line"></i></span>
                                 <span class="nav-title">Cardápio</span>
                             </a><span class="lock"><i class="ri-lock-line"></i></span>
-                        </li>
-                    <?php else : ?>
+                        </li> --}}
+
                         <li>
                             <a href="index.php?p=cardapio">
                                 <span class="nav-icon"><i class="ri-restaurant-line"></i></span>
                                 <span class="nav-title">Cardápio</span>
                             </a>
                         </li>
-                    <?php endif; ?>
 
-                    <!-- <li><a href="index.php?p=funcionario"><span class="nav-icon"><i class="ri-shake-hands-line"></i></span><span class="nav-title">Funcionários</span></a>
+
+                    {{-- < <li><a href="index.php?p=funcionario"><span class="nav-icon"><i class="ri-shake-hands-line"></i></span><span class="nav-title">Funcionários</span></a>
                     <li><a href="index.php?p=configuracao"><span class="nav-icon"><i class="ri-settings-2-line"></i></span><span class="nav-title">Configurações</span></a>
-                    <li><a href="index.php?p=perfil"><span class="nav-icon"><i class="ri-user-line"></i></span><span class="nav-title">Perfil</span></a></li>  -->
+                    <li><a href="index.php?p=perfil"><span class="nav-icon"><i class="ri-user-line"></i></span><span class="nav-title">Perfil</span></a></li>   --}}
 
                     </li>
                 </ul>
             </div>
-        </nav> --}}
+        </nav>
 
         {{-- <main>
 

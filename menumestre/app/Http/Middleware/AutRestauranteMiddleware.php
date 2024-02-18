@@ -33,13 +33,20 @@ class AutRestauranteMiddleware
 
                 if($tipoUsuario instanceof Funcionario){
                     $tipo = $tipoUsuario->tipoFuncionario;
+
                 }
             }
 
             $tipoUser = session('tipo_usuario');
 
+
+
             if($tipo === $tipoUser){
+
+                session(['tipo_usuario_id' => $usuario->tipo_usuario_id]);
+                
                 return $next($request);
+
             }else{
                 return back()->withErrors(['email' => 'Acesso não permitido para esse perfil']);
             }
