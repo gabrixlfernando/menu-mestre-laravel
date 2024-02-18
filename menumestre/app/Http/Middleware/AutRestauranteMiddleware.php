@@ -20,20 +20,19 @@ class AutRestauranteMiddleware
     {
         $email = session('email');
 
-        if($email){
+        if ($email) {
             $usuario = Usuario::where('email', $email)->first();
-            if(!$usuario){
+            if (!$usuario) {
                 return redirect()->route('login')->withErrors(['email' => 'Não autenticado']);
             }
 
             $tipoUsuario = $usuario->tipo_usuario;
 
-            if($tipoUsuario) {
+            if ($tipoUsuario) {
                 $tipo = null;
 
-                if($tipoUsuario instanceof Funcionario){
+                if ($tipoUsuario instanceof Funcionario) {
                     $tipo = $tipoUsuario->tipoFuncionario;
-
                 }
             }
 
@@ -41,13 +40,12 @@ class AutRestauranteMiddleware
 
 
 
-            if($tipo === $tipoUser){
+            if ($tipo === $tipoUser) {
 
                 session(['tipo_usuario_id' => $usuario->tipo_usuario_id]);
-                
-                return $next($request);
 
-            }else{
+                return $next($request);
+            } else {
                 return back()->withErrors(['email' => 'Acesso não permitido para esse perfil']);
             }
         }
