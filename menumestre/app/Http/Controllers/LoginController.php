@@ -56,7 +56,7 @@ class LoginController extends Controller
         // dd($tipoUsuario);
 
             if($tipoUsuario->tipoFuncionario == 'administrativo'){
-
+        
                 session([
                     'id'            => $tipoUsuario->idFuncionario,
                     'nome'          => $tipoUsuario->nomeFuncionario,

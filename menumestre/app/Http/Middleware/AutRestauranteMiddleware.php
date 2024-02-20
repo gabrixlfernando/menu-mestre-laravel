@@ -45,6 +45,7 @@ class AutRestauranteMiddleware
                 session(['tipo_usuario_id' => $usuario->tipo_usuario_id]);
 
                 return $next($request);
+                
             } else {
                 return back()->withErrors(['email' => 'Acesso não permitido para esse perfil']);
             }

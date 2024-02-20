@@ -25,6 +25,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/bootstrap.css ')}}" />
 
   <link rel="stylesheet" href="{{ asset('../assets/css/home.css')}}">
+  <link rel="stylesheet" href="{{ asset('../assets/css/cardapio.css')}}">
 
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('../assets/css/dashboard.css')}}">
@@ -45,8 +46,8 @@
                         <span title="Ativo!"></span>
                     </div>
                     <div class="perfil-title">
-                        <span class="perfil-nome">nome</span>
-                        <span class="perfil-cargo">tipo</span>
+                        <span class="perfil-nome">{{ $funcionario -> nomeFuncionario }}</span>
+                        <span class="perfil-cargo">{{ $funcionario -> tipoFuncionario }}</span>
                     </div>
                 </div>
 
@@ -58,8 +59,8 @@
             <div class="navbar">
                 <ul>
 
-                    <li><a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i class="ri-home-3-line"></i></span><span class="nav-title">Dashboard</span></a></li>
-                    <li><a href="index.php?p=pedido"><span class="nav-icon"><i class="ri-notification-3-line"></i></span><span class="nav-title">Pedidos</span></a></li>
+                    <li><a href="{{ url('/dashboard/administrativo')}}"><span class="nav-icon"><i class="ri-home-3-line"></i></span><span class="nav-title">Dashboard</span></a></li>
+                    <li><a href="{{ url('/dashboard/administrativo/cardapio')}}"><span class="nav-icon"><i class="ri-notification-3-line"></i></span><span class="nav-title">Pedidos</span></a></li>
 
                      <!-- Verificação se é Gerente ou Chef de Cozinha -->
 
@@ -71,7 +72,7 @@
                         </li> --}}
 
                         <li>
-                            <a href="index.php?p=cardapio">
+                            <a href="{{ url('/dashboard/administrativo/cardapio')}}">
                                 <span class="nav-icon"><i class="ri-restaurant-line"></i></span>
                                 <span class="nav-title">Cardápio</span>
                             </a>
@@ -86,40 +87,6 @@
                 </ul>
             </div>
         </nav>
-
-        {{-- <main>
-
-          <?php
-
-
-            $pagina = @$_GET['p'];
-
-            switch ($pagina) {
-                case 'home':
-                    require_once('home/home.php');
-                    break;
-                case 'cardapio':
-                    require_once('cardapio/cardapio.php');
-
-                default:
-
-                    break;
-            }
-
-
-
-            // if($pagina == NULL){
-            //     echo "Dashboard";
-            // }else{
-            //     if($pagina == 'servico'){
-            //         require_once('servico/servico.php');
-            //     }
-            // }
-
-           ?>
-
-
-        </main> --}}
 
         <main >
             @yield('conteudo')

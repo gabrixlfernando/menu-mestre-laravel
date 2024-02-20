@@ -8,7 +8,7 @@
     <div class="home-estatisticas">
         <!-- Cabeçalho com o nome do funcionário e a data atual -->
         <div class="cabecalho-container">
-            <h2>Olá, nome funcionario</h2>
+            <h2>Olá, {{ $funcionario -> nomeFuncionario }}</h2>
             <p id="data-atual"></p>
         </div>
         <!-- Container das estatísticas -->

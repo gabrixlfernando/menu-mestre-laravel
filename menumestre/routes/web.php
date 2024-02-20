@@ -35,6 +35,8 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo', [AdministrativoController::class, 'index'])->name('dashboard.administrativo');
 
+    Route::get('/dashboard/administrativo/cardapio', [AdministrativoController::class, 'cardapio'])->name('dashboard.administrativo.cardapio');
+
 });
 
 
