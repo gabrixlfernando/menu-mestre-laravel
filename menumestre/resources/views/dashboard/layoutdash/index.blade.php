@@ -38,11 +38,11 @@
 
     <div class="grid-container">
         <header>
-                <img class="logo" src="./img/logo/MM-Logo-dark.svg" alt="">
+                <img class="logo" src="{{ asset('../assets//images/logo/MM-Logo-dark.svg')}}" alt="">
             <div>
                 <div class="perfil-info">
                     <div class="funcionario-img">
-                        <img class="" src="{{ asset('../assets//images/dashboard/logo.png')}}">
+                        <img class="" src="{{ asset('../assets/images/funcionarios/' . $funcionario->fotoFuncionario) }}">
                         <span title="Ativo!"></span>
                     </div>
                     <div class="perfil-title">

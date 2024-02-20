@@ -39,7 +39,8 @@
             </a>
     </div>
 
-    <div class="card card-show" data-categoria="">
+    @foreach ($cardapio as $item)
+    <div class="card card-show" data-categoria="{{ $item -> categoriaProduto }}">
 
         {{-- <!-- Botão de ativação/desativação -->
         <div class="card-desativado">
@@ -55,10 +56,10 @@
                 <span class="card-new-item">Novo!</span>
 
             <a class="card-ativo-btn" title="Ativo (Clique para desativar)" href=""><i class="ri-eye-line""></i></a></td>
-            <img src="./img/produtos/'.['categoriaProduto'] .'/'['fotoProduto'] . '">
-            <h3></h3>
-            <p></p>
-            <span class="card-price">R$</span>
+            <img src="{{ asset('../assets/images/cardapio/' . $item->fotoProduto) }}">
+            <h3>{{ $item -> nomeProduto }}</h3>
+            <p>{{ $item -> descricaoProduto }}</p>
+            <span class="card-price">R${{ $item -> valorProduto }}</span>
         </div>
 
         <!-- Botão de edição -->
@@ -70,6 +71,8 @@
         </div>
     </div>
 
+    @endforeach
+    </div>
 </div>
 
 @endsection

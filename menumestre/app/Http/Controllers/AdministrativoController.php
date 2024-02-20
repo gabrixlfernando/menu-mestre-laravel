@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cardapio;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,9 @@ class AdministrativoController extends Controller
     //busacando o funcionario pelo id no banco de dados
     $funcionario = Funcionario::find($id);
 
-        return view('dashboard.administrativo.cardapio', compact('funcionario'));
+    $cardapio = Cardapio::all();
+
+        return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
     }
 
 
