@@ -10,5 +10,7 @@ class Cardapio extends Model
     use HasFactory;
 
     protected $table = 'tblprodutos';
+
+    public $timestamps = false;
     protected $primaryKey = 'idProduto';
 }

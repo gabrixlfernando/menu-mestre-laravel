@@ -63,7 +63,7 @@
 
         for (const card of cards) {
             const categoriaProduto = card.getAttribute('data-categoria');
-            
+
             if (categoria === 'todos' || categoria === categoriaProduto) {
                 card.style.display = 'block';
             } else {
@@ -86,7 +86,7 @@
         } else if (categoria === 'bebida') {
         btnBebida.classList.add('filtro-ativo');
         } else if (categoria === 'sobremesa') {
-        btnSobremesa.classList.add('filtro-ativo');    
+        btnSobremesa.classList.add('filtro-ativo');
         }
     }
 
@@ -96,6 +96,28 @@
             icon: 'error',
             title: 'Acesso Negado!',
             text: 'Você não tem permissão para acessar esta página como Chef de Cozinha.',
+        });
+    }
+
+    function desaCardapio() {
+        Swal.fire({
+            title: 'Desativado!',
+            text: 'O item não está mais visível no site.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '/dashboard/administrativo/cardapio';
+        });
+    }
+
+    function ativaCardapio(){
+        Swal.fire({
+            title: 'Ativado!',
+            text: 'O item está visível no site.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '/dashboard/administrativo/cardapio';
         });
     }
 
