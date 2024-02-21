@@ -27,6 +27,7 @@
             </button>
         </div>
 
+
         <!-- Container dos cards de produtos -->
         <div class="card-container" id="card-container">
             <!-- Card para adicionar novo prato -->
@@ -51,7 +52,7 @@
                     @if (empty($item['statusProduto']) || strtolower($item['statusProduto']) == 'inativo')
                         <!-- Botão de ativação/desativação -->
                         <div class="card-desativado">
-                            <a class="card-desativado-btn" title="Desativado (Clique para ativar)" 
+                            <a class="card-desativado-btn" title="Desativado (Clique para ativar)"
                                 href="{{ route('ativar.produto', ['idProduto' => $item->idProduto]) }}">
                                 <i class="ri-eye-off-line"></i>
                             </a>

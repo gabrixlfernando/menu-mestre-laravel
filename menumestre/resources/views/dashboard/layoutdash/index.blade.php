@@ -107,9 +107,9 @@
     </div>
 
 
-
+    <!-- Importe a biblioteca Axios para fazer requisições AJAX -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--js-->
-
     <script src="{{ asset('../assets/js/main.js') }}"></script>
 
 </body>

@@ -381,15 +381,12 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-box">
-                <a href="">Veja mais</a>
-            </div>
         </div>
     </section>
 
     <!-- end food section -->
 
-    <!-- about section -->
+    <!-- sobre section -->
 
     <section class="about_section layout_padding" id="sobre">
         <div class="container  ">
@@ -423,9 +420,9 @@
         </div>
     </section>
 
-    <!-- end about section -->
+    <!-- fim sobre section -->
 
-    <!-- book section -->
+    <!-- contato section -->
     <section class="book_section layout_padding" id="contato">
         <div class="container">
             <div class="heading_container">
@@ -441,32 +438,12 @@
                                 <input type="text" class="form-control" placeholder="Seu Nome" />
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="Telefone" />
-                            </div>
-                            <div>
                                 <input type="email" class="form-control" placeholder="Seu Email" />
                             </div>
                             <div>
-                                <select class="form-control nice-select wide">
-                                    <option value="" disabled selected>
-                                        Quantas pessoas? </option>
-                                    <option value="">
-                                        2
-                                    </option>
-                                    <option value="">
-                                        3
-                                    </option>
-                                    <option value="">
-                                        4
-                                    </option>
-                                    <option value="">
-                                        5
-                                    </option>
-                                </select>
+                                <input type="text" class="form-control" placeholder="Telefone" />
                             </div>
-                            <div>
-                                <input type="date" class="form-control">
-                            </div>
+                            <textarea name="" id="" cols="30" rows="10" class="form-control textarea" placeholder="Escreva sua mensagem"></textarea>
                             <div class="btn_box">
                                 <button type="submit">Enviar</button>
                             </div>
@@ -481,60 +458,7 @@
             </div>
         </div>
     </section>
-    <!-- end book section -->
+    <!-- fim contato section -->
 
-    <!-- client section -->
-{{--
-    <section class="client_section layout_padding-bottom">
-        <div class="container">
-            <div class="heading_container heading_center psudo_white_primary mb_45">
-                <h2>
-                    O que dizem nossos clientes </h2>
-            </div>
-            <div class="carousel-wrap row ">
-                <div class="owl-carousel client_owl-carousel">
-                    <div class="item">
-                        <div class="box">
-                            <div class="detail-box">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidente
-                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                                <h6>
-                                    Moana Michell
-                                </h6>
-                                <p>
-                                    magna aliqua
-                                </p>
-                            </div>
-                            <div class="img-box">
-                                <img src="{{ asset('../assets/images/client1.jpg') }}" alt="" class="box-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="box">
-                            <div class="detail-box">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                                </p>
-                                <h6>
-                                    Mike Hamell
-                                </h6>
-                                <p>
-                                    magna aliqua
-                                </p>
-                            </div>
-                            <div class="img-box">
-                                <img src="{{ asset('../assets/images/client2.jpg') }}" alt="" class="box-img">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    <!-- end client section -->
 
 @endsection

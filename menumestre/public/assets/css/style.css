@@ -695,7 +695,7 @@ a:focus {
 .book_section .form_container .form-control {
   width: 100%;
   border: none;
-  height: 50px;
+  height: 70px;
   margin-bottom: 25px;
   padding-left: 25px;
   border: 1px solid #999;
@@ -705,7 +705,9 @@ a:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
+  resize: none;
 }
+
 
 .book_section .form_container .form-control::-webkit-input-placeholder {
   color: #222222;

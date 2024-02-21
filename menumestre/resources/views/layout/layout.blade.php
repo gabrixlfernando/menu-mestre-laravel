@@ -173,6 +173,8 @@
       <!-- footer section -->
       <!-- jQery -->
       <script src="{{ asset('../assets/js/jquery-3.4.1.min.js') }}"></script>
+      <!-- Importe a biblioteca Axios para fazer requisições AJAX -->
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <!-- popper js -->
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
       </script>
