@@ -51,7 +51,7 @@
                     @if (empty($item['statusProduto']) || strtolower($item['statusProduto']) == 'inativo')
                         <!-- Botão de ativação/desativação -->
                         <div class="card-desativado">
-                            <a class="card-desativado-btn" title="Desativado (Clique para ativar)" onclick="ativaCardapio()"
+                            <a class="card-desativado-btn" title="Desativado (Clique para ativar)" 
                                 href="{{ route('ativar.produto', ['idProduto' => $item->idProduto]) }}">
                                 <i class="ri-eye-off-line"></i>
                             </a>
@@ -66,7 +66,7 @@
                             <span class="card-new-item">Novo!</span>
                         @endif
 
-                        <a class="card-ativo-btn" title="Ativo (Clique para desativar)" onclick="desaCardapio()"
+                        <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
                             href="{{ route('dashboard.administrativo.cardapio.desativar', ['idProduto' => $item->idProduto]) }}"><i
                                 class="ri-eye-line""></i></a></td>
                         <img src="{{ asset('../assets/images/cardapio/' . $item->fotoProduto) }}">
@@ -86,5 +86,5 @@
             @endforeach
         </div>
     </div>
-
+    @include('sweetalert::alert')
 @endsection

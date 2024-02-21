@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
 use App\Models\Funcionario;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
 
@@ -64,22 +65,15 @@ class AdministrativoController extends Controller
                 $cardapio->save();
 
 
-            //    // Exiba o alerta com SweetAlert
-            //     echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>";
-            //     echo "<script>
-            //         Swal.fire({
-            //             title: 'Desativado!',
-            //             text: 'O item não está mais visível no site.',
-            //             icon: 'success',
-            //             confirmButtonText: 'OK'
-            //         }).then(() => {
-            //             window.location.href = '/dashboard/administrativo/cardapio';
-            //         });
-            //     </script>";
-        return redirect()->back()->with('success', 'O produto foi desativado com sucesso.');
+        Alert::success('Desativado!', 'O item não está mais visível no site.');
+
+       // return redirect()->back()->with('success', 'O produto foi desativado com sucesso.');
+
+       return redirect()->route('dashboard.administrativo.cardapio');
 
             } else {
-                return redirect()->back()->with('error', 'Produto não encontrado.');
+                Alert::error('Erro!', 'Ocorreu um erro ao desativar o item.');
+                return redirect()->route('dashboard.administrativo.cardapio');
             }
         }
 
@@ -91,9 +85,14 @@ class AdministrativoController extends Controller
                 $cardapio->statusProduto = 'ativo';
                 $cardapio->save();
 
-                return redirect()->back()->with('success', 'Produto ativado com sucesso.');
+                Alert::success('Ativado!', 'O item está visível no site.');
+
+                return redirect()->route('dashboard.administrativo.cardapio');
+
+                // return redirect()->back()->with('success', 'Produto ativado com sucesso.');
             } else {
-                return redirect()->back()->with('error', 'Produto não encontrado.');
+                Alert::error('Erro!', 'Ocorreu um erro ao ativar o item.');
+                return redirect()->route('dashboard.administrativo.cardapio');
             }
         }
 

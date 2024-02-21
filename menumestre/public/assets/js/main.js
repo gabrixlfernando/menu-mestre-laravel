@@ -99,28 +99,6 @@
         });
     }
 
-    function desaCardapio() {
-        Swal.fire({
-            title: 'Desativado!',
-            text: 'O item não está mais visível no site.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = '/dashboard/administrativo/cardapio';
-        });
-    }
-
-    function ativaCardapio(){
-        Swal.fire({
-            title: 'Ativado!',
-            text: 'O item está visível no site.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = '/dashboard/administrativo/cardapio';
-        });
-    }
-
     // Obter o elemento onde a data atual será exibida
     var dataAtualElement = document.getElementById('data-atual');
 
