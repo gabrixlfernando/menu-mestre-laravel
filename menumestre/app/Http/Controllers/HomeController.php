@@ -14,36 +14,87 @@ class HomeController extends Controller
         return view('site.home');
     }
 
-    public function salvarNoBanco(Request $request){
+    public function salvarNoBanco(Request $request)
+    {
+        //dd($request->all());
+        // Extrai os dados JSON da requisição
+        $dados = $request->json()->all();
 
 
-        $dados = $request->json()->all(); //recebe os dados do json e transforma em array associativo
+       //r dd($request);
 
+
+        // Valida os dados recebidos
         $validarDados = Validator::make($dados, [
             'nomeContato'       => 'required|max:100',
             'emailContato'      => 'required|email|max:100',
             'foneContato'       => 'required|max:15',
-            // 'assuntoContato'    => 'required|max:100',
+            'assuntoContato'    => 'required|max:100',
             'mensContato'       => 'required',
-
-
         ]);
+        // dd($dados);
 
-       
 
 
-        if ($validarDados->fails()) {//se existir algum erro de valida
-            return response()->json(['erros'=>$validarDados->errors()], 422);
-        }else{
-            $contato = Contato::create($validarDados->validated());//criando um novo contato com os dados validos
 
-            //Por email
 
-            Mail::to('webdequebrada@smpsistema.com.br')->send(new ContatoEmail($contato));
 
-            return response()->json(['success' => 'Email registrado com sucesso!']);
+
+        // Verifica se houve falha na validação
+        if ($validarDados->fails()) {
+
+            return response()->json(['erros' => $validarDados->errors()], 422);
+
+        } else {
+            // Cria um novo registro de contato no banco de dados
+            $contato = Contato::create($validarDados->validated());
+
+            // Envia e-mail
+            try {
+                Mail::to('webdequebrada@smpsistema.com.br')->send(new ContatoEmail($contato));
+            } catch (\Exception $e) {
+                // Em caso de erro no envio do e-mail, retorna uma resposta de erro
+                return response()->json(['error' => 'Erro ao enviar e-mail.'], 500);
+            }
+
+            // Retorna uma resposta de sucesso
+            return response()->json(['success' => 'E-mail registrado com sucesso!']);
         }
-
     }
+
+    // public function salvarNoBanco(Request $request)
+    // {
+    //     // Valida os dados recebidos do formulário
+    //     $validarDados = Validator::make($request->all(), [
+    //         'nomeContato'       => 'required|max:100',
+    //         'emailContato'      => 'required|email|max:100',
+    //         'foneContato'       => 'required|max:15',
+    //         'mensContato'       => 'required',
+    //     ]);
+
+    //     // Verifica se houve falha na validação
+    //     if ($validarDados->fails()) {
+    //         return response()->json(['erros' => $validarDados->errors()], 422);
+    //     } else {
+    //         // Cria um novo registro de contato no banco de dados
+    //         $contato = Contato::create([
+    //             'nomeContato' => $request->input('nomeContato'),
+    //             'emailContato' => $request->input('emailContato'),
+    //             'foneContato' => $request->input('foneContato'),
+    //             'mensContato' => $request->input('mensContato'),
+    //         ]);
+
+    //         // Envia e-mail
+    //         try {
+    //             Mail::to('webdequebrada@smpsistema.com.br')->send(new ContatoEmail($contato));
+    //         } catch (\Exception $e) {
+    //             // Em caso de erro no envio do e-mail, retorna uma resposta de erro
+    //             return response()->json(['error' => 'Erro ao enviar e-mail.'], 500);
+    //         }
+
+    //         // Retorna uma resposta de sucesso
+    //         return response()->json(['success' => 'E-mail registrado com sucesso!']);
+    //     }
+    // }
 
 }

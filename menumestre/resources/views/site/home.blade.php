@@ -452,16 +452,16 @@
 
                             {{-- opção de selecionar o tipo de assunto do contato --}}
 
-                            {{-- <div>
+                            <div>
                                 <select name="assuntoContato" id="assuntoContato" class="form-control"  value="{{ old('assuntoContato') }}">
                                     <option value="" disabled="" selected="" hidden="">Selecione o assunto</option>
-                                    <option value="Musculação">Musculação</option>
-                                    <option value="Levantamento de força">Levantamento de força</option>
-                                    <option value="Aula de Meditação">Aula de Meditação</option>
-                                    <option value="Aula de boxe">Aula de boxe</option>
+                                    <option value="Feedback">Feedback</option>
+                                    <option value="Pedidos e consultas sobre o cardápio">Pedidos e consultas sobre o cardápio</option>
+                                    <option value="Suporte ao cliente">Suporte ao cliente</option>
+                                    <option value="Trabalhe conosco">Trabalhe conosco</option>
                                 </select>
                                  <div id="assuntoContatoError" class="error-mensagem"></div>
-                            </div> --}}
+                            </div>
                             <div>
                                 <textarea  name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
                                     placeholder="Digitea sua mensagem">{{ old('mensContato') }}</textarea>

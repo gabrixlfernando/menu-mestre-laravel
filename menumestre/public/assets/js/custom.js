@@ -100,7 +100,7 @@ function formContato(e){
         nomeContato : document.getElementById('nomeContato').value,
         emailContato : document.getElementById('emailContato').value,
         foneContato : document.getElementById('foneContato').value,
-        // assuntoContato : document.getElementById('assuntoContato').value,
+        assuntoContato : document.getElementById('assuntoContato').value,
         mensContato : document.getElementById('mensContato').value
     };
 
@@ -149,3 +149,46 @@ function formContato(e){
 
 
 
+// function formContato(e){
+//     e.preventDefault();
+//     e.stopPropagation();
+
+//     var form = document.getElementById('formContato');
+
+//     fetch('/', {
+//         method: 'POST',
+//         headers: {
+//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//         },
+//         body: new FormData(form)
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             return response.json().then(errorData => {
+//                 throw errorData;
+//             });
+//         }
+//         return response.json();
+//     })
+//     .then((data) => {
+//         if (data.success) {
+//             showAlert(
+//                 `<div class="alert alert-success">${data.success}</div>`,
+//                  "contatoMensagem"
+//             );
+//             form.reset();
+//         } else{
+//             showAlert(
+//                 `<div class="alert alert-danger">Erro ao enviar email.</div>`,
+//                 "contatoMensagem"
+//             );
+//         }
+//     })
+//     .catch(error => {
+//             if (error.errors) {
+//                 displayError(error.errors);
+//             }else {
+//                 console.log("Erro desconhecido", error);
+//             }
+//     });
+// }

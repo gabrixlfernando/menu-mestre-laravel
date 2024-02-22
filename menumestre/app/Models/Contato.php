@@ -9,9 +9,7 @@ class Contato extends Model
 {
     use HasFactory;
 
-    protected $table = 'tblcontatos';
-    protected $primaryKey = 'idContato';
+    protected $table = 'contatos';
 
-    public $timestamps = false;
-
+    protected $fillable = ['nomeContato','emailContato', 'foneContato', 'assuntoContato', 'mensContato'];
 }
