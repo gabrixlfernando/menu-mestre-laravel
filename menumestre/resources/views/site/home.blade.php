@@ -464,7 +464,7 @@
                             </div>
                             <div>
                                 <textarea  name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
-                                    placeholder="Digitea sua mensagem">{{ old('mensContato') }}</textarea>
+                                    placeholder="Digite a sua mensagem">{{ old('mensContato') }}</textarea>
                                     <div id="mensContatoError" class="error-mensagem"></div>
                             </div>
                             <div class="btn_box">
