@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
+Route::post('/', [HomeController::class, 'salvarNoBanco'])->name('contato.enviar');
+
 // login
 
 Route::get('/admin', [LoginController::class, 'index'])->name('login');

@@ -384,7 +384,7 @@
         </div>
     </section>
 
-    <!-- end food section -->
+    <!-- fim cardapio section -->
 
     <!-- sobre section -->
 
@@ -433,19 +433,43 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form_container">
-                        <form action="">
+                        <form action="{{ route('contato.enviar')}}" method="POST" id="formContato">
+                            @csrf
                             <div>
-                                <input type="text" class="form-control" placeholder="Seu Nome" />
+                                <input type="text" name="nomeContato" id="nomeContato" class="form-control"
+                                    placeholder="Seu Nome" value="{{ old('nomeContato') }}">
+                                <div id="nomeContatoError" class="error-mensagem"></div>
                             </div>
                             <div>
-                                <input type="email" class="form-control" placeholder="Seu Email" />
+                                <input type="email" name="emailContato" id="emailContato" class="form-control"
+                                    placeholder="Seu Email" value="{{ old('emailContato') }}">
+                                <div id="emailContatoError" class="error-mensagem"></div>
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="Telefone" />
+                                <input type="text" name="foneContato" id="foneContato" class="form-control"
+                                    placeholder="Telefone" value="{{ old('foneContato') }}">
                             </div>
-                            <textarea name="" id="" cols="30" rows="10" class="form-control textarea" placeholder="Escreva sua mensagem"></textarea>
+
+                            {{-- opção de selecionar o tipo de assunto do contato --}}
+
+                            {{-- <div>
+                                <select name="assuntoContato" id="assuntoContato" class="form-control"  value="{{ old('assuntoContato') }}">
+                                    <option value="" disabled="" selected="" hidden="">Selecione o assunto</option>
+                                    <option value="Musculação">Musculação</option>
+                                    <option value="Levantamento de força">Levantamento de força</option>
+                                    <option value="Aula de Meditação">Aula de Meditação</option>
+                                    <option value="Aula de boxe">Aula de boxe</option>
+                                </select>
+                                 <div id="assuntoContatoError" class="error-mensagem"></div>
+                            </div> --}}
+                            <div>
+                                <textarea  name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
+                                    placeholder="Digitea sua mensagem">{{ old('mensContato') }}</textarea>
+                                    <div id="mensContatoError" class="error-mensagem"></div>
+                            </div>
                             <div class="btn_box">
-                                <button type="submit">Enviar</button>
+                                <button type="submit" onclick="formContato(event)">Enviar via e-mail</button>
+                                <div id="contatoMensagem" class="msgContato"></div>
                             </div>
                         </form>
                     </div>

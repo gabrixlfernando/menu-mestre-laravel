@@ -18,6 +18,9 @@
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/bootstrap.css ')}}" />
 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 
 
   <!--owl slider stylesheet -->
@@ -171,6 +174,8 @@
         </div>
       </footer>
       <!-- footer section -->
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <!-- jQery -->
       <script src="{{ asset('../assets/js/jquery-3.4.1.min.js') }}"></script>
       <!-- Importe a biblioteca Axios para fazer requisições AJAX -->

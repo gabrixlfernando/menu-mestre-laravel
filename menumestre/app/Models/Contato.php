@@ -10,7 +10,8 @@ class Contato extends Model
     use HasFactory;
 
     protected $table = 'tblcontatos';
+    protected $primaryKey = 'idContato';
 
     public $timestamps = false;
-    protected $primaryKey = 'idContato';
+
 }
