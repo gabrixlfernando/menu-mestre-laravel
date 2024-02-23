@@ -4,95 +4,9 @@
 
 @section('conteudo')
 
-    <div class="hero_area">
-        <div class="bg-box">
-            <img src="{{ asset('../assets/images/hero-bg.jpg') }}" alt="">
-        </div>
 
-        <!-- slider section -->
-        <section class="slider_section ">
-            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Restaurante Menu Mestre
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, comodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse erro unde. Tempora ex doloremque, labore,
-                                            sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Conheça Nosso Menu
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item ">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Restaurante fast food
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, comodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse erro unde. Tempora ex doloremque, labore,
-                                            sunt repellat dolore, iste magni quos nihil ducimus libero ipsam. </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Peça agora
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Restaurante fast food
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, comodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse erro unde. Tempora ex doloremque, labore,
-                                            sunt repellat dolore, iste magni quos nihil ducimus libero ipsam. </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Peça agora
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <ol class="carousel-indicators">
-                        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-                        <li data-target="#customCarousel1" data-slide-to="1"></li>
-                        <li data-target="#customCarousel1" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </div>
 
-        </section>
-        <!-- end slider section -->
-    </div>
+
 
     <!-- offer section -->
 
@@ -143,9 +57,9 @@
 
     <!-- end offer section -->
 
-    <!-- food section -->
+    <!-- cardapio section -->
 
-    <section class="food_section layout_padding-bottom">
+    {{-- <section class="food_section layout_padding-bottom">
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
@@ -382,7 +296,231 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    <section id="our_menu" class="pt-5 pb-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="page_title text-center mb-4">
+						<h1>Nosso Menu</h1>
+						<div class="single_line"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="breakfast-tab" data-toggle="tab" href="#breakfast" role="tab">Pratos</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="lunch-tab" data-toggle="tab" href="#lunch" role="tab">Massas</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Bebidas</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Sobremesas</a>
+					</li>
+				</ul>
+        	</div>
+			<div class="row">
+				<div class="tab-content col-lg-12" id="myTabContent">
+					<div class="tab-pane fade show active" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/chinese.jpeg') }}" alt="burger">
+									<div class="menu_content">
+										<h4>Chicken Burger  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="black coffee">
+									<div class="menu_content">
+										<h4>Black coffee <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/Hambúrguer.jpeg') }}" alt="fried rice">
+									<div class="menu_content">
+										<h4>Fried Rice  <span>$45</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato2.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato3.jpeg') }}" alt="burger">
+									<div class="menu_content">
+										<h4>Chicken Burger  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato4.jpeg') }}" alt="black coffee">
+									<div class="menu_content">
+										<h4>Black coffee <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato5.jpeg') }}" alt="fried rice">
+									<div class="menu_content">
+										<h4>Fried Rice  <span>$45</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="pizza">
+									<div class="menu_content">
+										<h4>12" Pizza  <span>$35</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/massa1.jpeg') }}" alt="salad">
+									<div class="menu_content">
+										<h4>Salad <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/massa2.jpeg') }}" alt="green tea">
+									<div class="menu_content">
+										<h4>green tea <span>$15</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/massa3.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/messa4.jpeg') }}" alt="burger">
+									<div class="menu_content">
+										<h4>Chicken Burger  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/massa5.jpeg') }}" alt="black coffee">
+									<div class="menu_content">
+										<h4>Black coffee <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/pizza1.jpeg') }}"fried rice">
+									<div class="menu_content">
+										<h4>Fried Rice  <span>$45</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="dinner" role="tabpanel" aria-labelledby="dinner-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/coca1.jpeg') }}" alt="burger">
+									<div class="menu_content">
+										<h4>Chicken Burger  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/sprite.jpeg') }}" alt="black coffee">
+									<div class="menu_content">
+										<h4>Black coffee <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/pepsi.jpeg') }}" alt="fried rice">
+									<div class="menu_content">
+										<h4>Fried Rice  <span>$45</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/fanta.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src={{ asset('../assets/images/vinho.jpeg') }} alt="burger">
+									<div class="menu_content">
+										<h4>Chicken Burger  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/vinho2.jpeg') }}" alt="black coffee">
+									<div class="menu_content">
+										<h4>Black coffee <span>$20</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/vinho3.jpeg') }}" alt="fried rice">
+									<div class="menu_content">
+										<h4>Fried Rice  <span>$45</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+								<div class="single_menu">
+									<img src="{{ asset('../assets/images/vinho4.jpeg') }}" alt="meat">
+									<div class="menu_content">
+										<h4>meat  <span>$24</span></h4>
+										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+		</div>
+	</section>
 
     <!-- fim cardapio section -->
 
@@ -394,7 +532,7 @@
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="img-box">
-                        <img src="{{ asset('../assets/images/about-img.png') }}" alt="">
+                        {{-- <img src="{{ asset('../assets/images/about-img.png') }}" alt=""> --}}
                     </div>
                 </div>
                 <div class="col-md-6">
