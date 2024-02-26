@@ -66,7 +66,7 @@ body {
 
 /*#region Topo */
 header {
-  background-color: var(--white);
+  background-color: white;
   height: 10vh;
   grid-column: 1 / -1;
   grid-row: 1;
@@ -102,6 +102,10 @@ header .perfil-info .perfil-title .perfil-nome {
 header .perfil-info .perfil-title .perfil-cargo {
   font-size: 1rem;
   color: var(--gray);
+}
+
+.btn-sair i{
+    margin-right: 5px;
 }
 
 header .login .btn-sair {
@@ -185,6 +189,7 @@ main {
   padding: 2rem;
   height: 90vh;
   overflow-y: auto;
+
 
 }
 /*#endregion Conteúdo Principal*/

@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/*font-family: 'Poppins', sans-serif;*/
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+/* font-family: "Open Sans", sans-serif; */
+:root {
+  --fundo: #121212;
+  --white: #fffcf9;
+  --green: #31af8b;
+  --orange: #ff850a;
+  --gray: #aeaeae;
+  --shadow-card: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.container-funcionario{
+text-align: center;
+display: flex;
+justify-content: center;
+}
+.cont-funcionario{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    height: 100%;
+    align-items: center;
+    gap: 150px;
+
+}
+.cont-gerentes, .cont-atendentes{
+    margin-top: 20px;  
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.gerentes-card, .atendentes-card{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+
+}
+.cont-gerentes h4, .cont-atendentes h4{
+    color: var(--fundo);
+    font-weight: 600;
+}
+
+.card-container{
+    background-color: var(--white);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    width: 400px;
+    position: relative;
+    border-radius: 15px;
+    display: flex;
+}
+.card-geral{
+    display: flex;
+}
+.card-geral img{
+    width: 100px;
+    height: 100px;
+}
+.card-info{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.card-info h4{
+    color: var(--fundo);
+    font-weight: 600;
+}
+.card-info p{
+    color: var(--fundo);
+    font-weight: 500;
+}
+.card-info span{
+    color: var(--gray);
+    font-weight: 400;
+}
+
+.card-info span:nth-child(2){
+    color: var(--fundo);
+}
+.card-info p span{
+    position: relative;
+}
+/* .card-info p span strong{
+    position: absolute;
+    background-color: var(--green);
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    border-radius: 9999px;
+    border: solid 4px var(--white);
+} */
+.card-botao{
+    background-color: rgba(11, 145, 223, 0.826);
+    border-radius: 9999px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    padding: 10px;
+
+}
+.card-botao i{
+    font-size: 1.5rem;
+    color: var(--white);
+}
+.card-botao a{
+    text-decoration: none;
+    color: var(--white);
+}
+.card-botao{
+    
+}

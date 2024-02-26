@@ -1,5 +1,4 @@
-
-    const nav = document.getElementById('menu');
+const nav = document.getElementById('menu');
     const gridContainer = document.querySelector('.grid-container');
     const sections = document.querySelectorAll('section');
     const titleSpans = nav.querySelectorAll('.nav-title');
@@ -12,8 +11,7 @@
         titleSpans.forEach(span => {
             span.style.display = 'none';
         });
-        contentDiv.style.opacity = '1'; // aparecer botoes de filtro
-        contentDiv.style.visibility = 'visible'; // aparecer botoes de filtro
+
     });
 
     nav.addEventListener('mouseenter', () => {
@@ -22,8 +20,7 @@
         titleSpans.forEach(span => {
             span.style.display = 'inline-block';
         });
-        contentDiv.style.opacity = '0'; // ocultar botoes de filtro
-        contentDiv.style.visibility = 'hidden'; // ocultar botoes  de filtro
+
     });
     titleSpans.forEach(span => {
         span.addEventListener('click', () => {
@@ -48,6 +45,7 @@
             });
         });
     });
+
 
 
     function filtrar(categoria) {
@@ -89,6 +87,46 @@
         btnSobremesa.classList.add('filtro-ativo');
         }
     }
+
+    // Mesa Filtro
+
+    function filtrar(categoria) {
+        const cardContainer = document.getElementById('card-container');
+        const cards = cardContainer.getElementsByClassName('card-show');
+
+        // botões
+        const btnDisponivel = document.getElementById('filtro-btn-disponivel');
+        const btnOcupada = document.getElementById('filtro-btn-ocupada');
+        const btnReservada = document.getElementById('filtro-btn-reservada');
+
+
+        for (const card of cards) {
+            const categoriaProduto = card.getAttribute('data-categoria');
+
+            if (categoria === 'todos' || categoria === categoriaProduto) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        }
+
+        // Remova a classe 'ativo' de todos os botões
+        btnDisponivel.classList.remove('filtro-ativo');
+        btnOcupada.classList.remove('filtro-ativo');
+        btnReservada.classList.remove('filtro-ativo');
+
+
+
+        // Adicione a classe 'ativo' apenas ao botão clicado
+        if (categoria === 'disponivel') {
+        btnDisponivel.classList.add('filtro-ativo');
+        } else if (categoria === 'ocupada') {
+        btnOcupada.classList.add('filtro-ativo');
+        } else if (categoria === 'reservada') {
+        btnReservada.classList.add('filtro-ativo');
+        }
+    }
+
 
 
 

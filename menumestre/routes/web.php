@@ -43,7 +43,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo/cardapio/ativar-produto/{idProduto}', [AdministrativoController::class, 'ativarProduto'])->name('ativar.produto');
 
-
+    Route::get('/dashboard/administrativo/funcionario', [AdministrativoController::class, 'funcionario'])->name('dashboard.administrativo.funcionario');
 
 
 

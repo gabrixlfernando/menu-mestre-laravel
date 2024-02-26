@@ -56,7 +56,7 @@ class LoginController extends Controller
         // dd($tipoUsuario);
 
             if($tipoUsuario->tipoFuncionario == 'administrativo'){
-        
+
                 session([
                     'id'            => $tipoUsuario->idFuncionario,
                     'nome'          => $tipoUsuario->nomeFuncionario,
@@ -76,17 +76,6 @@ class LoginController extends Controller
                ]);
 
                return redirect()->route('dashboard.atendente');
-
-            }elseif($tipoUsuario->tipoFuncionario == 'cozinheiro'){
-
-                session([
-                    'id'            => $tipoUsuario->idFuncionario,
-                    'nome'          => $tipoUsuario->nomeFuncionario,
-                    'email'         => $tipoUsuario->email,
-                    'tipo_usuario'  => $tipoUsuario->tipoFuncionario,
-               ]);
-
-               return redirect()->route('dashboard.cozinheiro');
 
             }
         }

@@ -59,12 +59,15 @@
             </div>
             <!-- Estatísticas de pratos -->
             <div class="estatisticas">
+                <img src="img/icones/mesa.png" alt="">
                 <div class="estatisticas-info">
-                    <h4>310</h4>
-                    <span>Pratos</span>
-                    <p>Itens registrados no cardápio.</p>
+                    <h4>??</h4>
+                    <span>Mesas</span>
+                    <p>Mesas disponíveis.</p>
+                    <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
 
                 </div>
+            </div>
                 <!-- Condição que verifica se o funcionário é Chef de Cozinha -->
                 {{-- <?php if ($dadosFuncionario['especialidadeFuncionario'] === 'Chef de Cozinha') : ?>
                     <!-- Se for, exibe o link de acesso negado -->

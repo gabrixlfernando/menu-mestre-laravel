@@ -6,21 +6,27 @@
     --green: rgb(26, 201, 26);
     --orange: #ff850a;
     --gray: #aeaeae;
+    --shadow-card: 5px 5px 20px rgba(0, 0, 0, 0.068);
   }
 
   *{
     box-sizing: border-box;
   }
-.container{
-    position: relative;
+.containerr{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
 }
+
+
 .filtro-btn{
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
     gap: 50px;
-    position: fixed;
-    right: 50px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    width: 100%;
+    left: 0;
+    margin-bottom: 10px;
 }
 .filtro-btn button{
     color: var(--fundo);
@@ -34,17 +40,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: none;
+    background-color: #F6F0EF;
 }
-.filtro-ativo{
-    background-color: var(--fundo);
-    font-weight: 500;
-    border: solid 4px var(--fundo);
-}
+
 .filtro-ativo i{
-    color: var(--white);
+    color: var(--orange);
 }
 .filtro-ativo span{
-    color: var(--white);
+    color: var(--orange);
 }
 .filtro-btn i{
     font-size: 2rem;
@@ -53,7 +57,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-
+    justify-content: center;
 }
 
 .card{
@@ -72,6 +76,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 .card-edit div{
     display: flex;
@@ -98,7 +103,6 @@
     display: flex;
     flex-direction: column;
     background-color: var(--white);
-    margin-bottom: 20px;
 }
 .card-info{
     display: flex;

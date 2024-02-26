@@ -3,9 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('conteudo')
-
     <!-- Início do conteúdo HTML -->
-    <div class="container">
+    <div class="containerr">
 
         <!-- Botões de filtro -->
         <div class="filtro-btn" id="botoes-filtro">
@@ -17,6 +16,10 @@
                 <i class="ri-restaurant-2-fill"></i>
                 <span>Comida</span>
             </button>
+            <button id="filtro-btn-comida" onclick="filtrar('massa')" title="Massa">
+                <i class="ri-restaurant-fill"></i>
+                    <span>Massa</span>
+                </button>
             <button id="filtro-btn-bebida" onclick="filtrar('bebida')" title="Bebida">
                 <i class="ri-goblet-fill"></i>
                 <span>Bebida</span>
@@ -29,16 +32,18 @@
 
 
         <!-- Container dos cards de produtos -->
-        <div class="card-container" id="card-container">
-            <!-- Card para adicionar novo prato -->
-            <div class="card card-edit" onclick="window.location.href='index.php?p=cardapio&c=inserir'">
-                <a href="index.php?p=cardapio&c=inserir">
-                    <div>
-                        <span><i class="ri-add-line"></i></span>
-                        <span>Adicionar novo prato</span>
-                    </div>
-                </a>
-            </div>
+        <div class="container-lista">
+            <!-- Container dos cards de produtos -->
+            <div class="card-container" id="card-container">
+                <!-- Card para adicionar novo prato -->
+                <div class="card card-edit" onclick="window.location.href='index.php?p=cardapio&c=inserir'">
+                    <a href="index.php?p=cardapio&c=inserir">
+                        <div>
+                            <span><i class="ri-add-line"></i></span>
+                            <span>Adicionar novo prato</span>
+                        </div>
+                    </a>
+                </div>
 
             <!-- Loop para exibir os cards de produtos -->
 
@@ -87,5 +92,7 @@
             @endforeach
         </div>
     </div>
+</div>
+
     @include('sweetalert::alert')
 @endsection

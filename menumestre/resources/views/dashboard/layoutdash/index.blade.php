@@ -35,6 +35,10 @@
 
     <link rel="stylesheet" href="{{ asset('../assets/css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/css/cardapio.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('../assets/css/mesa.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('../assets/css/inserir.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/css/listar.css') }}"> --}}
+
 
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('../assets/css/dashboard.css') }}">
@@ -61,7 +65,7 @@
                     </div>
                 </div>
 
-                <a class="btn btn-danger" href="{{ route('sair') }}"><i class="ri-logout-circle-r-line"></i>Sair</a>
+                <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i class="ri-logout-circle-r-line"></i>Sair</a>
 
             </div>
         </header>
@@ -69,12 +73,12 @@
             <div class="navbar">
                 <ul>
 
-                    <li><a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i
-                                    class="ri-home-3-line"></i></span><span class="nav-title">Dashboard</span></a></li>
-                    <li><a href="{{ url('/dashboard/administrativo/cardapio') }}"><span class="nav-icon"><i
-                                    class="ri-notification-3-line"></i></span><span class="nav-title">Pedidos</span></a>
+                    <li>
+                        <a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i class="ri-community-fill"></i></span><span class="nav-title">Home</span></a>
                     </li>
-
+                    <li>
+                        <a href=""><span class="nav-icon"><i class="ri-calendar-todo-fill"></i></span><span class="nav-title">Mesas</span></a>
+                    </li>
                     <!-- Verificação se é Gerente ou Chef de Cozinha -->
 
                     {{-- <li class="acesso-negado" >
@@ -91,11 +95,11 @@
                         </a>
                     </li>
 
-
-                    {{-- < <li><a href="index.php?p=funcionario"><span class="nav-icon"><i class="ri-shake-hands-line"></i></span><span class="nav-title">Funcionários</span></a>
-                    <li><a href="index.php?p=configuracao"><span class="nav-icon"><i class="ri-settings-2-line"></i></span><span class="nav-title">Configurações</span></a>
-                    <li><a href="index.php?p=perfil"><span class="nav-icon"><i class="ri-user-line"></i></span><span class="nav-title">Perfil</span></a></li>   --}}
-
+                    <li>
+                        <a href="{{ url('dashboard/administrativo/funcionario') }}"><span class="nav-icon"><i class="ri-shield-user-fill"></i></span><span class="nav-title">Funcionários</span></a>
+                    </li>
+                    <li>
+                        <a href=""><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span class="nav-title">Mensagens</span></a>
                     </li>
                 </ul>
             </div>
