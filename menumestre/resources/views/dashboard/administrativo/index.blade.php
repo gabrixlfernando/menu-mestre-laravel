@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('conteudo')
+
+
 <div class="home-container">
     <!-- Container das estatísticas -->
     <div class="home-estatisticas">
@@ -35,31 +37,31 @@
                     <i class="ri-file-list-3-fill" style="color: rgb(45, 169, 226);"></i>
                 </div>
             </div>
-            <!-- Estatísticas de vendas -->
-            <div class="estatisticas">
-                <div class="estatisticas-info">
-                    <h4>15</h4>
-                    <span>Vendas</span>
-                    <p>Vendas feitas.</p>
-                </div>
-                <div class="estatisticas-icon" style="background-color: rgba(61, 236, 38, 0.568);">
-                    <i class="ri-money-dollar-circle-fill" style="color: rgb(61, 236, 38);"></i>
-                </div>
+         <!-- Estatísticas de funcionários -->
+         <div class="estatisticas">
+            <div class="estatisticas-info">
+                <h4>3</h4>
+                <span>Funcionários</span>
+                <p>Funcionários registrados.</p>
             </div>
-            <!-- Estatísticas de funcionários -->
-            <div class="estatisticas">
-                <div class="estatisticas-info">
-                    <h4>4</h4>
-                    <span>Funcionários</span>
-                    <p>Funcionários registrados.</p>
-                </div>
-                <div class="estatisticas-icon" style="background-color: rgba(179, 8, 8, 0.568)">
-                    <i class="ri-user-2-fill" style="color: rgb(179, 8, 8);"></i>
-                </div>
+            <div class="estatisticas-icon" style="background-color: rgba(179, 8, 8, 0.568)">
+                <i class="ri-user-2-fill" style="color: rgb(179, 8, 8);"></i>
             </div>
+        </div>
+        <!-- Estatísticas de vendas -->
+        <div class="estatisticas">
+            <div class="estatisticas-info">
+                <h4>R$ 400</h4>
+                <span>Vendas Totais</span>
+                <p>Vendas totais realizadas.</p>
+            </div>
+            <div class="estatisticas-icon" style="background-color: rgba(61, 236, 38, 0.568);">
+                <i class="ri-money-dollar-circle-fill" style="color: rgb(61, 236, 38);"></i>
+            </div>
+        </div>
             <!-- Estatísticas de pratos -->
             <div class="estatisticas">
-                <img src="img/icones/mesa.png" alt="">
+                <img src="{{ asset('../assets//images/icones/mesa.png') }}" alt="">
                 <div class="estatisticas-info">
                     <h4>??</h4>
                     <span>Mesas</span>
@@ -67,6 +69,17 @@
                     <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
 
                 </div>
+            </div>
+
+            <!-- Estatísticas de pratos -->
+            <div class="estatisticas">
+                <img src="{{ asset('../assets//images/icones/burguer.png') }}" alt="">
+                <div class="estatisticas-info">
+                    <h4>20</h4>
+                    <span>Pratos</span>
+                    <p>Itens registrados.</p>
+                        <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
+                </div>                <!-- Condição que verifica se o funcionário é Atendente -->
             </div>
                 <!-- Condição que verifica se o funcionário é Chef de Cozinha -->
                 {{-- <?php if ($dadosFuncionario['especialidadeFuncionario'] === 'Chef de Cozinha') : ?>

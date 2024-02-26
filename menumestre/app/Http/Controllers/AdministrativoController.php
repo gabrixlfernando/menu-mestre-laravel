@@ -108,7 +108,7 @@ class AdministrativoController extends Controller
         //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::find($id);
 
-        
+
 
          // Consulta todos os funcionários com tipo "administrativo"
         $administradores = Funcionario::where('tipoFuncionario', 'administrativo')->get();
@@ -124,6 +124,20 @@ class AdministrativoController extends Controller
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
         return view('dashboard.administrativo.funcionario', compact('funcionario','administradores', 'atendentes'));
+    }
+
+    public function mesa()
+    {
+
+        $id = session('id');
+
+        //busacando o funcionario pelo id no banco de dados
+        $funcionario = Funcionario::find($id);
+
+
+        // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
+
+        return view('dashboard.administrativo.mesa', compact('funcionario'));
     }
 
 

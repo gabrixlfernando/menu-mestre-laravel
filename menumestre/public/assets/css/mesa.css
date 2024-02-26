@@ -39,7 +39,7 @@
     height: 120px;
     border-radius: 9999px;
     font-size: 1rem;
-    cursor: pointer; 
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +83,7 @@
 .card{
     width: 300px;
     height: 300px;
-    box-sizing: border-box;  
+    box-sizing: border-box;
     border-radius: 20px;
     position: relative;
 }
@@ -92,7 +92,7 @@
     background-color: #ffffff02;
     width: 300px;
     height: 300px;
-    border: dashed 2px var(--fundo);  
+    border: dashed 2px var(--fundo);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,14 +120,14 @@
 
 .card-show {
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;
     border: solid 1px var(--disponivel);
 
 }
 .card-info{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 15px;
     flex-grow: 1;
     position: relative;
     cursor: pointer;
@@ -187,7 +187,7 @@
 }
 
 .card-price{
-    color: var(--fundo);  
+    color: var(--fundo);
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--disponivel);
@@ -213,7 +213,7 @@ a{
     font-weight: 600;
     color: var(--white);
     font-weight: 500;
-    
+
 }
 .card-edit-btn:hover{
     opacity: 1;

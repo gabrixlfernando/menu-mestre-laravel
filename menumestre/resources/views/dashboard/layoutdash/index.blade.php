@@ -32,10 +32,7 @@
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/bootstrap.css ') }}" />
-
     <link rel="stylesheet" href="{{ asset('../assets/css/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('../assets/css/cardapio.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('../assets/css/mesa.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('../assets/css/inserir.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/css/listar.css') }}"> --}}
 
@@ -65,7 +62,8 @@
                     </div>
                 </div>
 
-                <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i class="ri-logout-circle-r-line"></i>Sair</a>
+                <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i
+                        class="ri-logout-circle-r-line"></i>Sair</a>
 
             </div>
         </header>
@@ -74,10 +72,12 @@
                 <ul>
 
                     <li>
-                        <a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i class="ri-community-fill"></i></span><span class="nav-title">Home</span></a>
+                        <a href="{{ url('/dashboard/administrativo') }}"><span class="nav-icon"><i
+                                    class="ri-community-fill"></i></span><span class="nav-title">Home</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="nav-icon"><i class="ri-calendar-todo-fill"></i></span><span class="nav-title">Mesas</span></a>
+                        <a href="{{ url('dashboard/administrativo/mesa') }}"><span class="nav-icon"><i
+                                    class="ri-calendar-todo-fill"></i></span><span class="nav-title">Mesas</span></a>
                     </li>
                     <!-- Verificação se é Gerente ou Chef de Cozinha -->
 
@@ -96,10 +96,13 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('dashboard/administrativo/funcionario') }}"><span class="nav-icon"><i class="ri-shield-user-fill"></i></span><span class="nav-title">Funcionários</span></a>
+                        <a href="{{ url('dashboard/administrativo/funcionario') }}"><span class="nav-icon"><i
+                                    class="ri-shield-user-fill"></i></span><span
+                                class="nav-title">Funcionários</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span class="nav-title">Mensagens</span></a>
+                        <a href=""><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span
+                                class="nav-title">Mensagens</span></a>
                     </li>
                 </ul>
             </div>
@@ -111,6 +114,10 @@
     </div>
 
 
+    <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Pacote de JavaScript do Bootstrap (inclui Popper) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Importe a biblioteca Axios para fazer requisições AJAX -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--js-->

@@ -45,6 +45,8 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo/funcionario', [AdministrativoController::class, 'funcionario'])->name('dashboard.administrativo.funcionario');
 
+    Route::get('/dashboard/administrativo/mesa', [AdministrativoController::class, 'mesa'])->name('dashboard.administrativo.mesa');
+
 
 
 });

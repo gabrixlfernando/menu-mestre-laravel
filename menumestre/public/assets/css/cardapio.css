@@ -66,6 +66,7 @@
     box-sizing: border-box;
     border-radius: 20px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .card-edit{
