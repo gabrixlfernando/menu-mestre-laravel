@@ -10,6 +10,28 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Estilos para a barra de rolagem */
+::-webkit-scrollbar {
+    width: 5px; /* largura da barra de rolagem */
+}
+
+/* Estilos para o track (trilha) da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: transparent; /* cor de fundo do track */
+}
+
+/* Estilos para o thumb (alça) da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background: #ff0000; /* cor do thumb */
+    border-radius: 10px; /* borda arredondada do thumb */
+}
+
+/* Estilos para o thumb (alça) da barra de rolagem quando passar o mouse por cima */
+::-webkit-scrollbar-thumb:hover {
+    background: #cc0000; /* cor do thumb quando passar o mouse por cima */
+}
+
+
 .layout_padding {
   padding: 90px 0;
 }
