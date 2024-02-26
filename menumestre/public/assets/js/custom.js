@@ -91,9 +91,40 @@ function displayError(erros) {
     }
 }
 
+
 function formContato(e){
     e.preventDefault();
     e.stopPropagation();
+
+     // Validar os campos do formulário
+     var nomeContato = document.getElementById('nomeContato').value.trim();
+     var emailContato = document.getElementById('emailContato').value.trim();
+     var foneContato = document.getElementById('foneContato').value.trim();
+     var assuntoContato = document.getElementById('assuntoContato').value.trim();
+     var mensContato = document.getElementById('mensContato').value.trim();
+
+     var camposVazios = [];
+
+    if (!nomeContato) {
+        camposVazios.push("Nome");
+    }
+    if (!emailContato) {
+        camposVazios.push("Email");
+    }
+    if (!foneContato) {
+        camposVazios.push("Telefone");
+    }
+    if (!assuntoContato) {
+        camposVazios.push("Assunto");
+    }
+    if (!mensContato) {
+        camposVazios.push("Mensagem");
+    }
+
+    if (camposVazios.length > 0) {
+        showAlert(`<div class="alert alert-danger">Por favor, preencha os seguintes campos: ${camposVazios.join(', ')}.</div>`, "contatoMensagem");
+        return; // Impede o envio do formulário se algum campo estiver vazio
+    }
 
 
     var data = {
@@ -137,58 +168,24 @@ function formContato(e){
             );
         }
     })
-
     .catch(error => {
-            if (error.errors) {
-                displayError(error.errors);
-            }else {
-                console.log("Erro desconhecido", error);
-            }
+        let errorMessage = "Erro desconhecido";
+
+        if (error.errors) {
+            // Se houver erros de validação, exiba cada mensagem de erro
+            errorMessage = Object.values(error.errors).flat().join('<br>');
+        } else if (error.message) {
+            // Se houver uma mensagem de erro geral, exiba essa mensagem
+            errorMessage = error.message;
+        }
+
+        showAlert(
+            `<div class="alert alert-danger">${errorMessage}</div>`,
+            "contatoMensagem"
+        );
     });
 }
 
 
 
-// function formContato(e){
-//     e.preventDefault();
-//     e.stopPropagation();
 
-//     var form = document.getElementById('formContato');
-
-//     fetch('/', {
-//         method: 'POST',
-//         headers: {
-//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-//         },
-//         body: new FormData(form)
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             return response.json().then(errorData => {
-//                 throw errorData;
-//             });
-//         }
-//         return response.json();
-//     })
-//     .then((data) => {
-//         if (data.success) {
-//             showAlert(
-//                 `<div class="alert alert-success">${data.success}</div>`,
-//                  "contatoMensagem"
-//             );
-//             form.reset();
-//         } else{
-//             showAlert(
-//                 `<div class="alert alert-danger">Erro ao enviar email.</div>`,
-//                 "contatoMensagem"
-//             );
-//         }
-//     })
-//     .catch(error => {
-//             if (error.errors) {
-//                 displayError(error.errors);
-//             }else {
-//                 console.log("Erro desconhecido", error);
-//             }
-//     });
-// }
