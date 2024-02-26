@@ -61,7 +61,7 @@
                     </div>
                     <div class="perfil-title">
                         <span class="perfil-nome">{{ $funcionario->nomeFuncionario }}</span>
-                        <span class="perfil-cargo">{{ $funcionario->tipoFuncionario }}</span>
+                        <span class="perfil-cargo">{{ ucwords($funcionario->tipoFuncionario) }}</span>
                     </div>
                 </div>
 

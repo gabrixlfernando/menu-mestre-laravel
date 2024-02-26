@@ -108,7 +108,15 @@ class AdministrativoController extends Controller
         //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::find($id);
 
+        
+
+         // Consulta todos os funcionários com tipo "administrativo"
         $administradores = Funcionario::where('tipoFuncionario', 'administrativo')->get();
+
+         // Substituir "administrativo" por "Gerente" nos resultados
+         foreach ($administradores as $administrador) {
+            $administrador->tipoFuncionario = 'Gerente';
+        }
 
         // Consulta todos os funcionários com tipo "atendente"
         $atendentes = Funcionario::where('tipoFuncionario', 'atendente')->get();

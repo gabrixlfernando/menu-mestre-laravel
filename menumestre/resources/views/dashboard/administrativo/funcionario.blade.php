@@ -19,9 +19,9 @@
                         <div class="card-geral">
                             <img src="{{ asset('../assets/images/funcionarios/' . $administrador->fotoFuncionario) }}">
                             <div class="card-info">
-                                <h4>{{ $administrador->tipoFuncionario }}</h4>
-                                <p>Função: <span>{{ $administrador->tipoFuncionario }}</span></p>
-                                <p>Status: <span>{{ $administrador->statusFuncionario }}<strong></strong></span></p>
+                                <h4>{{ $administrador->nomeFuncionario }}</h4>
+                                <p>Função: <span>{{ ucwords($administrador->tipoFuncionario) }}</span></p>
+                                <p>Status: <span>{{ ucwords($administrador->statusFuncionario) }}<strong></strong></span></p>
                             </div>
                         </div>
                         <!-- <div class="card-botao">
@@ -42,9 +42,9 @@
                         <div class="card-geral">
                             <img src="{{ asset('../assets/images/funcionarios/' . $atendente->fotoFuncionario) }}">
                             <div class="card-info">
-                                <h4>{{ $atendente->tipoFuncionario }}</h4>
-                                <p>Função: <span>{{ $atendente->tipoFuncionario }}</span></p>
-                                <p>Status: <span>{{ $atendente->statusFuncionario }}</span></p>
+                                <h4>{{ $atendente->nomeFuncionario }}</h4>
+                                <p>Função: <span>{{ ucwords($atendente->tipoFuncionario) }}</span></p>
+                                <p>Status: <span>{{ ucwords($atendente->statusFuncionario) }}</span></p>
                             </div>
                         </div>
 
