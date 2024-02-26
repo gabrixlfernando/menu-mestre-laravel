@@ -197,7 +197,7 @@ $(document).ready(function() {
     });
 
     $('#btnVoltarAoTopo').click(function() {
-        $('html, body').animate({scrollTop : 0},800);
+        $('html, body').animate({scrollTop : 0},300);
         return false;
     });
 });
