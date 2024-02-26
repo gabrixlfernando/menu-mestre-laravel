@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
 use App\Models\Funcionario;
+use App\Models\Mesa;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
@@ -13,7 +14,10 @@ class AdministrativoController extends Controller
 {
     public function index()
     {
+        // Recuperando o total de funcionários
+        $totalFuncionarios = Funcionario::count();
 
+        $totalPratos = Cardapio::count();
         //recuperando o id do funcionario da sessão
 
         $id = session('id');
@@ -28,10 +32,11 @@ class AdministrativoController extends Controller
             abort(404, 'Funcionario não encontrado!');
         }
 
+
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos'));
     }
 
     public function cardapio()
@@ -110,11 +115,11 @@ class AdministrativoController extends Controller
 
 
 
-         // Consulta todos os funcionários com tipo "administrativo"
+        // Consulta todos os funcionários com tipo "administrativo"
         $administradores = Funcionario::where('tipoFuncionario', 'administrativo')->get();
 
-         // Substituir "administrativo" por "Gerente" nos resultados
-         foreach ($administradores as $administrador) {
+        // Substituir "administrativo" por "Gerente" nos resultados
+        foreach ($administradores as $administrador) {
             $administrador->tipoFuncionario = 'Gerente';
         }
 
@@ -123,11 +128,12 @@ class AdministrativoController extends Controller
 
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
-        return view('dashboard.administrativo.funcionario', compact('funcionario','administradores', 'atendentes'));
+        return view('dashboard.administrativo.funcionario', compact('funcionario', 'administradores', 'atendentes'));
     }
 
     public function mesa()
     {
+        $mesas = Mesa::all();
 
         $id = session('id');
 
@@ -137,9 +143,6 @@ class AdministrativoController extends Controller
 
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
-        return view('dashboard.administrativo.mesa', compact('funcionario'));
+        return view('dashboard.administrativo.mesa', compact('mesas','funcionario'));
     }
-
-
-
 }

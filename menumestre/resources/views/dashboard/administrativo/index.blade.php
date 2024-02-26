@@ -40,7 +40,7 @@
          <!-- Estatísticas de funcionários -->
          <div class="estatisticas">
             <div class="estatisticas-info">
-                <h4>3</h4>
+                <h4>{{ $totalFuncionarios }}</h4>
                 <span>Funcionários</span>
                 <p>Funcionários registrados.</p>
             </div>
@@ -75,7 +75,7 @@
             <div class="estatisticas">
                 <img src="{{ asset('../assets//images/icones/burguer.png') }}" alt="">
                 <div class="estatisticas-info">
-                    <h4>20</h4>
+                    <h4>{{ $totalPratos }}</h4>
                     <span>Pratos</span>
                     <p>Itens registrados.</p>
                         <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
