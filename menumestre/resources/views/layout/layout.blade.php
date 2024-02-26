@@ -184,7 +184,9 @@
         @yield('conteudo')
     </main>
 
-
+    <button id="btnVoltarAoTopo" class="btn-voltar-ao-topo" title="Voltar ao Topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <footer class="footer_section">
         <div class="container">

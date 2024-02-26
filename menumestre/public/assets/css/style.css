@@ -1173,3 +1173,20 @@ z-index: -1;
   top: 0;
   left: 0;
 }
+
+
+.btn-voltar-ao-topo {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff0909;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 9999;
+}
