@@ -63,10 +63,10 @@
             <div class="estatisticas">
                 <img src="{{ asset('../assets//images/icones/mesa.png') }}" alt="">
                 <div class="estatisticas-info">
-                    <h4>??</h4>
+                    <h4>{{ $totalMesas }}</h4>
                     <span>Mesas</span>
                     <p>Mesas disponíveis.</p>
-                    <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
+                    <a href="{{ url('/dashboard/administrativo/mesa')}}">Acessar</a>
 
                 </div>
             </div>

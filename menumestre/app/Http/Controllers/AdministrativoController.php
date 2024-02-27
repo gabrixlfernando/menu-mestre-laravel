@@ -18,6 +18,8 @@ class AdministrativoController extends Controller
         $totalFuncionarios = Funcionario::count();
 
         $totalPratos = Cardapio::count();
+
+        $totalMesas = Mesa::count();
         //recuperando o id do funcionario da sessão
 
         $id = session('id');
@@ -36,7 +38,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas'));
     }
 
     public function cardapio()
@@ -144,5 +146,19 @@ class AdministrativoController extends Controller
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
         return view('dashboard.administrativo.mesa', compact('mesas','funcionario'));
+    }
+
+
+    public function statusMesa(Request $request)
+    {
+        $mesa = Mesa::findOrFail($request->mesaId); // Encontra a mesa pelo ID
+
+        // Atualiza o status e a capacidade da mesa com os valores recebidos do formulário
+        $mesa->status = $request->statusMesa;
+        $mesa->capacidade = $request->capacidadeMesa;
+
+        $mesa->save(); // Salva as alterações no banco de dados
+
+        return response()->json(['message' => 'Status e capacidade da mesa atualizados com sucesso']);
     }
 }
