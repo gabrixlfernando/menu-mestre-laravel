@@ -40,8 +40,8 @@
                 </a>
             </div>
             @foreach ($mesas as $mesa)
-            <div class="card card-show" data-categoria="">
-                    <div class="card-info" data-toggle="modal" data-target="#alterarMesaModal">
+            <div class="card card-show" >
+                    <div class="card-info" data-toggle="modal" data-target="#alterarMesaModal" data-mesaid="{{ $mesa->id }}">
                         <div class="card-stats">
                             <span>{{ ucwords($mesa->status) }}</span><i class="ri-checkbox-circle-fill"></i>
                         </div>
@@ -56,7 +56,10 @@
                             </span>
                         </div>
                     </div>
+
             </div>
+
+
             @endforeach
         </div>
     </div>
@@ -65,37 +68,40 @@
 
     <div class="modal fade" id="alterarMesaModal" tabindex="-1" role="dialog" aria-labelledby="alterarMesaModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="alterarMesaModalLabel">Alterar Mesa</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="formAlterarMesa">
-                <input type="hidden" id="mesaId">
-                <div class="form-group">
-                  <label for="statusMesa">Status da Mesa: </label>
-                  <select class="form-control" id="statusMesa">
-                    <option value="disponivel">Disponível</option>
-                    <option value="ocupada">Ocupada</option>
-                    <option value="reservada">Reservada</option>
-                  </select>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alterarMesaModalLabel">Alterar Mesa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                  <label for="capacidadeMesa">Capacidade da Mesa:</label>
-                  <input type="number" class="form-control" id="capacidadeMesa" min="1">
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('dashboard.administrativo.mesa.edit', ['id' => $mesa->id]) }}">
+                        @csrf
+                        @method('PUT')
+                        <!-- Campos do formulário para editar a mesa -->
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <input type="text" id="status" name="status" value="{{ $mesa->status }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacidade">Capacidade:</label>
+                            <input type="number" id="capacidade" name="capacidade" value="{{ $mesa->capacidade }}">
+                        </div>
+                        <!-- Outros campos do formulário, se necessário -->
+                        <button type="submit">Salvar</button>
+                    </form>
+
                 </div>
-              </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" onclick="salvarAlteracoes()">Salvar Alterações</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+
+
+
 
 
 @endsection

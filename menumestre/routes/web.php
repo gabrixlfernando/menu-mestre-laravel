@@ -47,7 +47,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo/mesa', [AdministrativoController::class, 'mesa'])->name('dashboard.administrativo.mesa');
 
-    Route::get('/dashboard/administrativo/mesa/status-mesa/{id}', [AdministrativoController::class, 'statusMesa'])->name('status.mesa');
+    Route::put('/dashboard/administrativo/mesa/{id}', [AdministrativoController::class, 'editMesa'])->name('dashboard.administrativo.mesa.edit');
 
 
 

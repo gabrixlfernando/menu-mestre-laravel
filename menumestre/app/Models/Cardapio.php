@@ -11,6 +11,10 @@ class Cardapio extends Model
 
     protected $table = 'tblprodutos';
 
+    protected $fillable = [
+        'nomeProduto', 'descricaoProduto', 'valorProduto','categoriaProduto','fotoProduto','statusProduto'
+    ];
+
     public $timestamps = false;
     protected $primaryKey = 'idProduto';
 }

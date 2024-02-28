@@ -156,4 +156,41 @@ const nav = document.getElementById('menu');
     dataAtualElement.textContent = dataFormatada;
 
 
-   
+    document.addEventListener('DOMContentLoaded', function() {
+        var cards = document.querySelectorAll('.card-show');
+        cards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                var mesaId = card.getAttribute('data-mesaid');
+                var modal = $('#alterarMesaModal');
+
+                // Fazer uma solicitação AJAX para buscar os detalhes da mesa usando o ID
+                $.ajax({
+                    url: '/mesas/' + mesaId, // Rota para buscar os detalhes da mesa
+                    method: 'GET',
+                    success: function(response) {
+                        // Preencher os campos do formulário com os detalhes da mesa
+                        $('#mesaId').val(response.mesa.id);
+                        $('#statusMesa').val(response.mesa.status);
+                        $('#capacidadeMesa').val(response.mesa.capacidade);
+
+                        // Abre o modal
+                        modal.modal('show');
+                    },
+                    error: function(xhr, status, error) {
+                        // Lidar com erros
+                        console.error(error);
+                    }
+                });
+            });
+        });
+
+        // Limpar os campos do formulário ao fechar o modal
+        $('#alterarMesaModal').on('hidden.bs.modal', function () {
+            $('#mesaId').val('');
+            $('#statusMesa').val('');
+            $('#capacidadeMesa').val('');
+        });
+    });
+
+
+

@@ -133,6 +133,8 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.funcionario', compact('funcionario', 'administradores', 'atendentes'));
     }
 
+    // lista todas as mesas
+
     public function mesa()
     {
         $mesas = Mesa::all();
@@ -143,22 +145,36 @@ class AdministrativoController extends Controller
         $funcionario = Funcionario::find($id);
 
 
+
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
-        return view('dashboard.administrativo.mesa', compact('mesas','funcionario'));
+        return view('dashboard.administrativo.mesa', compact('mesas', 'funcionario'));
     }
 
-
-    public function statusMesa(Request $request)
+    public function editMesa(Request $request, $id)
     {
-        $mesa = Mesa::findOrFail($request->mesaId); // Encontra a mesa pelo ID
+        $request->validate([
+            'status' => 'required',
+            'capacidade' => 'required|numeric', // Supondo que a capacidade seja um número
+            // Outros campos que você precisa validar
+        ]);
 
-        // Atualiza o status e a capacidade da mesa com os valores recebidos do formulário
-        $mesa->status = $request->statusMesa;
-        $mesa->capacidade = $request->capacidadeMesa;
+        // Encontre a mesa pelo ID
+        $mesa = Mesa::find($id);
 
-        $mesa->save(); // Salva as alterações no banco de dados
+        dd($id);
 
-        return response()->json(['message' => 'Status e capacidade da mesa atualizados com sucesso']);
+        // Atualize os campos da mesa com os dados recebidos do formulário
+        $mesa->status = $request->status;
+        $mesa->capacidade = $request->capacidade;
+        // Atualize outros campos, se necessário
+
+        // Salve as alterações no banco de dados
+        $mesa->save();
+
+        // Redirecione para alguma rota após a atualização (por exemplo, para a página de detalhes da mesa)
+        return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id])->with('success', 'Mesa atualizada com sucesso!');
+
+
     }
 }

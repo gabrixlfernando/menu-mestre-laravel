@@ -10,12 +10,12 @@ class Pedido extends Model
     use HasFactory;
 
     protected $fillable = [
-        'comanda_id', 'produto_id', 'quantidade', 'preco_unitario', 'total_item'
+        'mesa_id', 'produto_id', 'quantidade', 'preco_unitario', 'total_item'
     ];
 
-    public function comanda()
+    public function mesa()
     {
-        return $this->belongsTo(Comanda::class);
+        return $this->belongsTo(Mesa::class,'mesa_id', 'id');
     }
 
     public function produto()
