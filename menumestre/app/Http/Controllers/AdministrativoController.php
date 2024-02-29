@@ -105,6 +105,26 @@ class AdministrativoController extends Controller
         }
     }
 
+    public function createProduto(Request $request)
+    {
+        $cardapio = $request->all();
+
+        // if($request->imagemProduto) {
+        //     $cardapio['imagemProduto'] = $request->imagemProduto->createProduto('cardapio');
+        // }
+
+        if ($request->hasFile('fotoProduto')) {
+            $imagem = $request->file('fotoProduto');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
+            $cardapio['fotoProduto'] = $nomeImagem;
+        }
+
+        $cardapio = Cardapio::create($cardapio);
+
+        return redirect()->route('dashboard.administrativo.cardapio');
+    }
+
 
 
     public function funcionario()

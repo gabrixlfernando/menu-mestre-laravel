@@ -13,15 +13,17 @@
                 <!-- Conteúdo do formulário -->
                 <div class="container">
                     <div class="inserir-container">
-                        <form class="form-container" action="index.php?p=cardapio&c=inserir" method="POST" enctype="multipart/form-data">
+                        <form class="form-container" action="{{ route('admin.produto.create') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+
                                             <label for="inputImagem">Imagem:</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputImagem" name="fotoProduto" required>
-                                                <label class="custom-file-label" for="inputImagem">Escolha um arquivo</label>
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" name="fotoProduto" required>
+                                                <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -57,12 +59,16 @@
                                                 <input class="form-check-input" type="radio" id="sobremesa" name="categoriaProduto" value="sobremesa" required>
                                                 <label class="form-check-label" for="sobremesa">Sobremesa</label>
                                             </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="massa" name="categoriaProduto" value="massa" required>
+                                                <label class="form-check-label" for="massa">Massa</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </div>
                                 </div>
                             </div>
