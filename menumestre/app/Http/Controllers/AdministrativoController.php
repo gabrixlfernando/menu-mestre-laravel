@@ -125,6 +125,14 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.cardapio');
     }
 
+    public function editProduto($idProduto)
+    {
+        $cardapio = Cardapio::findOrfail($idProduto);
+
+        return redirect()->route('admin.produto.update', compact('cardapio'));
+    }
+
+
 
 
     public function funcionario()

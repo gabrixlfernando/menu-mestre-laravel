@@ -35,20 +35,27 @@ Route::post('/admin', [LoginController::class, 'autenticar'])->name('login');
 
 Route::middleware(['autenticacao:administrativo'])->group(function(){
 
+    // Dashboard
     Route::get('/dashboard/administrativo', [AdministrativoController::class, 'index'])->name('dashboard.administrativo');
 
+    // Cardapio
     Route::get('/dashboard/administrativo/cardapio', [AdministrativoController::class, 'cardapio'])->name('dashboard.administrativo.cardapio');
 
     Route::get('/dashboard/administrativo/cardapio/desativar-produto/{idProduto}', [AdministrativoController::class, 'desativarProduto'])->name('dashboard.administrativo.cardapio.desativar');
 
     Route::get('/dashboard/administrativo/cardapio/ativar-produto/{idProduto}', [AdministrativoController::class, 'ativarProduto'])->name('ativar.produto');
-    Route::post('//dashboard/administrativo/produtos/create', [AdministrativoController::class, 'createProduto'])->name('admin.produto.create');
 
+    Route::post('/dashboard/administrativo/produtos/create', [AdministrativoController::class, 'createProduto'])->name('admin.produto.create');
+    Route::get('/dashboard/administrativo/cardapio/{idProduto}', [AdministrativoController::class, 'editProduto'])->name('admin.produto.edit');
+    Route::put('/dashboard/administrativo/produtos/update', [AdministrativoController::class, 'updateProduto'])->name('admin.produto.update');
+
+    // Funcionarios
     Route::get('/dashboard/administrativo/funcionario', [AdministrativoController::class, 'funcionario'])->name('dashboard.administrativo.funcionario');
 
+    // Mesas
     Route::get('/dashboard/administrativo/mesa', [AdministrativoController::class, 'mesa'])->name('dashboard.administrativo.mesa');
 
-    Route::put('/dashboard/administrativo/mesa/{id}', [AdministrativoController::class, 'editMesa'])->name('dashboard.administrativo.mesa.edit');
+    Route::get('/dashboard/administrativo/mesa/{id}', [AdministrativoController::class, 'editMesa'])->name('dashboard.administrativo.mesa.edit');
 
 
 

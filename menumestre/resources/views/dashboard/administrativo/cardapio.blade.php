@@ -93,7 +93,7 @@
                             </a>
                         </div> --}}
                         <div class="card-edit-btn" data-toggle="modal" data-target="#update">
-                            <a title="Editar Cardápio" href="#">
+                            <a title="Editar Cardápio" href="{{ route('admin.produto.edit', ['idProduto' => $item->idProduto]) }}">
                                 <div>
                                     <span><i class="ri-edit-2-line"></i></span>
                                     <span>Editar</span>
@@ -106,6 +106,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
 
