@@ -10,23 +10,23 @@
 
         <!-- Botões de filtro -->
         <div class="filtro-btn" id="botoes-filtro">
-            <button id="filtro-btn-todos" class="filtro-ativo" onclick="filtrar('todos')" title="Todos">
+            <button id="filtro-btn-todos" class="filtro-ativo" data-categoria="todos" title="Todos">
                 <i class="ri-file-list-3-fill"></i>
                 <span>Todos</span>
             </button>
-            <button id="filtro-btn-comida" onclick="filtrar('comida')" title="Comida">
+            <button id="filtro-btn-comida" data-categoria="comida" title="Comida">
                 <i class="ri-restaurant-2-fill"></i>
                 <span>Comida</span>
             </button>
-            <button id="filtro-btn-comida" onclick="filtrar('massa')" title="Massa">
+            <button id="filtro-btn-massa" data-categoria="massa" title="Massa">
                 <i class="ri-restaurant-fill"></i>
                 <span>Massa</span>
             </button>
-            <button id="filtro-btn-bebida" onclick="filtrar('bebida')" title="Bebida">
+            <button id="filtro-btn-bebida" data-categoria="bebida" title="Bebida">
                 <i class="ri-goblet-fill"></i>
                 <span>Bebida</span>
             </button>
-            <button id="filtro-btn-sobremesa" onclick="filtrar('sobremesa')" title="Sobremesa">
+            <button id="filtro-btn-sobremesa" data-categoria="sobremesa" title="Sobremesa">
                 <i class="ri-cake-3-fill"></i>
                 <span>Sobremesa</span>
             </button>
@@ -92,15 +92,15 @@
 
                             </a>
                         </div> --}}
-                        <div class="card-edit-btn" data-toggle="modal" data-target="#update">
-                            <a title="Editar Cardápio" href="{{ route('admin.produto.edit', ['idProduto' => $item->idProduto]) }}">
+                        <div class="card-edit-btn">
+                            <a title="Editar Cardápio" data-toggle="modal" data-target="#edit{{ $item->idProduto }}" href="#">
                                 <div>
                                     <span><i class="ri-edit-2-line"></i></span>
                                     <span>Editar</span>
                                 </div>
                             </a>
                         </div>
-                        @include('dashboard.administrativo.produtos.update')
+                        @include('dashboard.administrativo.produtos.edit', ['idProduto' => $item->idProduto])
                     </div>
                 @endforeach
             </div>

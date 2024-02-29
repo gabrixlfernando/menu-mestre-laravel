@@ -47,46 +47,43 @@ const nav = document.getElementById('menu');
     });
 
 
+ // Filtro do cardápio
 
-    function filtrar(categoria) {
-        const cardContainer = document.getElementById('card-container');
-        const cards = cardContainer.getElementsByClassName('card-show');
+ document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.filtro-btn button');
 
-        // botões
-        const btnTodos = document.getElementById('filtro-btn-todos');
-        const btnComida = document.getElementById('filtro-btn-comida');
-        const btnBebida = document.getElementById('filtro-btn-bebida');
-        const btnSobremesa = document.getElementById('filtro-btn-sobremesa');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove a classe 'filtro-ativo' de todos os botões
+            buttons.forEach(btn => btn.classList.remove('filtro-ativo'));
 
+            // Adiciona a classe 'filtro-ativo' ao botão clicado
+            button.classList.add('filtro-ativo');
 
-        for (const card of cards) {
-            const categoriaProduto = card.getAttribute('data-categoria');
+            // Obtém a categoria do botão clicado
+            const categoria = button.getAttribute('data-categoria');
 
-            if (categoria === 'todos' || categoria === categoriaProduto) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        }
+            // Filtra os cards com base na categoria
+            filtrar(categoria);
+        });
+    });
+});
 
-        // Remova a classe 'ativo' de todos os botões
-        btnTodos.classList.remove('filtro-ativo');
-        btnComida.classList.remove('filtro-ativo');
-        btnBebida.classList.remove('filtro-ativo');
-        btnSobremesa.classList.remove('filtro-ativo');
+function filtrar(categoria) {
+    const cardContainer = document.getElementById('card-container');
+    const cards = cardContainer.getElementsByClassName('card-show');
 
+    for (const card of cards) {
+        const categoriaProduto = card.getAttribute('data-categoria');
 
-        // Adicione a classe 'ativo' apenas ao botão clicado
-        if (categoria === 'todos') {
-        btnTodos.classList.add('filtro-ativo');
-        } else if (categoria === 'comida') {
-        btnComida.classList.add('filtro-ativo');
-        } else if (categoria === 'bebida') {
-        btnBebida.classList.add('filtro-ativo');
-        } else if (categoria === 'sobremesa') {
-        btnSobremesa.classList.add('filtro-ativo');
+        if (categoria === 'todos' || categoria === categoriaProduto) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
         }
     }
+}
+
 
     // Mesa Filtro
 

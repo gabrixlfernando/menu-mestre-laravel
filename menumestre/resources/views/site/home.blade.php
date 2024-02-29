@@ -91,7 +91,7 @@
                                         voluptatem repellendus sed eaque </p>
                                     <div class="options">
                                         <h6>
-                                            R$20
+                                            RR$20
                                         </h6>
                                         <a href="">
                                             <i class="fa-solid fa-cart-shopping"></i>
@@ -332,28 +332,28 @@
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/chinese.jpeg') }}" alt="burger">
 									<div class="menu_content">
-										<h4>Chicken Burger  <span>$24</span></h4>
+										<h4>Chicken Burger  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="black coffee">
 									<div class="menu_content">
-										<h4>Black coffee <span>$20</span></h4>
+										<h4>Black coffee <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/Hambúrguer.jpeg') }}" alt="fried rice">
 									<div class="menu_content">
-										<h4>Fried Rice  <span>$45</span></h4>
+										<h4>Fried Rice  <span>R$45</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato2.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
@@ -362,28 +362,28 @@
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato3.jpeg') }}" alt="burger">
 									<div class="menu_content">
-										<h4>Chicken Burger  <span>$24</span></h4>
+										<h4>Chicken Burger  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato4.jpeg') }}" alt="black coffee">
 									<div class="menu_content">
-										<h4>Black coffee <span>$20</span></h4>
+										<h4>Black coffee <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato5.jpeg') }}" alt="fried rice">
 									<div class="menu_content">
-										<h4>Fried Rice  <span>$45</span></h4>
+										<h4>Fried Rice  <span>R$45</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
@@ -396,28 +396,28 @@
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="pizza">
 									<div class="menu_content">
-										<h4>12" Pizza  <span>$35</span></h4>
+										<h4>12" Pizza  <span>R$35</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/massa1.jpeg') }}" alt="salad">
 									<div class="menu_content">
-										<h4>Salad <span>$20</span></h4>
+										<h4>Salad <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/massa2.jpeg') }}" alt="green tea">
 									<div class="menu_content">
-										<h4>green tea <span>$15</span></h4>
+										<h4>green tea <span>R$15</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/massa3.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
@@ -426,28 +426,28 @@
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/messa4.jpeg') }}" alt="burger">
 									<div class="menu_content">
-										<h4>Chicken Burger  <span>$24</span></h4>
+										<h4>Chicken Burger  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/massa5.jpeg') }}" alt="black coffee">
 									<div class="menu_content">
-										<h4>Black coffee <span>$20</span></h4>
+										<h4>Black coffee <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/pizza1.jpeg') }}"fried rice">
 									<div class="menu_content">
-										<h4>Fried Rice  <span>$45</span></h4>
+										<h4>Fried Rice  <span>R$45</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
@@ -460,28 +460,28 @@
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/coca1.jpeg') }}" alt="burger">
 									<div class="menu_content">
-										<h4>Chicken Burger  <span>$24</span></h4>
+										<h4>Chicken Burger  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/sprite.jpeg') }}" alt="black coffee">
 									<div class="menu_content">
-										<h4>Black coffee <span>$20</span></h4>
+										<h4>Black coffee <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/pepsi.jpeg') }}" alt="fried rice">
 									<div class="menu_content">
-										<h4>Fried Rice  <span>$45</span></h4>
+										<h4>Fried Rice  <span>R$45</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/fanta.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
@@ -490,28 +490,28 @@
 								<div class="single_menu">
 									<img src={{ asset('../assets/images/vinho.jpeg') }} alt="burger">
 									<div class="menu_content">
-										<h4>Chicken Burger  <span>$24</span></h4>
+										<h4>Chicken Burger  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/vinho2.jpeg') }}" alt="black coffee">
 									<div class="menu_content">
-										<h4>Black coffee <span>$20</span></h4>
+										<h4>Black coffee <span>R$20</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/vinho3.jpeg') }}" alt="fried rice">
 									<div class="menu_content">
-										<h4>Fried Rice  <span>$45</span></h4>
+										<h4>Fried Rice  <span>R$45</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>
 								<div class="single_menu">
 									<img src="{{ asset('../assets/images/vinho4.jpeg') }}" alt="meat">
 									<div class="menu_content">
-										<h4>meat  <span>$24</span></h4>
+										<h4>meat  <span>R$24</span></h4>
 										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
 									</div>
 								</div>

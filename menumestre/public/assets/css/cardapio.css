@@ -42,6 +42,7 @@
     justify-content: center;
     border: none;
     background-color: #F6F0EF;
+    outline: none;
 }
 
 .filtro-ativo i{
@@ -130,7 +131,7 @@
     font-weight: 300;
     height: 40px;
 }
-.card-show span{
+.card-show .card-new-item{
     margin-top: 15px;
 }
 .card-price{
@@ -228,4 +229,73 @@ a{
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--white);
+}
+
+
+/* Modal Inserir */
+
+.enviar-arquivo{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fundo);
+    width: 50px;
+    height: 50px;
+    border-radius: 9999px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    font-size: 1.2rem;
+    margin-top: 7%;
+}
+
+input[type=submit]{
+    width: 100%;
+}
+
+input[type=file]{
+display: none;
+}
+
+.categoria-btn{
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #e9ecef;;
+    color: #495057;
+    cursor: pointer;
+    margin-bottom: 2%;
+    line-height: 1.5;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+/* Estilizando os botões de rádio para que fiquem invisíveis */
+input[type="radio"] {
+    display: none;
+}
+
+/* Estilizando os botões de rádio quando estão marcados */
+input[type="radio"]:checked + label {
+    background-color: #495057;
+    color: #e9ecef;
+}
+
+
+.col-md-6{
+    max-width: 100%;
+    flex: 1;
+}
+.btn-primary {
+    color: #fff;
+    background-color: var(--green);
+    border-color: var(--green);
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #fb0606;
+    border-color: #fb0606;
 }

@@ -109,10 +109,6 @@ class AdministrativoController extends Controller
     {
         $cardapio = $request->all();
 
-        // if($request->imagemProduto) {
-        //     $cardapio['imagemProduto'] = $request->imagemProduto->createProduto('cardapio');
-        // }
-
         if ($request->hasFile('fotoProduto')) {
             $imagem = $request->file('fotoProduto');
             $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
@@ -129,8 +125,37 @@ class AdministrativoController extends Controller
     {
         $cardapio = Cardapio::findOrfail($idProduto);
 
-        return redirect()->route('admin.produto.update', compact('cardapio'));
+        return redirect()->route('dashboard.administrativo.cardapio', compact('cardapio'));
     }
+
+    public function updateProduto(Request $request, $idProduto)
+    {
+        // Encontre o produto pelo ID
+        $item = Cardapio::findOrFail($idProduto);
+
+        // Verifique se uma nova imagem foi enviada
+        if ($request->hasFile('fotoProduto')) {
+            $imagem = $request->file('fotoProduto');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
+            // Atualize o nome da imagem no produto
+            $item->fotoProduto = $nomeImagem;
+        }
+
+        // Atualize os outros campos do produto
+        $item->nomeProduto = $request->input('nomeProduto');
+        $item->descricaoProduto = $request->input('descricaoProduto');
+        $item->valorProduto = $request->input('valorProduto');
+        $item->categoriaProduto = $request->input('categoriaProduto');
+
+        // Salve as alterações no banco de dados
+        $item->save();
+
+        // Redirecione de volta para a página de visualização do produto
+        return redirect()->route('dashboard.administrativo.cardapio');
+    }
+
+
 
 
 
@@ -202,7 +227,5 @@ class AdministrativoController extends Controller
 
         // Redirecione para alguma rota após a atualização (por exemplo, para a página de detalhes da mesa)
         return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id])->with('success', 'Mesa atualizada com sucesso!');
-
-
     }
 }
