@@ -107,20 +107,29 @@ class AdministrativoController extends Controller
 
     public function createProduto(Request $request)
     {
-        $cardapio = $request->all();
+        // Obtém todos os dados do formulário
+    $dadosProduto = $request->all();
 
-        if ($request->hasFile('fotoProduto')) {
-            $imagem = $request->file('fotoProduto');
-            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
-            $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
-            $cardapio['fotoProduto'] = $nomeImagem;
-        }
+    // Verifica se uma nova imagem foi enviada
+    if ($request->hasFile('fotoProduto')) {
+        // Obtém o objeto da imagem
+        $imagem = $request->file('fotoProduto');
+        // Obtém o nome original da imagem
+        $nomeOriginalImagem = $imagem->getClientOriginalName();
+        // Move a imagem para o diretório de destino
+        $imagem->move(public_path('assets/images/cardapio/'), $nomeOriginalImagem);
+        // Define o nome original da imagem nos dados do produto
+        $dadosProduto['fotoProduto'] = $nomeOriginalImagem;
+    }
 
-        $cardapio = Cardapio::create($cardapio);
+    // Cria um novo produto no banco de dados com os dados fornecidos
+    $produto = Cardapio::create($dadosProduto);
 
-        Alert::success('Produto Cadastrado!', 'O item foi cadastrado com sucesso.');
+    // Exibe uma mensagem de sucesso para o usuário
+    Alert::success('Produto Cadastrado!', 'O item foi cadastrado com sucesso.');
 
-        return redirect()->route('dashboard.administrativo.cardapio');
+    // Redireciona o usuário de volta para a página de cardápio
+    return redirect()->route('dashboard.administrativo.cardapio');
     }
 
     public function editProduto($idProduto)

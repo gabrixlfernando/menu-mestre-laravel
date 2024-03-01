@@ -21,7 +21,7 @@
                                         <div class="form-group">
                                             <label for="inputImagem">Imagem:</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fotoProduto" name="fotoProduto">
+                                                <input type="file" class="custom-file-input" id="fotoProduto" name="fotoProduto" onchange="exibirImagem(this)">
                                                 <label class="custom-file-label" for="fotoProduto">Escolha um arquivo</label>
                                             </div>
                                             <!-- Exibir a imagem atual -->
@@ -76,3 +76,19 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+    function exibirImagem(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagemAtual')
+                    .attr('src', e.target.result)
+                    .removeClass('d-none'); // Remove a classe d-none para exibir a imagem
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
