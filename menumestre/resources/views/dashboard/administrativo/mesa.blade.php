@@ -10,27 +10,25 @@
     <!-- Início do conteúdo HTML -->
     <div class="container">
 
-        <!-- Botões de filtro -->
-
-        <div class="filtro-btn" id="botoes-filtro">
-            <button id="filtro-btn-todos" class="filtro-ativo" onclick="filtrar('todos')" data-status="todos" title="Todas">
-                <i class="ri-bar-chart-2-line"></i>
-                <span>Todas</span>
-            </button>
-            <button id="filtro-btn-disponivel" class="filtro-ativo" onclick="filtrar('disponivel')" title="Disponível"
-                data-status="disponivel">
-                <i class="ri-checkbox-circle-fill"></i>
-                <span>Disponível</span>
-            </button>
-            <button id="filtro-btn-ocupada" onclick="filtrar('ocupada')" title="Ocupada" data-status="ocupada">
-                <i class="ri-git-repository-private-fill"></i>
-                <span>Ocupada</span>
-            </button>
-            <button id="filtro-btn-reservada" onclick="filtrar('reservada')" title="Reservada" data-status="reservada">
-                <i class="ri-time-fill"></i>
-                <span>Reservada</span>
-            </button>
-        </div>
+       <!-- Botões de filtro -->
+<div class="filtro-btn" id="botoes-filtro">
+    <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
+        <i class="ri-file-list-3-fill"></i>
+        <span>Todos</span>
+    </button>
+    <button id="filtro-btn-disponivel" data-status="disponivel" title="Disponível">
+        <i class="ri-checkbox-circle-fill"></i>
+        <span>Disponível</span>
+    </button>
+    <button id="filtro-btn-ocupada" data-status="ocupada" title="Ocupada">
+        <i class="ri-git-repository-private-fill"></i>
+        <span>Ocupada</span>
+    </button>
+    <button id="filtro-btn-reservada" data-status="reservada" title="Reservada">
+        <i class="ri-time-fill"></i>
+        <span>Reservada</span>
+    </button>
+</div>
     </div>
 
     @include('dashboard.administrativo.mesa.create')

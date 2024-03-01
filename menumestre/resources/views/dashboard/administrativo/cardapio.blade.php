@@ -32,7 +32,7 @@
             </button>
         </div>
 
-        
+
 
 
         <!-- Container dos cards de produtos -->

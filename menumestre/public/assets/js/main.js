@@ -84,11 +84,8 @@ function filtrar(categoria) {
     }
 }
 
-// filtro mesaaaa
-
-
 document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.filtro-btn button');
+    const buttons = document.querySelectorAll('.filtro-btn-mesa button');
 
     buttons.forEach(button => {
         button.addEventListener('click', function() {
@@ -101,14 +98,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Obtém o status do botão clicado
             const status = button.getAttribute('data-status');
 
-            // Filtra as mesas com base no status
+            // Filtra os cards com base no status
             filtrar(status);
         });
     });
 });
 
-function filtrar(status) {
-    const cards = document.querySelectorAll('.card-show');
+function filtrarMesa(status) {
+    const cardContainer = document.getElementById('card-container');
+    const cards = cardContainer.getElementsByClassName('card-show');
 
     for (const card of cards) {
         const cardStatus = card.getAttribute('data-status');
@@ -120,6 +118,45 @@ function filtrar(status) {
         }
     }
 }
+
+// // filtro mesaaaa
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const buttons = document.querySelectorAll('.filtro-btn button');
+
+//     buttons.forEach(button => {
+//         button.addEventListener('click', function() {
+//             // Remove a classe 'filtro-ativo' de todos os botões
+//             buttons.forEach(btn => btn.classList.remove('filtro-ativo'));
+
+//             // Adiciona a classe 'filtro-ativo' ao botão clicado
+//             button.classList.add('filtro-ativo');
+
+//             // Obtém o status do botão clicado
+//             const status = button.getAttribute('data-status');
+
+//             // Filtra as mesas com base no status
+//             filtrar(status);
+//         });
+//     });
+// });
+
+// function filtrar(status) {
+//     const cards = document.querySelectorAll('.card-show');
+
+//     for (const card of cards) {
+//         const cardStatus = card.getAttribute('data-status');
+
+//         if (status === 'todos' || status === cardStatus) {
+//             card.style.display = 'block';
+//         } else {
+//             card.style.display = 'none';
+//         }
+//     }
+// }
+
+
 
 
     // Mesa Filtro
@@ -160,43 +197,6 @@ function filtrar(status) {
     //     btnReservada.classList.add('filtro-ativo');
     //     }
     // }
-
-    // function filtrar(status) {
-    //     const cardContainer = document.getElementById('card-container');
-    //     const cards = cardContainer.getElementsByClassName('card-show');
-
-    //     // Botões de filtro
-    //     const btnDisponivel = document.getElementById('filtro-btn-disponivel');
-    //     const btnOcupada = document.getElementById('filtro-btn-ocupada');
-    //     const btnReservada = document.getElementById('filtro-btn-reservada');
-
-    //     for (const card of cards) {
-    //         const statusMesa = card.getAttribute('data-status');
-
-    //         if (status === 'todos' || status === statusMesa) {
-    //             card.style.display = 'block';
-    //         } else {
-    //             card.style.display = 'none';
-    //         }
-    //     }
-
-    //     // Remova a classe 'filtro-ativo' de todos os botões
-    //     btnDisponivel.classList.remove('filtro-ativo');
-    //     btnOcupada.classList.remove('filtro-ativo');
-    //     btnReservada.classList.remove('filtro-ativo');
-
-    //     // Adicione a classe 'filtro-ativo' apenas ao botão clicado
-    //     if (status === 'disponivel') {
-    //         btnDisponivel.classList.add('filtro-ativo');
-    //     } else if (status === 'ocupada') {
-    //         btnOcupada.classList.add('filtro-ativo');
-    //     } else if (status === 'reservada') {
-    //         btnReservada.classList.add('filtro-ativo');
-    //     }
-    // }
-
-
-
 
 
     // Verificação de usuário
