@@ -15,6 +15,8 @@ class Cardapio extends Model
         'nomeProduto', 'descricaoProduto', 'valorProduto','categoriaProduto','fotoProduto','statusProduto'
     ];
 
+    protected $guarded= [];
+
     public $timestamps = false;
     protected $primaryKey = 'idProduto';
 }

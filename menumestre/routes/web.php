@@ -47,7 +47,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::post('/dashboard/administrativo/produtos/create', [AdministrativoController::class, 'createProduto'])->name('admin.produto.create');
     Route::get('/dashboard/administrativo/cardapio/edit/{idProduto}', [AdministrativoController::class, 'editProduto'])->name('admin.produto.edit');
-    Route::get('/dashboard/administrativo/produtos/update', [AdministrativoController::class, 'updateProduto'])->name('admin.produto.update');
+    Route::put('/dashboard/administrativo/produtos/update/{idProduto}', [AdministrativoController::class, 'updateProduto'])->name('admin.produto.update');
 
     // Funcionarios
     Route::get('/dashboard/administrativo/funcionario', [AdministrativoController::class, 'funcionario'])->name('dashboard.administrativo.funcionario');

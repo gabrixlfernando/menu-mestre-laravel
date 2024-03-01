@@ -8,7 +8,7 @@ use App\Models\Mesa;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 
 class AdministrativoController extends Controller
 {
@@ -118,6 +118,8 @@ class AdministrativoController extends Controller
 
         $cardapio = Cardapio::create($cardapio);
 
+        Alert::success('Produto Cadastrado!', 'O item foi cadastrado com sucesso.');
+
         return redirect()->route('dashboard.administrativo.cardapio');
     }
 
@@ -130,29 +132,56 @@ class AdministrativoController extends Controller
 
     public function updateProduto(Request $request, $idProduto)
     {
-        // Encontre o produto pelo ID
-        $item = Cardapio::findOrFail($idProduto);
+       // Regras de validação
+    $rules = [
+        'nomeProduto' => 'required|max:255',
+        'descricaoProduto' => 'required|max:255',
+        'valorProduto' => 'required|numeric',
+        'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
+        'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
+    ];
 
-        // Verifique se uma nova imagem foi enviada
-        if ($request->hasFile('fotoProduto')) {
-            $imagem = $request->file('fotoProduto');
-            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
-            $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
-            // Atualize o nome da imagem no produto
-            $item->fotoProduto = $nomeImagem;
-        }
+    // Mensagens de erro personalizadas
+    $messages = [
+        'categoriaProduto.in' => 'A categoria selecionada é inválida.',
+        'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
+        'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
+        'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
+    ];
 
-        // Atualize os outros campos do produto
-        $item->nomeProduto = $request->input('nomeProduto');
-        $item->descricaoProduto = $request->input('descricaoProduto');
-        $item->valorProduto = $request->input('valorProduto');
-        $item->categoriaProduto = $request->input('categoriaProduto');
+    // Validação dos dados
+    $validator = Validator::make($request->all(), $rules, $messages);
 
-        // Salve as alterações no banco de dados
-        $item->save();
+    // Verifica se há erros de validação
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
 
-        // Redirecione de volta para a página de visualização do produto
-        return redirect()->route('dashboard.administrativo.cardapio');
+    // Se não houver erros de validação, continue com o processo de atualização do produto
+    // Encontre o produto pelo ID
+    $item = Cardapio::findOrFail($idProduto);
+
+    // Verifique se uma nova imagem foi enviada
+    if ($request->hasFile('fotoProduto')) {
+        $imagem = $request->file('fotoProduto');
+        $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+        $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
+        // Atualize o nome da imagem no produto
+        $item->fotoProduto = $nomeImagem;
+    }
+
+    // Atualize os outros campos do produto
+    $item->nomeProduto = $request->input('nomeProduto');
+    $item->descricaoProduto = $request->input('descricaoProduto');
+    $item->valorProduto = $request->input('valorProduto');
+    $item->categoriaProduto = $request->input('categoriaProduto');
+
+    // Salve as alterações no banco de dados
+    $item->save();
+
+    Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
+    // Redirecione de volta para a página de visualização do produto
+    return redirect()->route('dashboard.administrativo.cardapio');
     }
 
 

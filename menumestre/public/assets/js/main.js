@@ -153,41 +153,59 @@ function filtrar(categoria) {
     dataAtualElement.textContent = dataFormatada;
 
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var cards = document.querySelectorAll('.card-show');
-        cards.forEach(function(card) {
-            card.addEventListener('click', function() {
-                var mesaId = card.getAttribute('data-mesaid');
-                var modal = $('#alterarMesaModal');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var cards = document.querySelectorAll('.card-show');
+    //     cards.forEach(function(card) {
+    //         card.addEventListener('click', function() {
+    //             var mesaId = card.getAttribute('data-mesaid');
+    //             var modal = $('#alterarMesaModal');
 
-                // Fazer uma solicitação AJAX para buscar os detalhes da mesa usando o ID
-                $.ajax({
-                    url: '/mesas/' + mesaId, // Rota para buscar os detalhes da mesa
-                    method: 'GET',
-                    success: function(response) {
-                        // Preencher os campos do formulário com os detalhes da mesa
-                        $('#mesaId').val(response.mesa.id);
-                        $('#statusMesa').val(response.mesa.status);
-                        $('#capacidadeMesa').val(response.mesa.capacidade);
+    //             // Fazer uma solicitação AJAX para buscar os detalhes da mesa usando o ID
+    //             $.ajax({
+    //                 url: '/mesas/' + mesaId, // Rota para buscar os detalhes da mesa
+    //                 method: 'GET',
+    //                 success: function(response) {
+    //                     // Preencher os campos do formulário com os detalhes da mesa
+    //                     $('#mesaId').val(response.mesa.id);
+    //                     $('#statusMesa').val(response.mesa.status);
+    //                     $('#capacidadeMesa').val(response.mesa.capacidade);
 
-                        // Abre o modal
-                        modal.modal('show');
-                    },
-                    error: function(xhr, status, error) {
-                        // Lidar com erros
-                        console.error(error);
-                    }
-                });
-            });
-        });
+    //                     // Abre o modal
+    //                     modal.modal('show');
+    //                 },
+    //                 error: function(xhr, status, error) {
+    //                     // Lidar com erros
+    //                     console.error(error);
+    //                 }
+    //             });
+    //         });
+    //     });
 
-        // Limpar os campos do formulário ao fechar o modal
-        $('#alterarMesaModal').on('hidden.bs.modal', function () {
-            $('#mesaId').val('');
-            $('#statusMesa').val('');
-            $('#capacidadeMesa').val('');
+    //     // Limpar os campos do formulário ao fechar o modal
+    //     $('#alterarMesaModal').on('hidden.bs.modal', function () {
+    //         $('#mesaId').val('');
+    //         $('#statusMesa').val('');
+    //         $('#capacidadeMesa').val('');
+    //     });
+    // });
+
+
+
+    $(document).ready(function() {
+        // Adicionar um evento de mudança ao input de arquivo
+        $('#fotoProduto').change(function() {
+            // Selecionar a imagem atual
+            const imagemAtual = $('#imagemAtual');
+
+            // Verificar se um arquivo foi selecionado
+            if (this.files && this.files[0]) {
+                // Ler o arquivo selecionado como URL de dados
+                const leitor = new FileReader();
+                leitor.onload = function(e) {
+                    // Exibir a imagem selecionada na imagem atual
+                    imagemAtual.attr('src', e.target.result);
+                }
+                leitor.readAsDataURL(this.files[0]);
+            }
         });
     });
-
-
-

@@ -12,11 +12,7 @@
                 <!-- Conteúdo do formulário -->
                 <div class="container">
                     <div class="inserir-container">
-
-
-
-
-                         <form class="form-container" action="{{ route('admin.produto.update', $item->idProduto) }}" method="POST" enctype="multipart/form-data">
+                         <form class="form-container" action="{{ route('admin.produto.update', ['idProduto' => $item->idProduto])}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="container">
@@ -25,12 +21,12 @@
                                         <div class="form-group">
                                             <label for="inputImagem">Imagem:</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fotoProduto" name="fotoProduto" required>
+                                                <input type="file" class="custom-file-input" id="fotoProduto" name="fotoProduto">
                                                 <label class="custom-file-label" for="fotoProduto">Escolha um arquivo</label>
                                             </div>
-                                            <!-- Exibir a imagem -->
+                                            <!-- Exibir a imagem atual -->
                                             <div class="mt-3">
-                                                <img src="{{ asset('../assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto">
+                                                <img id="imagemAtual" src="{{ asset('assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -53,30 +49,21 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Categoria do Produto:</label><br>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="comida" name="categoriaProduto" value="comida" required {{ $item->categoriaProduto == 'comida' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="comida">Comida</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="bebida" name="categoriaProduto" value="bebida" required {{ $item->categoriaProduto == 'bebida' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="bebida">Bebida</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="sobremesa" name="categoriaProduto" value="sobremesa" required {{ $item->categoriaProduto == 'sobremesa' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="sobremesa">Sobremesa</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" id="massa" name="categoriaProduto" value="massa" required {{ $item->categoriaProduto == 'massa' ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="massa">Massa</label>
-                                            </div>
+                                            <label for="categoriaProduto">Categoria do Produto:</label>
+                                            <select class="form-control" id="categoriaProduto" name="categoriaProduto" required>
+                                                <option value="comida" {{ $item->categoriaProduto == 'comida' ? 'selected' : '' }}>Comida</option>
+                                                <option value="bebida" {{ $item->categoriaProduto == 'bebida' ? 'selected' : '' }}>Bebida</option>
+                                                <option value="sobremesa" {{ $item->categoriaProduto == 'sobremesa' ? 'selected' : '' }}>Sobremesa</option>
+                                                <option value="massa" {{ $item->categoriaProduto == 'massa' ? 'selected' : '' }}>Massa</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="modal-footer">
                                     <div class="col">
                                         <button type="submit" class="btn btn-primary">Confirmar</button>
                                     </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                         </form>
@@ -85,9 +72,7 @@
                 </div>
             </div>
             <!-- Botão de fechar o modal -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
+
         </div>
     </div>
 </div>
