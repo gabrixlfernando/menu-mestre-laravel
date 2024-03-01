@@ -48,7 +48,8 @@ const nav = document.getElementById('menu');
 
 
  // Filtro do cardápio
-document.addEventListener('DOMContentLoaded', function() {
+
+ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.filtro-btn-cardapio button');
 
     buttons.forEach(button => {
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Obtém a categoria do botão clicado
             const status = button.getAttribute('data-status');
 
-            // Filtra os cards com base na categoria
+            // Filtra os cards com base no status
             filtrarMesa(status);
         });
     });
