@@ -11,7 +11,7 @@
     <div class="container">
 
        <!-- Botões de filtro -->
-<div class="filtro-btn" id="botoes-filtro">
+<div class="filtro-btn-mesa" id="botoes-filtro">
     <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
         <i class="ri-file-list-3-fill"></i>
         <span>Todos</span>

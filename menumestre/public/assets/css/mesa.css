@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
 }
-.filtro-btn{
+.filtro-btn-mesa{
     gap: 50px;
     display: flex;
     justify-content: center;
@@ -32,7 +32,7 @@
     left: 0;
     margin-bottom: 10px;
 }
-.filtro-btn button{
+.filtro-btn-mesa button{
     color: var(--fundo);
     font-weight: 500;
     width: 120px;
@@ -48,7 +48,7 @@
     background-color: #F6F0EF;
 }
 
-.filtro-btn i{
+.filtro-btn-mesa i{
     font-size: 2rem;
 }
 
@@ -168,7 +168,7 @@
 }
 .card-show .card-info img{
     width: 110px;
-    height: 110px;
+    height: 90px;
     border-radius: 9999px;
     align-self: center;
     margin-top: 40px;
@@ -190,7 +190,7 @@
 .card-price{
     color: var(--fundo);
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--disponivel);
 }
 
