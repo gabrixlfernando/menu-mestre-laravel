@@ -267,4 +267,28 @@ class AdministrativoController extends Controller
     // Redirecione de volta para a página de visualização da mesa ou outra página desejada
     return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id]);
     }
+
+    public function createMesa(Request $request)
+    {
+        // Validação dos dados do formulário
+        $validatedData = $request->validate([
+            'numero_mesa' => 'required',
+            'capacidade' => 'required|integer',
+            'status' => 'required|in:disponivel,reservada,ocupada',
+            'preco' => 'required|numeric',
+        ]);
+
+        // Criação da nova mesa
+        $mesa = new Mesa();
+        $mesa->numero_mesa = $validatedData['numero_mesa'];
+        $mesa->capacidade = $validatedData['capacidade'];
+        $mesa->status = $validatedData['status'];
+        $mesa->preco = $validatedData['preco'];
+        $mesa->save();
+
+        Alert::success('Mesa Cadastrada!', 'A mesa foi cadastrada com sucesso.');
+        // Redireciona de volta com uma mensagem de sucesso
+        return redirect()->route('dashboard.administrativo.mesa');
+    }
+
 }

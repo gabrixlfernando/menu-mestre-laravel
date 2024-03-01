@@ -59,6 +59,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::put('/dashboard/administrativo/mesa/update/{id}', [AdministrativoController::class, 'updateMesa'])->name('mesa.update');
 
+    Route::post('/dashboard/administrativo/mesa/create', [AdministrativoController::class, 'createMesa'])->name('mesa.create');
 
 
 });
