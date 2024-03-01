@@ -332,4 +332,40 @@ class AdministrativoController extends Controller
                 return response()->json(['error' => 'Contato não encontrado'], 404);
             }
         }
+    public function desativarMesa($id){
+         // Encontre o produto pelo ID
+         $mesa = Mesa::find($id);
+         // Verifique se o produto foi encontrado
+         if ($mesa) {
+             // Atualize o status para "inativo"
+             $mesa->status = 'inativo';
+             $mesa->save();
+             Alert::success('Desativada!', 'A mesa foi desativada com sucesso.');
+             return redirect()->route('dashboard.administrativo.mesa');
+         } else {
+             Alert::error('Erro!', 'Ocorreu um erro ao desativar o item.');
+             return redirect()->route('dashboard.administrativo.mesa');
+         }
+    }
+
+
+    public function ativarMesa($id)
+    {
+        $mesa = mesa::find($id);
+
+        if ($mesa) {
+            $mesa->status = 'disponivel';
+            $mesa->save();
+
+            Alert::success('Ativada!', 'A mesa foi ativada com sucesso.');
+
+            return redirect()->route('dashboard.administrativo.mesa');
+
+            // return redirect()->back()->with('success', 'Produto ativado com sucesso.');
+        } else {
+            Alert::error('Erro!', 'Ocorreu um erro ao ativar o item.');
+            return redirect()->route('dashboard.administrativo.mesa');
+        }
+    }
+
 }

@@ -63,6 +63,9 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     // Contato (Página Mensagens)
     Route::get('/dashboard/administrativo/contato', [AdministrativoController::class, 'contato'])->name('dashboard.administrativo.contato');
+    Route::get('/dashboard/administrativo/mesa/desativar-mesa/{id}', [AdministrativoController::class, 'desativarMesa'])->name('mesa.desativar');
+    Route::get('/dashboard/administrativo/mesa/ativar-mesa/{id}', [AdministrativoController::class, 'ativarMesa'])->name('mesa.ativar');
+
 
     Route::get('/dashboard/administrativo/contato/show/{id}', [AdministrativoController::class, 'showContato'])->name('contato.show');
 

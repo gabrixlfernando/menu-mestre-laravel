@@ -80,7 +80,7 @@
 
                             <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
                                 href="{{ route('dashboard.administrativo.cardapio.desativar', ['idProduto' => $item->idProduto]) }}"><i
-                                    class="ri-eye-line""></i></a></td>
+                                    class="ri-eye-line"></i></a>
                             <img src="{{ asset('../assets/images/cardapio/' . $item->fotoProduto) }}">
                             <h3>{{ $item->nomeProduto }}</h3>
                             <p>{{ $item->descricaoProduto }}</p>
@@ -88,12 +88,6 @@
                         </div>
 
                         <!-- Botão de edição -->
-                        {{-- <div class="card-edit-btn" onclick="window.location.href='index.php?p=cardapio&c=atualizar&id=';">
-                            <a title="Editar Cardápio" href="">
-                                <span><i class="ri-edit-2-line"></i></span>
-
-                            </a>
-                        </div> --}}
                         <div class="card-edit-btn">
                             <a title="Editar Cardápio" data-toggle="modal" data-target="#edit{{ $item->idProduto }}" href="#">
                                 <div>

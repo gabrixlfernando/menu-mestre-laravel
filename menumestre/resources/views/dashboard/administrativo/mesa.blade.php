@@ -69,10 +69,19 @@
             @endphp
             <div class="card card-show" style="border: solid 1px {{ $statusColor }}" data-status="{{ $mesa->status }}">
                 <!-- Verifica o status da mesa e define a cor de fundo com base nisso -->
-
+                @if (empty($mesa['status']) || strtolower($mesa['status']) == 'inativo')
+                <!-- Botão de ativação/desativação -->
+                <div class="card-desativado">
+                    <a class="card-desativado-btn" title="Desativado (Clique para ativar)"
+                        href="{{ route('mesa.ativar', ['id' => $mesa->id]) }}">
+                        <i class="ri-eye-off-line"></i>
+                    </a>
+                </div>
+            @endif
 
                 <div class="card-info" data-toggle="modal"
                 data-target="#alterarMesaModal{{ $mesa->id }}">
+
                     <!-- Adiciona o estilo condicional ao campo card-stats -->
                     <div class="card-stats" style="background-color: {{ $statusColor }}">
                         <span>{{ ucwords($mesa->status) }}</span>
@@ -96,16 +105,21 @@
                             <i class="ri-group-fill"></i>
                         </span>
                     </div>
-                    @endif
-                </div>
 
+                    @endif
+
+                </div>
+                <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
+                href="{{ route('mesa.desativar', ['id' => $mesa->id]) }}"><i class="ri-eye-line"></i></a>
             </div>
+
+
         @endforeach
     </div>
     </div>
 
 
 
-
+    @include('sweetalert::alert')
 
 @endsection
