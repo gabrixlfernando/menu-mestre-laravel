@@ -61,7 +61,14 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::post('/dashboard/administrativo/mesa/create', [AdministrativoController::class, 'createMesa'])->name('mesa.create');
 
+    // Contato (Página Mensagens)
+    Route::get('/dashboard/administrativo/contato', [AdministrativoController::class, 'contato'])->name('dashboard.administrativo.contato');
 
+    Route::get('/dashboard/administrativo/contato/show/{id}', [AdministrativoController::class, 'showContato'])->name('contato.show');
+
+    Route::put('/atualizar-lido/{id}', [AdministrativoController::class, 'atualizarLido'])->name('contato.atualizar-lido');
+
+    Route::get('/verificar-lido/{id}', [AdministrativoController::class, 'verificarLido'])->name('contato.verificar-lido');
 });
 
 
