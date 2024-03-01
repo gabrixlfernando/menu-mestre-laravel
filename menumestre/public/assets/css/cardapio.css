@@ -19,7 +19,7 @@
 }
 
 
-.filtro-btn{
+.filtro-btn-cardapio{
     gap: 50px;
     display: flex;
     justify-content: center;
@@ -28,7 +28,7 @@
     left: 0;
     margin-bottom: 10px;
 }
-.filtro-btn button{
+.filtro-btn-cardapio button{
     color: var(--fundo);
     font-weight: 500;
     width: 120px;
@@ -51,7 +51,7 @@
 .filtro-ativo span{
     color: var(--orange);
 }
-.filtro-btn i{
+.filtro-btn-cardapio i{
     font-size: 2rem;
 }
 .card-container{

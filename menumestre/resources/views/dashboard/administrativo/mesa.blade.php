@@ -11,7 +11,7 @@
     <div class="container">
 
        <!-- Botões de filtro -->
-<div class="filtro-btn" id="botoes-filtro">
+<div class="filtro-btn-mesa" id="botoes-filtro">
     <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
         <i class="ri-file-list-3-fill"></i>
         <span>Todos</span>
@@ -75,11 +75,20 @@
                 data-target="#alterarMesaModal{{ $mesa->id }}">
                     <!-- Adiciona o estilo condicional ao campo card-stats -->
                     <div class="card-stats" style="background-color: {{ $statusColor }}">
-                        <span>{{ ucwords($mesa->status) }}</span><i class="ri-checkbox-circle-fill"></i>
+                        <span>{{ ucwords($mesa->status) }}</span>
+                        @if ($mesa->status === 'disponivel')
+                            <i class="ri-checkbox-circle-fill"></i>
+                        @elseif ($mesa->status === 'reservada')
+                            <i class="ri-time-fill"></i>
+                        @elseif ($mesa->status === 'ocupada')
+                            <i class="ri-git-repository-private-fill"></i>
+                        @endif
                     </div>
                     <img src="{{ asset('../assets//images/icones/mesa.png') }}" alt="Mesa">
                     <h3>Mesa {{ $mesa->numero_mesa }}</h3>
                     <p>Capacidade: {{ $mesa->capacidade }}</p>
+
+                    @if ($mesa->status !== 'disponivel')
                     <div class="card-price-pessoas">
                         <span class="card-price">R${{ $mesa->preco }}</span>
                         <span class="card-pessoas">
@@ -87,8 +96,7 @@
                             <i class="ri-group-fill"></i>
                         </span>
                     </div>
-
-
+                    @endif
                 </div>
 
             </div>
