@@ -61,6 +61,9 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::post('/dashboard/administrativo/mesa/create', [AdministrativoController::class, 'createMesa'])->name('mesa.create');
 
+    Route::get('/dashboard/administrativo/mesa/desativar-mesa/{id}', [AdministrativoController::class, 'desativarMesa'])->name('mesa.desativar');
+    Route::get('/dashboard/administrativo/mesa/ativar-mesa/{id}', [AdministrativoController::class, 'ativarMesa'])->name('mesa.ativar');
+
 
 });
 
