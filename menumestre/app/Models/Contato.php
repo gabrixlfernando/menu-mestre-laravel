@@ -11,5 +11,5 @@ class Contato extends Model
 
     protected $table = 'contatos';
 
-    protected $fillable = ['nomeContato','emailContato', 'foneContato', 'assuntoContato', 'mensContato'];
+    protected $fillable = ['nomeContato','emailContato', 'foneContato', 'assuntoContato', 'mensContato', 'lidoContato'];
 }
