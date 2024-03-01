@@ -40,9 +40,30 @@
                 </a>
             </div>
             @foreach ($mesas as $mesa)
-            <div class="card card-show" >
-                    <div class="card-info" data-toggle="modal" data-target="#alterarMesaModal" data-mesaid="{{ $mesa->id }}">
-                        <div class="card-stats">
+                @php
+                    $statusColor = '';
+                    switch ($mesa->status) {
+                        case 'disponivel':
+                            $statusColor = 'var(--disponivel)';
+                            break;
+                        case 'ocupada':
+                            $statusColor = 'var(--ocupada)';
+                            break;
+                        case 'reservada':
+                            $statusColor = 'var(--reservada)';
+                            break;
+                        default:
+                            $statusColor = 'var(--default-color)';
+                            break;
+                    }
+                @endphp
+                <div class="card card-show" style="border: solid 1px {{ $statusColor }}">
+                    <!-- Verifica o status da mesa e define a cor de fundo com base nisso -->
+
+
+                    <div class="card-info">
+                        <!-- Adiciona o estilo condicional ao campo card-stats -->
+                        <div class="card-stats" style="background-color: {{ $statusColor }}">
                             <span>{{ ucwords($mesa->status) }}</span><i class="ri-checkbox-circle-fill"></i>
                         </div>
                         <img src="{{ asset('../assets//images/icones/mesa.png') }}" alt="Mesa">
@@ -55,50 +76,18 @@
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>
+                        <button type="button" class="btn btn-dark" data-toggle="modal"
+                            data-target="#alterarMesaModal{{ $mesa->id }}">
+                            Alterar Mesa
+                        </button>
+                        @include('dashboard.administrativo.mesa.edit', ['id' => $mesa->id])
                     </div>
 
-            </div>
-
-
+                </div>
             @endforeach
         </div>
     </div>
 
-
-
-    <div class="modal fade" id="alterarMesaModal" tabindex="-1" role="dialog" aria-labelledby="alterarMesaModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="alterarMesaModalLabel">Alterar Mesa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('dashboard.administrativo.mesa.edit', ['id' => $mesa->id]) }}">
-                        @csrf
-                        @method('PUT')
-                        <!-- Campos do formulário para editar a mesa -->
-                        <div class="form-group">
-                            <label for="status">Status:</label>
-                            <input type="text" id="status" name="status" value="{{ $mesa->status }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="capacidade">Capacidade:</label>
-                            <input type="number" id="capacidade" name="capacidade" value="{{ $mesa->capacidade }}">
-                        </div>
-                        <!-- Outros campos do formulário, se necessário -->
-                        <button type="submit">Salvar</button>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

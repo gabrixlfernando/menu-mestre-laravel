@@ -132,6 +132,7 @@ class AdministrativoController extends Controller
     return redirect()->route('dashboard.administrativo.cardapio');
     }
 
+    // Buscar produto pelo id
     public function editProduto($idProduto)
     {
         $cardapio = Cardapio::findOrfail($idProduto);
@@ -139,6 +140,7 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.cardapio', compact('cardapio'));
     }
 
+    // Atualizar Produto
     public function updateProduto(Request $request, $idProduto)
     {
        // Regras de validação
@@ -197,7 +199,7 @@ class AdministrativoController extends Controller
 
 
 
-
+    // lista funcionarios
     public function funcionario()
     {
 
@@ -235,35 +237,34 @@ class AdministrativoController extends Controller
         //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::find($id);
 
-
-
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
         return view('dashboard.administrativo.mesa', compact('mesas', 'funcionario'));
     }
 
-    public function editMesa(Request $request, $id)
+    // busca mesa pelo id
+
+    public function editMesa($id)
     {
-        $request->validate([
-            'status' => 'required',
-            'capacidade' => 'required|numeric', // Supondo que a capacidade seja um número
-            // Outros campos que você precisa validar
-        ]);
+      $mesa = Mesa::findOrfail($id);
 
+      return redirect()->route('dashboard.administrativo.mesa', compact('mesa'));
+    }
+
+    public function updateMesa(Request $request, $id)
+    {
         // Encontre a mesa pelo ID
-        $mesa = Mesa::find($id);
+    $mesa = Mesa::findOrFail($id);
 
-        dd($id);
+    // Atualize os campos capacidade e status com os valores do formulário
+    $mesa->capacidade = $request->input('capacidade');
+    $mesa->status = $request->input('status');
 
-        // Atualize os campos da mesa com os dados recebidos do formulário
-        $mesa->status = $request->status;
-        $mesa->capacidade = $request->capacidade;
-        // Atualize outros campos, se necessário
+    // Salve as alterações no banco de dados
+    $mesa->save();
 
-        // Salve as alterações no banco de dados
-        $mesa->save();
-
-        // Redirecione para alguma rota após a atualização (por exemplo, para a página de detalhes da mesa)
-        return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id])->with('success', 'Mesa atualizada com sucesso!');
+    Alert::success('Mesa Atualizada!', 'A mesa foi atualizada com sucesso.');
+    // Redirecione de volta para a página de visualização da mesa ou outra página desejada
+    return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id]);
     }
 }

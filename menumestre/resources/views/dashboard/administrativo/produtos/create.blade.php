@@ -99,9 +99,9 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                 </div>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Confirmar</button>
                             </div>
                         </form>
 
