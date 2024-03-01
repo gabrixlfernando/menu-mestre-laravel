@@ -13,7 +13,7 @@
        <!-- Botões de filtro -->
 <div class="filtro-btn-mesa" id="botoes-filtro">
     <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
-        <i class="ri-file-list-3-fill"></i>
+        <i class="ri-bar-chart-2-line"></i>
         <span>Todos</span>
     </button>
     <button id="filtro-btn-disponivel" data-status="disponivel" title="Disponível">
