@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cardapio;
 use App\Models\Funcionario;
 use App\Models\Mesa;
+use App\Models\Contato;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
@@ -291,4 +292,44 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.mesa');
     }
 
+
+    // Lista Contato
+    public function contato(){
+        // $contatos = Contato::all();
+        $contatos = Contato::paginate(5); // Retorna 5 contatos por página
+        $id = session('id');
+
+        // Buscando o funcionário pelo id no banco de dados
+        $funcionario = Funcionario::find($id);
+
+        return view('dashboard.administrativo.contato', compact('contatos', 'funcionario'));
+    }
+
+        // Buscar contato pelo id
+        public function showContato($id)
+        {
+            $contato = Contato::findOrFail($id);
+            return view('dashboard.administrativo.contato.show', compact('contato'));
+        }
+
+        public function atualizarLido($id)
+        {
+            $contato = Contato::find($id);
+            if ($contato) {
+                $contato->update(['lidoContato' => true]);
+                return response()->json(['success' => true, 'message' => 'Contato marcado como lido com sucesso']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Contato não encontrado'], 404);
+            }
+        }
+
+        public function verificarLido($id)
+        {
+            $contato = Contato::find($id);
+            if ($contato) {
+                return response()->json(['lido' => $contato->lidoContato]);
+            } else {
+                return response()->json(['error' => 'Contato não encontrado'], 404);
+            }
+        }
 }
