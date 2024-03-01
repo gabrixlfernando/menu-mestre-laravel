@@ -88,8 +88,8 @@
                         </div>
 
                         <!-- Botão de edição -->
-                        <div class="card-edit-btn">
-                            <a title="Editar Cardápio" data-toggle="modal" data-target="#edit{{ $item->idProduto }}" href="#">
+                        <div class="card-edit-btn" data-toggle="modal" data-target="#edit{{ $item->idProduto }}">
+                            <a title="Editar Cardápio" href="#">
                                 <div>
                                     <span><i class="ri-edit-2-line"></i></span>
                                     <span>Editar</span>
