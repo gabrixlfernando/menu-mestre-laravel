@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group">
                         <label for="preco">Preço</label>
-                        <input type="number" class="form-control" id="preco" name="preco" required>
+                        <input type="number" class="form-control" id="preco" name="preco" pattern="^[0-9]+(\.[0-9]{1,2})?$" maxlength="7" required>
                     </div>
                     <div class="modal-footer">
                         <div class="col">
