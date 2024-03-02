@@ -101,7 +101,7 @@
                                 class="nav-title">Funcionários</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span
+                        <a href="{{ url('dashboard/administrativo/contato') }}"><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span
                                 class="nav-title">Mensagens</span></a>
                     </li>
                 </ul>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('foneContato', 15);
             $table->string('assuntoContato', 100)->default('Contato Site');
             $table->text('mensContato');
+            $table->boolean('lidoContato')->default(false); // Campo para indicar se o contato foi lido
             $table->timestamps();
         });
     }
