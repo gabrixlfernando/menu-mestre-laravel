@@ -85,6 +85,10 @@ function filtrarCardapio(categoria) {
 }
 
 // filtro mesa
+<<<<<<< HEAD
+=======
+
+>>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.filtro-btn-mesa button');
 

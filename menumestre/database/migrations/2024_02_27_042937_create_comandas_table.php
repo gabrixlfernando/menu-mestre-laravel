@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comandas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('mesa_id');
-            $table->enum('status', ['aberta', 'fechada'])->default('aberta');
-            $table->decimal('total', 10, 2)->default(0.00);
-            $table->timestamps();
+        // Schema::create('comandas', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('mesa_id');
+        //     $table->enum('status', ['aberta', 'fechada'])->default('aberta');
+        //     $table->decimal('total', 10, 2)->default(0.00);
+        //     $table->timestamps();
 
-            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
-        });
+        //     $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
+        // });
     }
 
     /**

@@ -53,7 +53,7 @@
             @foreach($contatos as $contato)
                 <li class="cont-list-contato abrirModal" data-id="{{ $contato->id }}" data-toggle="modal" data-target="#show{{ $contato->id }}">
                     <div class="cont-info-contato">
-                        <img src="{{ asset('assets/images/contatos/perfil_contato.png') }}" alt="">
+                        <img src="{{ asset('../assets/images/contatos/perfil_contato.png') }}" alt="">
                         <div>
                             <span>{{ $contato->nomeContato }}</span>
                             <p>{{ $contato->emailContato }}</p>
@@ -89,7 +89,10 @@
                 }
             });
         });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
         // Captura o evento de fechamento do modal
         $('.modal').on('hidden.bs.modal', function () {
             var id = $(this).attr('id').replace('show', '');

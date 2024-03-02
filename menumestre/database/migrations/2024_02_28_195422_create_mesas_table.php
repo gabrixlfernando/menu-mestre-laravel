@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mesas', function (Blueprint $table) {
-            $table->id();
-            $table->integer('numero_mesa')->unique();
-            $table->integer('capacidade');
-            $table->enum('status', ['disponivel', 'ocupada', 'reservada'])->default('disponivel');
-            $table->decimal('preco', 10, 2)->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('mesas', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('numero_mesa')->unique();
+        //     $table->integer('capacidade');
+        //     $table->enum('status', ['disponivel', 'ocupada', 'reservada'])->default('disponivel');
+        //     $table->decimal('preco', 10, 2)->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
