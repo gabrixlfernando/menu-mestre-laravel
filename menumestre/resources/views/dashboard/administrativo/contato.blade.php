@@ -9,10 +9,7 @@
 <div class="container-contato">
     <div class="header-contato">
         <div class="header-titulo">
-
-            <div>
-                <a><i class="ri-mail-open-line"></i><span>Mensagens</span></a>
-            </div>
+            <a><i class="ri-mail-open-line"></i><span>Mensagens</span></a>
         </div>
         <div role="navigation" aria-label="Pagination Navigation" class="pagination-container">
             <div class="pagination">

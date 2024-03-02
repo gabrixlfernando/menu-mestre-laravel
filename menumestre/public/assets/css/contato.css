@@ -35,17 +35,16 @@ main{
     font-weight: 400;
 }
 .header-titulo {
-    align-items: center;
-}
-.header-titulo div{
     display: flex;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
 }
+
 .header-titulo a{
+    display: flex;
     color: var(--fundo);
     text-decoration: none;
-    display: flex;
-    align-items: center;
+    justify-content: center;
     font-size: 1.2rem;
     font-weight: 400;
     transition: border-bottom 0.3s ease;
@@ -55,9 +54,7 @@ main{
     border-bottom: solid 4px var(--blue);
 }
 
-.header-titulo i{
-    margin-left: 20px;
-}
+
 .header-titulo span{
     margin-left: 10px;
 }
