@@ -6,7 +6,6 @@ use App\Models\Cardapio;
 use App\Models\Contato;
 use App\Models\Funcionario;
 use App\Models\Mesa;
-use App\Models\Contato;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;

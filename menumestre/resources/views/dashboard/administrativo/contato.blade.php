@@ -89,10 +89,6 @@
                 }
             });
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
         // Captura o evento de fechamento do modal
         $('.modal').on('hidden.bs.modal', function () {
             var id = $(this).attr('id').replace('show', '');

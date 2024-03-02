@@ -10,27 +10,6 @@
     <!-- Início do conteúdo HTML -->
     <div class="container">
 
-<<<<<<< HEAD
-       <!-- Botões de filtro -->
-<div class="filtro-btn-mesa" id="botoes-filtro">
-    <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
-        <i class="ri-bar-chart-2-line"></i>
-        <span>Todos</span>
-    </button>
-    <button id="filtro-btn-disponivel" data-status="disponivel" title="Disponível">
-        <i class="ri-checkbox-circle-fill"></i>
-        <span>Disponível</span>
-    </button>
-    <button id="filtro-btn-ocupada" data-status="ocupada" title="Ocupada">
-        <i class="ri-git-repository-private-fill"></i>
-        <span>Ocupada</span>
-    </button>
-    <button id="filtro-btn-reservada" data-status="reservada" title="Reservada">
-        <i class="ri-time-fill"></i>
-        <span>Reservada</span>
-    </button>
-</div>
-=======
         <!-- Botões de filtro -->
         <div class="filtro-btn-mesa" id="botoes-filtro">
             <button id="filtro-btn-todos" class="filtro-ativo" data-status="todos" title="Todos">
@@ -50,7 +29,6 @@
                 <span>Reservada</span>
             </button>
         </div>
->>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
     </div>
 
     @include('dashboard.administrativo.mesa.create')
@@ -117,18 +95,6 @@
                     <img src="{{ asset('../assets//images/icones/mesa.png') }}" alt="Mesa">
                     <h3>Mesa {{ $mesa->numero_mesa }}</h3>
                     <p>Capacidade: {{ $mesa->capacidade }}</p>
-<<<<<<< HEAD
-
-                    @if ($mesa->status !== 'disponivel')
-                    <div class="card-price-pessoas">
-                        <span class="card-price">R${{ $mesa->preco }}</span>
-                        <span class="card-pessoas">
-                            <p>{{ $mesa->capacidade }}</p>
-                            <i class="ri-group-fill"></i>
-                        </span>
-                    </div>
-
-=======
 
                     @if ($mesa->status !== 'disponivel')
                         <div class="card-price-pessoas">
@@ -138,16 +104,11 @@
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>
->>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
                     @endif
 
                 </div>
                 <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
-<<<<<<< HEAD
-                href="{{ route('mesa.desativar', ['id' => $mesa->id]) }}"><i class="ri-eye-line"></i></a>
-=======
                     href="{{ route('mesa.desativar', ['id' => $mesa->id]) }}"><i class="ri-eye-line"></i></a>
->>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
             </div>
 
 
@@ -155,11 +116,6 @@
     </div>
     </div>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 327f379451dae3f34bb514e0486a7b3e6438555e
     @include('sweetalert::alert')
 
 @endsection
