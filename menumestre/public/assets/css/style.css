@@ -1147,8 +1147,8 @@ clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
   text-transform: capitalize;
 }
 .menu_content h4 span {
-  font-size: 25px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 100;
   float: right;
   font-style: italic;
   color: #c0392b;

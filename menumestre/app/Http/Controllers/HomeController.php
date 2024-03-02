@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContatoEmail;
+use App\Models\Cardapio;
 use App\Models\Contato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -56,5 +57,20 @@ class HomeController extends Controller
             return response()->json(['success' => 'E-mail registrado com sucesso!']);
         }
     }
+
+
+    public function exibirCardapio()
+    {
+        // $cardapio = Cardapio::all();
+
+         // Consulta todos os produtos com cada categoria
+         $pratos = Cardapio::where('categoriaProduto', 'comida')->get();
+         $massas = Cardapio::where('categoriaProduto', 'massa')->get();
+         $bebidas = Cardapio::where('categoriaProduto', 'bebida')->get();
+         $sobremesas = Cardapio::where('categoriaProduto', 'sobremesa')->get();
+
+        return view('site.home', compact('pratos', 'massas', 'bebidas', 'sobremesas'));
+    }
+
 
 }

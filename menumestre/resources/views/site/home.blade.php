@@ -10,7 +10,7 @@
 
     <!-- offer section -->
 
-    <section class="offer_section layout_padding-bottom" id="menu">
+    {{-- <section class="offer_section layout_padding-bottom" id="menu">
         <div class="offer_container">
             <div class="container ">
                 <div class="row">
@@ -53,474 +53,136 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <!-- end offer section -->
 
-    <!-- cardapio section -->
-
-    {{-- <section class="food_section layout_padding-bottom">
-        <div class="container">
-            <div class="heading_container heading_center">
-                <h2>
-                    Nosso cardápio
-                </h2>
-            </div>
-
-            <ul class="filters_menu">
-                <li class="active" data-filter="*">Tudo</li>
-                <li data-filter=".burger">Hambúrguer</li>
-                <li data-filter=".pizza">Pizza</li>
-                <li data-filter=".pasta">Massa</li>
-                <li data-filter=".fries">Fritas</li>
-            </ul>
-
-            <div class="filters-content">
-                <div class="row grid">
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f1.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Pizza Deliciosa </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            RR$20
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f2.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Hambúrguer Delicioso </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$15
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f3.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Pizza Deliciosa </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$17
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pasta">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f4.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Massa Deliciosa </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$18
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all fries">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f5.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Batatas fritas </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$10
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f6.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Pizza Deliciosa </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$15
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f7.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Hambúrguer Saboroso </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$12
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f8.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Hambúrguer Saboroso </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$14
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pasta">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="{{ asset('../assets/images/f9.png') }}" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Massa Deliciosa </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque </p>
-                                    <div class="options">
-                                        <h6>
-                                            R$10
-                                        </h6>
-                                        <a href="">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <section id="our_menu" class="pt-5 pb-5" >
+        <div class="container" id="menu">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page_title text-center mb-4">
+                        <h1>Nosso Menu</h1>
+                        <div class="single_line"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section> --}}
+            <div class="row">
+                <ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="prato-tab" data-toggle="tab" href="#prato" role="tab">Pratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="massa-tab" data-toggle="tab" href="#massa" role="tab">Massas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="bebida-tab" data-toggle="tab" href="#bebida" role="tab">Bebidas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="sobremesa-tab" data-toggle="tab" href="#sobremesa" role="tab">Sobremesas</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="tab-content col-lg-12" id="myTabContent">
 
-    <section id="our_menu" class="pt-5 pb-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="page_title text-center mb-4">
-						<h1>Nosso Menu</h1>
-						<div class="single_line"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="breakfast-tab" data-toggle="tab" href="#breakfast" role="tab">Pratos</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="lunch-tab" data-toggle="tab" href="#lunch" role="tab">Massas</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Bebidas</a>
-					</li>
-          <li class="nav-item">
-						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Sobremesas</a>
-					</li>
-				</ul>
-        	</div>
-			<div class="row">
-				<div class="tab-content col-lg-12" id="myTabContent">
-					<div class="tab-pane fade show active" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/chinese.jpeg') }}" alt="burger">
-									<div class="menu_content">
-										<h4>Chicken Burger  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="black coffee">
-									<div class="menu_content">
-										<h4>Black coffee <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/Hambúrguer.jpeg') }}" alt="fried rice">
-									<div class="menu_content">
-										<h4>Fried Rice  <span>R$45</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato2.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato3.jpeg') }}" alt="burger">
-									<div class="menu_content">
-										<h4>Chicken Burger  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato4.jpeg') }}" alt="black coffee">
-									<div class="menu_content">
-										<h4>Black coffee <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato5.jpeg') }}" alt="fried rice">
-									<div class="menu_content">
-										<h4>Fried Rice  <span>R$45</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato6.jpeg') }}" alt="pizza">
-									<div class="menu_content">
-										<h4>12" Pizza  <span>R$35</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/massa1.jpeg') }}" alt="salad">
-									<div class="menu_content">
-										<h4>Salad <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/massa2.jpeg') }}" alt="green tea">
-									<div class="menu_content">
-										<h4>green tea <span>R$15</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/massa3.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/messa4.jpeg') }}" alt="burger">
-									<div class="menu_content">
-										<h4>Chicken Burger  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/massa5.jpeg') }}" alt="black coffee">
-									<div class="menu_content">
-										<h4>Black coffee <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/pizza1.jpeg') }}"fried rice">
-									<div class="menu_content">
-										<h4>Fried Rice  <span>R$45</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/prato1.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="dinner" role="tabpanel" aria-labelledby="dinner-tab">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/coca1.jpeg') }}" alt="burger">
-									<div class="menu_content">
-										<h4>Chicken Burger  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/sprite.jpeg') }}" alt="black coffee">
-									<div class="menu_content">
-										<h4>Black coffee <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/pepsi.jpeg') }}" alt="fried rice">
-									<div class="menu_content">
-										<h4>Fried Rice  <span>R$45</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/fanta.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="single_menu">
-									<img src={{ asset('../assets/images/vinho.jpeg') }} alt="burger">
-									<div class="menu_content">
-										<h4>Chicken Burger  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/vinho2.jpeg') }}" alt="black coffee">
-									<div class="menu_content">
-										<h4>Black coffee <span>R$20</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/vinho3.jpeg') }}" alt="fried rice">
-									<div class="menu_content">
-										<h4>Fried Rice  <span>R$45</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-								<div class="single_menu">
-									<img src="{{ asset('../assets/images/vinho4.jpeg') }}" alt="meat">
-									<div class="menu_content">
-										<h4>meat  <span>R$24</span></h4>
-										<p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta saepe facilis.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                    {{-- Pratos --}}
 
-		</div>
-	</section>
+                    <div class="tab-pane fade show active" id="prato" role="tabpanel" aria-labelledby="prato-tab">
+                        <div class="row">
+                            @php
+                                $pratosArray = $pratos->toArray();
+                                $pratosChunked = array_chunk($pratosArray, 2);
+                            @endphp
+                            @foreach($pratosChunked as $par)
+                            <div class="col-md-6">
+                                @foreach ($par as $prato)
+                                <div class="single_menu">
+                                    <img src="{{ asset('../assets/images/cardapio/' . $prato['fotoProduto']) }}" alt="burger">
+                                    <div class="menu_content">
+                                        <h4>{{ $prato['nomeProduto'] }} <span>R${{ $prato['valorProduto'] }}</span></h4>
+                                        <p>{{ $prato['descricaoProduto'] }}</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Massas --}}
+
+                    <div class="tab-pane fade" id="massa" role="tabpanel" aria-labelledby="massa-tab">
+                        <div class="row">
+                            @php
+                                $massasArray = $massas->toArray();
+                                $massasChunked = array_chunk($massasArray, 2);
+                            @endphp
+                            @foreach($massasChunked as $par)
+                            <div class="col-md-6">
+                                @foreach ($par as $massa)
+                                <div class="single_menu">
+                                    <img src="{{ asset('../assets/images/cardapio/' . $massa['fotoProduto']) }}" alt="massa">
+                                    <div class="menu_content">
+                                        <h4>{{ $massa['nomeProduto'] }} <span>R${{ $massa['valorProduto'] }}</span></h4>
+                                        <p>{{ $massa['descricaoProduto'] }}</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Bebidas --}}
+
+                    <div class="tab-pane fade" id="bebida" role="tabpanel" aria-labelledby="bebida-tab">
+                        <div class="row">
+                            @php
+                                $bebidasArray = $bebidas->toArray();
+                                $bebidasChunked = array_chunk($bebidasArray, 2);
+                            @endphp
+                            @foreach($bebidasChunked as $par)
+                            <div class="col-md-6">
+                                @foreach ($par as $bebida)
+                                <div class="single_menu">
+                                    <img src="{{ asset('../assets/images/cardapio/' . $bebida['fotoProduto']) }}" alt="bebida">
+                                    <div class="menu_content">
+                                        <h4>{{ $bebida['nomeProduto'] }} <span>R${{ $bebida['valorProduto'] }}</span></h4>
+                                        <p>{{ $bebida['descricaoProduto'] }}</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Sobremesas --}}
+
+                    <div class="tab-pane fade" id="sobremesa" role="tabpanel" aria-labelledby="sobremesa-tab">
+                        <div class="row">
+                            @php
+                                $sobremesasArray = $sobremesas->toArray();
+                                $sobremesasChunked = array_chunk($sobremesasArray, 2);
+                            @endphp
+                            @foreach($sobremesasChunked as $par)
+                            <div class="col-md-6">
+                                @foreach ($par as $sobremesa)
+                                <div class="single_menu">
+                                    <img src="{{ asset('../assets/images/cardapio/' . $sobremesa['fotoProduto']) }}" alt="sobremesa">
+                                    <div class="menu_content">
+                                        <h4>{{ $sobremesa['nomeProduto'] }} <span>R${{ $sobremesa['valorProduto'] }}</span></h4>
+                                        <p>{{ $sobremesa['descricaoProduto'] }}</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+    </section>
 
     <!-- fim cardapio section -->
 
@@ -571,7 +233,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form_container">
-                        <form action="{{ route('contato.enviar')}}" method="POST" id="formContato">
+                        <form action="{{ route('contato.enviar') }}" method="POST" id="formContato">
                             @csrf
                             <div>
                                 <input type="text" name="nomeContato" id="nomeContato" class="form-control"
@@ -591,19 +253,22 @@
                             {{-- opção de selecionar o tipo de assunto do contato --}}
 
                             <div>
-                                <select name="assuntoContato" id="assuntoContato" class="form-control"  value="{{ old('assuntoContato') }}">
-                                    <option value="" disabled="" selected="" hidden="">Selecione o assunto</option>
+                                <select name="assuntoContato" id="assuntoContato" class="form-control"
+                                    value="{{ old('assuntoContato') }}">
+                                    <option value="" disabled="" selected="" hidden="">Selecione o
+                                        assunto</option>
                                     <option value="Feedback">Feedback</option>
-                                    <option value="Pedidos e consultas sobre o cardápio">Pedidos e consultas sobre o cardápio</option>
+                                    <option value="Pedidos e consultas sobre o cardápio">Pedidos e consultas sobre o
+                                        cardápio</option>
                                     <option value="Suporte ao cliente">Suporte ao cliente</option>
                                     <option value="Trabalhe conosco">Trabalhe conosco</option>
                                 </select>
-                                 <div id="assuntoContatoError" class="error-mensagem"></div>
+                                <div id="assuntoContatoError" class="error-mensagem"></div>
                             </div>
                             <div>
-                                <textarea  name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
+                                <textarea name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
                                     placeholder="Digite a sua mensagem">{{ old('mensContato') }}</textarea>
-                                    <div id="mensContatoError" class="error-mensagem"></div>
+                                <div id="mensContatoError" class="error-mensagem"></div>
                             </div>
                             <div class="btn_box">
                                 <button type="submit" onclick="formContato(event)">Enviar via e-mail</button>
