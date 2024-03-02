@@ -96,11 +96,18 @@
                     <h3>Mesa {{ $mesa->numero_mesa }}</h3>
                     <p>Capacidade: {{ $mesa->capacidade }}</p>
 
-                    @if ($mesa->status !== 'disponivel')
+                    @if ($mesa->status === 'reservada')
+                        <div class="card-price-pessoas" style="justify-content: flex-end">
+                            <span class="card-pessoas">
+                                <p>{{ $mesa->pessoas_sentadas }}</p>
+                                <i class="ri-group-fill"></i>
+                            </span>
+                        </div>
+                    @elseif ($mesa->status !== 'disponivel')
                         <div class="card-price-pessoas">
                             <span class="card-price">R${{ $mesa->preco }}</span>
                             <span class="card-pessoas">
-                                <p>{{ $mesa->capacidade }}</p>
+                                <p>{{ $mesa->pessoas_sentadas }}</p>
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>

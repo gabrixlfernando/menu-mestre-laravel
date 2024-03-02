@@ -13,10 +13,6 @@
                 <form id="formAdicionarMesa" method="POST" action="{{ route('mesa.create') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="numeroMesa">Número da Mesa</label>
-                        <input type="text" class="form-control" id="numero_mesa" name="numero_mesa" required>
-                    </div>
-                    <div class="form-group">
                         <label for="capacidade">Capacidade</label>
                         <input type="number" class="form-control" id="capacidade" name="capacidade" required>
                     </div>

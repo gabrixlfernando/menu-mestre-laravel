@@ -11,6 +11,10 @@
                 <form class="form-container" method="POST" action="{{ route('mesa.update', ['id' => $mesa->id]) }}">
                     @csrf
                     @method('PUT')
+                    <div class="form-group">
+                        <label>Capacidade da Mesa:</label>
+                        <p>{{ $mesa->capacidade }}</p>
+                    </div>
                     <!-- Campos do formulário para editar a mesa -->
                     <div class="form-group">
                         <label for="status">Status:</label>
@@ -21,8 +25,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="capacidade">Capacidade:</label>
-                        <input type="number" id="capacidade" name="capacidade" value="{{ $mesa->capacidade }}" class="form-control">
+                        <label for="pessoas_sentadas">Quantas Pessoas?</label>
+                        <input type="number" id="pessoas_sentadas" name="pessoas_sentadas" value="{{ $mesa->pessoas_sentadas }}" class="form-control" max="{{ $mesa->capacidade }}">
                     </div>
                     <!-- Outros campos do formulário, se necessário -->
                     <div class="modal-footer">
