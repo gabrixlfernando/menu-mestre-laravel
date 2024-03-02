@@ -12,6 +12,6 @@ class Mesa extends Model
     protected $table = 'mesas';
 
     protected $fillable = [
-        'numero_mesa', 'capacidade', 'status'
+        'numero_mesa', 'capacidade', 'status','pessoas_sentadas'
     ];
 }

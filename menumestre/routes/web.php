@@ -16,17 +16,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
+// página home site
 Route::get('/',[HomeController::class, 'index'])->name('home');
-
+Route::get('/',[HomeController::class, 'exibirCardapio'])->name('cardapio.site');
 Route::post('/', [HomeController::class, 'salvarNoBanco'])->name('contato.enviar');
 
-// login
+// login admin
 
 Route::get('/admin', [LoginController::class, 'index'])->name('login');
 

@@ -109,28 +109,28 @@ class AdministrativoController extends Controller
     public function createProduto(Request $request)
     {
         // Obtém todos os dados do formulário
-    $dadosProduto = $request->all();
+        $dadosProduto = $request->all();
 
-    // Verifica se uma nova imagem foi enviada
-    if ($request->hasFile('fotoProduto')) {
-        // Obtém o objeto da imagem
-        $imagem = $request->file('fotoProduto');
-        // Obtém o nome original da imagem
-        $nomeOriginalImagem = $imagem->getClientOriginalName();
-        // Move a imagem para o diretório de destino
-        $imagem->move(public_path('assets/images/cardapio/'), $nomeOriginalImagem);
-        // Define o nome original da imagem nos dados do produto
-        $dadosProduto['fotoProduto'] = $nomeOriginalImagem;
-    }
+        // Verifica se uma nova imagem foi enviada
+        if ($request->hasFile('fotoProduto')) {
+            // Obtém o objeto da imagem
+            $imagem = $request->file('fotoProduto');
+            // Obtém o nome original da imagem
+            $nomeOriginalImagem = $imagem->getClientOriginalName();
+            // Move a imagem para o diretório de destino
+            $imagem->move(public_path('assets/images/cardapio/'), $nomeOriginalImagem);
+            // Define o nome original da imagem nos dados do produto
+            $dadosProduto['fotoProduto'] = $nomeOriginalImagem;
+        }
 
-    // Cria um novo produto no banco de dados com os dados fornecidos
-    $produto = Cardapio::create($dadosProduto);
+        // Cria um novo produto no banco de dados com os dados fornecidos
+        $produto = Cardapio::create($dadosProduto);
 
-    // Exibe uma mensagem de sucesso para o usuário
-    Alert::success('Produto Cadastrado!', 'O item foi cadastrado com sucesso.');
+        // Exibe uma mensagem de sucesso para o usuário
+        Alert::success('Produto Cadastrado!', 'O item foi cadastrado com sucesso.');
 
-    // Redireciona o usuário de volta para a página de cardápio
-    return redirect()->route('dashboard.administrativo.cardapio');
+        // Redireciona o usuário de volta para a página de cardápio
+        return redirect()->route('dashboard.administrativo.cardapio');
     }
 
     // Buscar produto pelo id
@@ -144,56 +144,56 @@ class AdministrativoController extends Controller
     // Atualizar Produto
     public function updateProduto(Request $request, $idProduto)
     {
-       // Regras de validação
-    $rules = [
-        'nomeProduto' => 'required|max:255',
-        'descricaoProduto' => 'required|max:255',
-        'valorProduto' => 'required|numeric',
-        'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
-        'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
-    ];
+        // Regras de validação
+        $rules = [
+            'nomeProduto' => 'required|max:255',
+            'descricaoProduto' => 'required|max:255',
+            'valorProduto' => 'required|numeric',
+            'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
+            'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
+        ];
 
-    // Mensagens de erro personalizadas
-    $messages = [
-        'categoriaProduto.in' => 'A categoria selecionada é inválida.',
-        'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
-        'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
-        'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
-    ];
+        // Mensagens de erro personalizadas
+        $messages = [
+            'categoriaProduto.in' => 'A categoria selecionada é inválida.',
+            'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
+            'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
+            'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
+        ];
 
-    // Validação dos dados
-    $validator = Validator::make($request->all(), $rules, $messages);
+        // Validação dos dados
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-    // Verifica se há erros de validação
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
+        // Verifica se há erros de validação
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-    // Se não houver erros de validação, continue com o processo de atualização do produto
-    // Encontre o produto pelo ID
-    $item = Cardapio::findOrFail($idProduto);
+        // Se não houver erros de validação, continue com o processo de atualização do produto
+        // Encontre o produto pelo ID
+        $item = Cardapio::findOrFail($idProduto);
 
-    // Verifique se uma nova imagem foi enviada
-    if ($request->hasFile('fotoProduto')) {
-        $imagem = $request->file('fotoProduto');
-        $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
-        $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
-        // Atualize o nome da imagem no produto
-        $item->fotoProduto = $nomeImagem;
-    }
+        // Verifique se uma nova imagem foi enviada
+        if ($request->hasFile('fotoProduto')) {
+            $imagem = $request->file('fotoProduto');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
+            // Atualize o nome da imagem no produto
+            $item->fotoProduto = $nomeImagem;
+        }
 
-    // Atualize os outros campos do produto
-    $item->nomeProduto = $request->input('nomeProduto');
-    $item->descricaoProduto = $request->input('descricaoProduto');
-    $item->valorProduto = $request->input('valorProduto');
-    $item->categoriaProduto = $request->input('categoriaProduto');
+        // Atualize os outros campos do produto
+        $item->nomeProduto = $request->input('nomeProduto');
+        $item->descricaoProduto = $request->input('descricaoProduto');
+        $item->valorProduto = $request->input('valorProduto');
+        $item->categoriaProduto = $request->input('categoriaProduto');
 
-    // Salve as alterações no banco de dados
-    $item->save();
+        // Salve as alterações no banco de dados
+        $item->save();
 
-    Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
-    // Redirecione de volta para a página de visualização do produto
-    return redirect()->route('dashboard.administrativo.cardapio');
+        Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
+        // Redirecione de volta para a página de visualização do produto
+        return redirect()->route('dashboard.administrativo.cardapio');
     }
 
 
@@ -247,33 +247,46 @@ class AdministrativoController extends Controller
 
     public function editMesa($id)
     {
-      $mesa = Mesa::findOrfail($id);
+        $mesa = Mesa::findOrfail($id);
 
-      return redirect()->route('dashboard.administrativo.mesa', compact('mesa'));
+        return redirect()->route('dashboard.administrativo.mesa', compact('mesa'));
     }
 
     public function updateMesa(Request $request, $id)
     {
         // Encontre a mesa pelo ID
-    $mesa = Mesa::findOrFail($id);
+        $mesa = Mesa::findOrFail($id);
 
-    // Atualize os campos capacidade e status com os valores do formulário
-    $mesa->capacidade = $request->input('capacidade');
-    $mesa->status = $request->input('status');
 
-    // Salve as alterações no banco de dados
-    $mesa->save();
+        $mesa->status = $request->input('status');
 
-    Alert::success('Mesa Atualizada!', 'A mesa foi atualizada com sucesso.');
-    // Redirecione de volta para a página de visualização da mesa ou outra página desejada
-    return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id]);
+        // Atualize os campos capacidade e status com os valores do formulário
+        // $mesa->pessoas_sentadas = $request->input('pessoas_sentadas');
+        // Se o status for "disponível", defina pessoas_sentadas como 0, caso contrário, obtenha o valor do formulário
+        if ($mesa->status === 'disponivel') {
+            $mesa->pessoas_sentadas = 0;
+        } else {
+            $mesa->pessoas_sentadas = $request->input('pessoas_sentadas');
+        }
+
+        // Salve as alterações no banco de dados
+        $mesa->save();
+
+        Alert::success('Mesa Atualizada!', 'A mesa foi atualizada com sucesso.');
+        // Redirecione de volta para a página de visualização da mesa ou outra página desejada
+        return redirect()->route('dashboard.administrativo.mesa', ['id' => $mesa->id]);
     }
 
     public function createMesa(Request $request)
     {
+        // Obtenha o número da última mesa cadastrada
+        $ultimaMesa = Mesa::orderBy('id', 'desc')->first();
+
+        // Determine o número para a nova mesa (último número + 1)
+        $numeroMesa = $ultimaMesa ? $ultimaMesa->numero_mesa + 1 : 1;
+
         // Validação dos dados do formulário
         $validatedData = $request->validate([
-            'numero_mesa' => 'required',
             'capacidade' => 'required|integer',
             'status' => 'required|in:disponivel,reservada,ocupada',
             'preco' => 'required|numeric',
@@ -281,7 +294,7 @@ class AdministrativoController extends Controller
 
         // Criação da nova mesa
         $mesa = new Mesa();
-        $mesa->numero_mesa = $validatedData['numero_mesa'];
+        $mesa->numero_mesa = $numeroMesa;
         $mesa->capacidade = $validatedData['capacidade'];
         $mesa->status = $validatedData['status'];
         $mesa->preco = $validatedData['preco'];
@@ -292,20 +305,21 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.mesa');
     }
 
-    public function desativarMesa($id){
-         // Encontre o produto pelo ID
-         $mesa = Mesa::find($id);
-         // Verifique se o produto foi encontrado
-         if ($mesa) {
-             // Atualize o status para "inativo"
-             $mesa->status = 'inativo';
-             $mesa->save();
-             Alert::success('Desativada!', 'A mesa foi desativada com sucesso.');
-             return redirect()->route('dashboard.administrativo.mesa');
-         } else {
-             Alert::error('Erro!', 'Ocorreu um erro ao desativar o item.');
-             return redirect()->route('dashboard.administrativo.mesa');
-         }
+    public function desativarMesa($id)
+    {
+        // Encontre o produto pelo ID
+        $mesa = Mesa::find($id);
+        // Verifique se o produto foi encontrado
+        if ($mesa) {
+            // Atualize o status para "inativo"
+            $mesa->status = 'inativo';
+            $mesa->save();
+            Alert::success('Desativada!', 'A mesa foi desativada com sucesso.');
+            return redirect()->route('dashboard.administrativo.mesa');
+        } else {
+            Alert::error('Erro!', 'Ocorreu um erro ao desativar o item.');
+            return redirect()->route('dashboard.administrativo.mesa');
+        }
     }
 
 
@@ -329,7 +343,8 @@ class AdministrativoController extends Controller
     }
 
     // Lista Contato
-    public function contato(){
+    public function contato()
+    {
         // $contatos = Contato::all();
         $contatos = Contato::orderBy('id', 'desc')->paginate(5); // Retorna 5 contatos por página
         $id = session('id');
@@ -340,32 +355,31 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.contato', compact('contatos', 'funcionario'));
     }
 
-        // Buscar contato pelo id
-        public function showContato($id)
-        {
-            $contato = Contato::findOrFail($id);
-            return view('dashboard.administrativo.contato.show', compact('contato'));
-        }
+    // Buscar contato pelo id
+    public function showContato($id)
+    {
+        $contato = Contato::findOrFail($id);
+        return view('dashboard.administrativo.contato.show', compact('contato'));
+    }
 
-        public function atualizarLido($id)
-        {
-            $contato = Contato::find($id);
-            if ($contato) {
-                $contato->update(['lidoContato' => true]);
-                return response()->json(['success' => true, 'message' => 'Contato marcado como lido com sucesso']);
-            } else {
-                return response()->json(['success' => false, 'message' => 'Contato não encontrado'], 404);
-            }
+    public function atualizarLido($id)
+    {
+        $contato = Contato::find($id);
+        if ($contato) {
+            $contato->update(['lidoContato' => true]);
+            return response()->json(['success' => true, 'message' => 'Contato marcado como lido com sucesso']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Contato não encontrado'], 404);
         }
+    }
 
-        public function verificarLido($id)
-        {
-            $contato = Contato::find($id);
-            if ($contato) {
-                return response()->json(['lido' => $contato->lidoContato]);
-            } else {
-                return response()->json(['error' => 'Contato não encontrado'], 404);
-            }
+    public function verificarLido($id)
+    {
+        $contato = Contato::find($id);
+        if ($contato) {
+            return response()->json(['lido' => $contato->lidoContato]);
+        } else {
+            return response()->json(['error' => 'Contato não encontrado'], 404);
         }
-
+    }
 }
