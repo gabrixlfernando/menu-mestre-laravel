@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="modal-footer m-data">
-                    <p>{{ \Carbon\Carbon::parse($contato->dataContato)->isoFormat('DD [de] MMMM') }}</p>
+                    <p>{{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }}</p>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <!-- Adicione aqui os botões ou ações que você deseja realizar no modal -->
                 </div>

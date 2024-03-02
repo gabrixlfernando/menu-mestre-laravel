@@ -64,7 +64,7 @@
                         <span>{{ Str::limit($contato->mensContato, 40, '...') }}</span>
                     </div>
                     <div class="cont-info-data">
-                        <span>{{ \Carbon\Carbon::parse($contato->dataContato)->isoFormat('DD [de] MMMM') }}</span>
+                        <span>{{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }}</span>
                     </div>
                 </li>
                 @include('dashboard.administrativo.contato.show', ['id' => $contato->id])
