@@ -46,25 +46,20 @@ main{
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: center;
     font-size: 1.2rem;
     font-weight: 400;
-    border-bottom: 4px solid transparent;
     transition: border-bottom 0.3s ease;
     background-color: var(--white);
     width: 250px;
     height: 50px;
-}
-.header-titulo a:hover{
-
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin: 0;
     border-bottom: solid 4px var(--blue);
-    border-radius: 2px;
+}
+
+.header-titulo i{
+    margin-left: 20px;
 }
 .header-titulo span{
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .container-contato{
@@ -73,7 +68,7 @@ main{
     min-width: 90%;
     background-color: var(--white);
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 40px;
     box-shadow: var(--shadow-card);
 }
 
@@ -151,10 +146,10 @@ main{
    font-weight: 500;
 }
 .cont-list-contato {
-    border-bottom: solid 1px transparent;
+    border-bottom: solid 4px transparent;
 }
 .cont-list-contato:hover{
-    border-bottom: solid 1px var(--blue);
+    border-bottom: solid 4px var(--blue);
     cursor: pointer;
 }
 .cont-list-contato span:nth-child(1){

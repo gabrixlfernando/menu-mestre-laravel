@@ -11,8 +11,7 @@
         <div class="header-titulo">
 
             <div>
-                <a href=""><i class="ri-mail-open-line"></i><span>Principal</span></a>
-                <a href=""><i class="ri-mail-check-line"></i><span>Favorito</span></a>
+                <a><i class="ri-mail-open-line"></i><span>Mensagens</span></a>
             </div>
         </div>
         <div role="navigation" aria-label="Pagination Navigation" class="pagination-container">
