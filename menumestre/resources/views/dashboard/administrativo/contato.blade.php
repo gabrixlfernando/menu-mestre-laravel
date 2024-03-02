@@ -50,6 +50,10 @@
             <ul>
             <!-- Loop sobre as mensagens e exibir cada uma -->
 
+            @php
+                $maxId = App\Models\Contato::max('id');
+            @endphp
+
             @foreach($contatos as $contato)
                 <li class="cont-list-contato abrirModal" data-id="{{ $contato->id }}" data-toggle="modal" data-target="#show{{ $contato->id }}">
                     <div class="cont-info-contato">
@@ -61,8 +65,11 @@
                     </div>
                     <div class="cont-info-assunto">
                         <span>{{ $contato->assuntoContato }}: </span>
-                        <span>{{ Str::limit($contato->mensContato, 40, '...') }}</span>
+                        <span>{{ Str::limit($contato->mensContato, 25, '...') }}</span>
                     </div>
+                    @if($contato->id == $maxId)
+                    <span class="card-new-item">Novo!</span>
+                    @endif
                     <div class="cont-info-data">
                         <span>{{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }}</span>
                     </div>

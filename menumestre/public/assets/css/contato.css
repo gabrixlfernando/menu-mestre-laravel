@@ -34,6 +34,9 @@ main{
     color: var(--gray);
     font-weight: 400;
 }
+.header-titulo {
+
+}
 .header-titulo p{
     color: var(--gray);
     font-weight: 400;
@@ -80,8 +83,19 @@ main{
 .cont-info-assunto{
     text-align: start;
     width: 70%;
+    font-size: 1rem;
 }
-
+.card-new-item{
+    border: solid 3px #17da52;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #17da52;
+    font-weight: 500;
+    padding: 4px;
+    width: 90px;
+    text-align: center;
+}
 .cont-info-data {
     width: 20%;
     text-align: end;
@@ -102,11 +116,11 @@ main{
     margin-left: 20px;
 }
 .cont-info-contato div span{
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--fundo);
  }
 .cont-info-contato div p{
-   font-size: 1rem;
+   font-size: 0.8rem;
    color: var(--gray);
    font-weight: 500;
 }
@@ -154,7 +168,7 @@ main{
 }
 
 .pagination-link.disabled {
-    color: #333;
+    color: var(--gray);
     background: none;
     cursor: not-allowed;
 }
@@ -166,7 +180,7 @@ main{
 .message-counter p {
     margin: 0;
     font-size: 14px;
-    color: #777;
+    color: var(--gray);
 }
 
 
