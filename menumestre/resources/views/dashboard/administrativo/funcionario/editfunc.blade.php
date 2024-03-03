@@ -9,8 +9,9 @@
         </div>
         <div class="modal-body">
           <!-- Formulário de edit -->
-          <form action="" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('admin.funcionario.update', ['idFuncionario' => $atendente->idFuncionario]) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>
                 <input type="file" class="form-control" id="fotoFuncionario" name="fotoFuncionario" value="{{ $atendente->fotoFuncionario }}" onchange="exibirImagem(this)">

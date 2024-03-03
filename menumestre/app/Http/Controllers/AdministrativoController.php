@@ -290,6 +290,76 @@ class AdministrativoController extends Controller
         return Redirect::route('dashboard.administrativo.funcionario');
     }
 
+    public function updateFuncionario(Request $request, $idFuncionario)
+    {
+        $request->merge([
+            'dataContratacao' => now(),
+            'criado_em' => now(),
+            'atualizado_em' => now()
+        ]);
+
+        $request->validate([
+            'nomeFuncionario'       => 'required|string|max:255',
+            'email'                 => 'required|email|max:255',
+            'dataNascimento'        => 'required|date',
+            'foneFuncionario'       => 'required|string|max:20',
+            'enderecoFuncionario'   => 'required|string|max:255',
+            'cidadeFuncionario'     => 'required|string|max:100',
+            'estadoFuncionario'     => 'required|string|max:50',
+            'cepFuncionario'        => 'required|string|max:10',
+            'dataContratacao'       => 'required|date',
+            'cargo'                 => 'required|string|max:100',
+            'salario'               => 'required|numeric',
+            'tipoFuncionario'       => 'required|in:administrativo,atendente,cozinheiro',
+            'statusFuncionario'     => 'required|in:ativo,inativo',
+            'fotoFuncionario'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $funcionario = Funcionario::findOrFail($idFuncionario);
+
+        $funcionario->fill($request->only([
+            'nomeFuncionario',
+            'email',
+            'dataNascimento',
+            'foneFuncionario',
+            'enderecoFuncionario',
+            'cidadeFuncionario' ,
+            'estadoFuncionario',
+            'cepFuncionario' ,
+            'dataContratacao',
+            'cargo',
+            'salario',
+            'tipoFuncionario',
+            'statusFuncionario',
+        ]));
+
+        // Verificar se uma nova imagem foi enviada
+        if ($request->hasFile('fotoFuncionario')) {
+            $fotoFuncionario = $request->file('fotoFuncionario');
+            $nomeArquivo = $funcionario->idFuncionario . '_' . str_replace(' ', '_', $funcionario->nomeFuncionario) . '.' . $fotoFuncionario->getClientOriginalExtension();
+            $caminhoDestino = public_path('assets/images/funcionarios/');
+
+            // Remover a foto antiga se existir
+            if ($funcionario->fotoFuncionario) {
+                if (file_exists(public_path($funcionario->fotoFuncionario))) {
+                    unlink(public_path($funcionario->fotoFuncionario));
+                }
+            }
+
+            // Mover a nova foto para o diretório de destino
+            $fotoFuncionario->move($caminhoDestino, $nomeArquivo);
+
+            // Atualizar o caminho da foto no modelo
+            $funcionario->fotoFuncionario = $nomeArquivo;
+        }
+
+        $funcionario->save();
+
+        Alert::success('Funcionario Atualizado!', 'O funcionario foi atualizado com sucesso.');
+
+        return Redirect::route('dashboard.administrativo.funcionario');
+    }
+
     public function editFuncionario($idFuncionario)
     {
         $funcionario = Funcionario::findOrfail($idFuncionario);
