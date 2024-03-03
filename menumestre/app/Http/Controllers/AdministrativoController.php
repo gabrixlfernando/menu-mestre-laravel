@@ -9,6 +9,7 @@ use App\Models\Mesa;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class AdministrativoController extends Controller
@@ -278,13 +279,15 @@ class AdministrativoController extends Controller
             $caminhoDestino = public_path('assets/images/funcionarios/');
 
             $fotoFuncionario->move($caminhoDestino, $nomeArquivo);
+
+            $funcionario->fotoFuncionario = $nomeArquivo;
         }
 
         $funcionario->save();
 
         Alert::success('Funcionario Cadastrado!', 'O funcionario foi cadastrado com sucesso.');
 
-        return view('dashboard.administrativo.funcionario');
+        return Redirect::route('dashboard.administrativo.funcionario');
     }
 
     public function editFuncionario($idFuncionario)

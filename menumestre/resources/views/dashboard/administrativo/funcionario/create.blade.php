@@ -55,10 +55,10 @@
               <label for="cepFuncionario" class="form-label">CEP</label>
               <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario">
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
               <label for="dataContratacao" class="form-label">Data de Contratação</label>
               <input type="date" class="form-control" id="dataContratacao" name="dataContratacao">
-            </div>
+            </div> --}}
             <div class="mb-3">
               <label for="cargo" class="form-label">Cargo</label>
               <input type="text" class="form-control" id="cargo" name="cargo">
