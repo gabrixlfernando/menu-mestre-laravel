@@ -11,6 +11,24 @@ class Funcionario extends Model
 
     protected $table = 'funcionario';
     protected $primaryKey = 'idFuncionario';
+    protected $fillable = [
+        'nomeFuncionario',
+        'email',
+        'dataNascimento',
+        'foneFuncionario',
+        'enderecoFuncionario',
+        'cidadeFuncionario',
+        'estadoFuncionario',
+        'cepFuncionario',
+        'dataContratacao',
+        'cargo',
+        'salario',
+        'tipoFuncionario',
+        'statusFuncionario',
+        'fotoFuncionario',
+        'criado_em',
+        'atualizado_em'
+    ];
     public $timestamps = false;
 
     public function usuario(){

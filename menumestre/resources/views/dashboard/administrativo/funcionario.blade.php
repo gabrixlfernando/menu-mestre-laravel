@@ -27,8 +27,8 @@
                             </a>
                             <div class="card-info">
                                 <h4>{{ $administrador->nomeFuncionario }}</h4>
-                                <p>Função: <span>{{ ucwords($administrador->tipoFuncionario) }}</span></p>
-                                <p>Status: <span>{{ ucwords($administrador->statusFuncionario) }}<strong></strong></span></p>
+                                <p>Função: <span>{{ ucwords($administrador->cargo) }}</span></p>
+                                <p>Status: <span>{{ $administrador->statusFuncionario === 'ativo' ? 'Ativo' : 'Desativado'  }} <span class="status-dot {{ $administrador->statusFuncionario === 'ativo' ? 'active' : 'inactive' }}"></span></span></p>
                             </div>
                         </div>
 
@@ -52,8 +52,8 @@
                             </a>
                             <div class="card-info">
                                 <h4>{{ $atendente->nomeFuncionario }}</h4>
-                                <p>Função: <span>{{ ucwords($atendente->tipoFuncionario) }}</span></p>
-                                <p>Status: <span>{{ ucwords($atendente->statusFuncionario) }}</span></p>
+                                <p>Função: <span>{{ ucwords($atendente->cargo) }}</span></p>
+                                <p>Status: <span>{{ $atendente->statusFuncionario === 'ativo' ? 'Ativo' : 'Desativado' }} <span class="status-dot {{ $atendente->statusFuncionario === 'ativo' ? 'active' : 'inactive' }}"></span></span></p>
                             </div>
                         </div>
 

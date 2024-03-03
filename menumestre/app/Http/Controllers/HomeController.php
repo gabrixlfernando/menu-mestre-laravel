@@ -64,10 +64,10 @@ class HomeController extends Controller
         // $cardapio = Cardapio::all();
 
          // Consulta todos os produtos com cada categoria
-         $pratos = Cardapio::where('categoriaProduto', 'comida')->get();
-         $massas = Cardapio::where('categoriaProduto', 'massa')->get();
-         $bebidas = Cardapio::where('categoriaProduto', 'bebida')->get();
-         $sobremesas = Cardapio::where('categoriaProduto', 'sobremesa')->get();
+         $pratos = Cardapio::where('categoriaProduto', 'comida')->where('statusProduto', 'ativo')->get();
+    $massas = Cardapio::where('categoriaProduto', 'massa')->where('statusProduto', 'ativo')->get();
+    $bebidas = Cardapio::where('categoriaProduto', 'bebida')->where('statusProduto', 'ativo')->get();
+    $sobremesas = Cardapio::where('categoriaProduto', 'sobremesa')->where('statusProduto', 'ativo')->get();
 
         return view('site.home', compact('pratos', 'massas', 'bebidas', 'sobremesas'));
     }
