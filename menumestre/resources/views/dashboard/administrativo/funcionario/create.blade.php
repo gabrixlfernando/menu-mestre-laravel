@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <!-- Formulário de cadastro -->
-          <form action="" method="POST">
+          <form action="{{ route('admin.funcionario.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>

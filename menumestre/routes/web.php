@@ -51,6 +51,8 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo/funcionario/edit/{idFuncionario}', [AdministrativoController::class, 'editFuncionario'])->name('admin.funcionario.edit');
 
+    Route::post('/dashboard/administrativo/funcionario/create', [AdministrativoController::class, 'createFuncionario'])->name('admin.funcionario.create');
+
     // Mesas
     Route::get('/dashboard/administrativo/mesa', [AdministrativoController::class, 'mesa'])->name('dashboard.administrativo.mesa');
 

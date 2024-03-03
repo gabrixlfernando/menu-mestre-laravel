@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
           <!-- Formulário de edit -->
-          <form action="" method="POST">
+          <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>
