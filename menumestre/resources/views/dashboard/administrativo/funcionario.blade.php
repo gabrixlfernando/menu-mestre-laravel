@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('../assets/css/funcionario.css') }}">
 
     <div class="container-funcionario">
+        <button onclick="window.location.href='/cadastro-funcionario'" class="btn btn-dark mb-3">Cadastrar Novo Funcionário</button>
         <div class="cont-funcionario">
             <div class="cont-gerentes">
                 <h4>Gerentes</h4>
@@ -17,16 +18,17 @@
                     @foreach($administradores as $administrador)
                     <div class="card-container">
                         <div class="card-geral">
-                            <img src="{{ asset('../assets/images/funcionarios/' . $administrador->fotoFuncionario) }}">
+                             <a href="" class="funcionario-link">
+                                <img src="{{ asset('../assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" id="imagem{{$administrador->id}}">
+                                <i class="ri-pencil-fill"></i>
+                            </a>
                             <div class="card-info">
                                 <h4>{{ $administrador->nomeFuncionario }}</h4>
                                 <p>Função: <span>{{ ucwords($administrador->tipoFuncionario) }}</span></p>
                                 <p>Status: <span>{{ ucwords($administrador->statusFuncionario) }}<strong></strong></span></p>
                             </div>
                         </div>
-                        <!-- <div class="card-botao">
-                            <span><a href="#" title="Editar informações"><i class="ri-pencil-fill"></i></a></span>
-                        </div>       -->
+
                     </div>
                     @endforeach
                 </div>
@@ -40,7 +42,10 @@
                     <div class="card-container">
 
                         <div class="card-geral">
-                            <img src="{{ asset('../assets/images/funcionarios/' . $atendente->fotoFuncionario) }}">
+                            <a href="" class="funcionario-link">
+                                <img src="{{ asset('../assets/images/funcionarios/' . $atendente->fotoFuncionario) }}" class="img-fluid" id="imagem{{$atendente->id}}">
+                                <i class="ri-pencil-fill"></i>
+                            </a>
                             <div class="card-info">
                                 <h4>{{ $atendente->nomeFuncionario }}</h4>
                                 <p>Função: <span>{{ ucwords($atendente->tipoFuncionario) }}</span></p>
@@ -48,9 +53,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="card-botao">
-                            <span><a href="#" title="Editar informações"><i class="ri-pencil-fill"></i></a></span>
-                        </div>      -->
                     </div>
                     @endforeach
 

@@ -41,7 +41,9 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
     Route::get('/dashboard/administrativo/cardapio/ativar-produto/{idProduto}', [AdministrativoController::class, 'ativarProduto'])->name('ativar.produto');
 
     Route::post('/dashboard/administrativo/produtos/create', [AdministrativoController::class, 'createProduto'])->name('admin.produto.create');
+
     Route::get('/dashboard/administrativo/cardapio/edit/{idProduto}', [AdministrativoController::class, 'editProduto'])->name('admin.produto.edit');
+    
     Route::put('/dashboard/administrativo/produtos/update/{idProduto}', [AdministrativoController::class, 'updateProduto'])->name('admin.produto.update');
 
     // Funcionarios
@@ -57,6 +59,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
     Route::post('/dashboard/administrativo/mesa/create', [AdministrativoController::class, 'createMesa'])->name('mesa.create');
 
     Route::get('/dashboard/administrativo/mesa/desativar-mesa/{id}', [AdministrativoController::class, 'desativarMesa'])->name('mesa.desativar');
+
     Route::get('/dashboard/administrativo/mesa/ativar-mesa/{id}', [AdministrativoController::class, 'ativarMesa'])->name('mesa.ativar');
 
     // Contato (Página Mensagens)
