@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pessoas_sentadas">Quantas Pessoas?</label>
-                        <input type="number" id="pessoas_sentadas" name="pessoas_sentadas" value="{{ $mesa->pessoas_sentadas }}" class="form-control" max="{{ $mesa->capacidade }}">
+                        <input type="number" id="pessoas_sentadas" name="pessoas_sentadas" value="{{ $mesa->pessoas_sentadas }}" class="form-control" max="{{ $mesa->capacidade }}" min="0">
                     </div>
                     <!-- Outros campos do formulário, se necessário -->
                     <div class="modal-footer">

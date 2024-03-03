@@ -14,7 +14,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="capacidade">Capacidade</label>
-                        <input type="number" class="form-control" id="capacidade" name="capacidade" required>
+                        <input type="number" class="form-control" id="capacidade" name="capacidade" required min="0">
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>

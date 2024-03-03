@@ -19,13 +19,6 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        {{-- <div class="form-group">
-
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01" name="fotoProduto" required>
-                                                <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
-                                            </div>
-                                        </div> --}}
                                         <div class="form-group">
                                             <label for="inputGroupFile01">Imagem:</label>
                                             <div class="custom-file">
@@ -81,7 +74,6 @@
                                         </div>
 
                                         <div class="form-group">
-                                            {{-- <label for="valorProduto">Preço do Produto:</label> --}}
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
@@ -108,8 +100,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Botão de fechar o modal -->
-
         </div>
     </div>
 </div>

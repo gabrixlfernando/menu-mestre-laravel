@@ -10,11 +10,42 @@
   --gray: #aeaeae;
   --shadow-card: 5px 5px 15px rgba(0,0,0,0.1);
 }
+.funcionario-link {
+    position: relative;
+    display: inline-block;
+}
+
+.funcionario-link img {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.funcionario-link:hover img {
+    opacity: 0.4; /* Opacidade reduzida ao passar o mouse */
+}
+
+.funcionario-link i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Ícone inicialmente invisível */
+    transition: opacity 0.3s ease;
+    color: #121212;
+    font-size: 25px;
+}
+
+.funcionario-link:hover i {
+    opacity: 1; /* Ícone visível ao passar o mouse */
+}
+
 
 .container-funcionario{
 text-align: center;
 display: flex;
 justify-content: center;
+flex-direction: column;
+align-items: center;
 }
 .cont-funcionario{
     margin-top: 20px;
@@ -28,7 +59,7 @@ justify-content: center;
 
 }
 .cont-gerentes, .cont-atendentes{
-    margin-top: 20px;  
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -64,6 +95,8 @@ justify-content: center;
     width: 100px;
     height: 100px;
 }
+
+
 .card-info{
     margin-left: 20px;
     display: flex;
@@ -116,6 +149,4 @@ justify-content: center;
     text-decoration: none;
     color: var(--white);
 }
-.card-botao{
-    
-}
+
