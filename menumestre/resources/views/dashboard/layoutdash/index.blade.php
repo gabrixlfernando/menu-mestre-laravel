@@ -51,10 +51,13 @@
                         <span class="perfil-nome">{{ $funcionario->nomeFuncionario }}</span>
                         <span class="perfil-cargo">{{ ucwords($funcionario->tipoFuncionario) }}</span>
                     </div>
-                </div>
 
-                <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i
-                        class="ri-logout-circle-r-line"></i>Sair</a>
+                </div>
+                <div class="header-link">
+                    <a class="notification-link" href=""><i class="ri-notification-2-line"></i><div class="notification-ativo" title="Notificações">2</div></a>
+                    <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i
+                            class="ri-logout-circle-r-line"></i>Sair</a>
+                </div>
 
             </div>
         </header>
@@ -84,7 +87,7 @@
                                 class="nav-title">Funcionários</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('dashboard/administrativo/contato') }}"><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span
+                        <a href="{{ url('dashboard/administrativo/contato') }}"><span class="nav-icon notification-message"><i class="ri-question-answer-fill"></i><div class="notification-ativo" title="Notificações">2</div></span><span
                                 class="nav-title">Mensagens</span></a>
                     </li>
                 </ul>
