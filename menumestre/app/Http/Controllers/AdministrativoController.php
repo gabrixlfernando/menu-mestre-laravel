@@ -22,7 +22,6 @@ class AdministrativoController extends Controller
 
         $totalMesas = Mesa::count();
         //recuperando o id do funcionario da sessão
-
         $id = session('id');
 
         //busacando o funcionario pelo id no banco de dados

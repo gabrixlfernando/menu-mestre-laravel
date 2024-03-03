@@ -146,7 +146,3 @@ function filtrarMesa(status) {
     dataAtualElement.textContent = dataFormatada;
 
 
-
-
-
-
