@@ -23,6 +23,8 @@ class AdministrativoController extends Controller
         $totalPratos = Cardapio::count();
 
         $totalMesas = Mesa::count();
+
+        $contatosNaoLidos = Contato::where('lidoContato', 0)->count();
         //recuperando o id do funcionario da sessão
 
         $id = session('id');
@@ -41,7 +43,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'contatosNaoLidos'));
     }
 
     public function cardapio()

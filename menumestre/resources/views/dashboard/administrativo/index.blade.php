@@ -18,12 +18,12 @@
             <!-- Estatísticas de clientes -->
             <div class="estatisticas">
                 <div class="estatisticas-info">
-                    <h4>22</h4>
-                    <span>Clientes</span>
-                    <p>Clientes registrados.</p>
+                    <h4>{{ $contatosNaoLidos }}</h4>
+                    <span>Mensagens </span>
+                    <p>Mensagens recebidas não lidas.</p>
                 </div>
-                <div class="estatisticas-icon"  style="background-color: rgba(226, 208, 45, 0.568);">
-                    <i class="ri-user-smile-fill"  style="color: rgb(226, 208, 45);"></i>
+                <div class="estatisticas-icon" style="background-color: rgba(226, 208, 45, 0.568);">
+                    <i class="ri-chat-1-fill" style="color: rgb(226, 208, 45);"></i>
                 </div>
             </div>
             <!-- Estatísticas de pedidos -->
@@ -81,7 +81,7 @@
                         <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
                 </div>                <!-- Condição que verifica se o funcionário é Atendente -->
             </div>
-               
+
             </div>
         </div>
     </div>
