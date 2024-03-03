@@ -81,14 +81,7 @@
                         <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
                 </div>                <!-- Condição que verifica se o funcionário é Atendente -->
             </div>
-                <!-- Condição que verifica se o funcionário é Chef de Cozinha -->
-                {{-- <?php if ($dadosFuncionario['especialidadeFuncionario'] === 'Chef de Cozinha') : ?>
-                    <!-- Se for, exibe o link de acesso negado -->
-                    <a href="#" class="link-lock" onclick="acessoNegado(); return false;">Acessar <span class="lock"><i class="ri-lock-line"></i></span></a>
-                <?php else : ?>
-                    <!-- Se não for, exibe o link para acessar o cardápio -->
-                    <a href="index.php?p=cardapio">Acessar</a>
-                <?php endif; ?> --}}
+               
             </div>
         </div>
     </div>
@@ -99,15 +92,6 @@
         </div>
     </div>
 
-    <!-- <div class="user-container">
-        <div class="home.top">
-        </div>
-        <div class="home.stats">
-            <div class="funcionarios.stats">Func</div>
-            <div class="produtos.stats">Prod</div>
-            <div class="vendas.stats">Venda</div>
-        </div>
-    </div> -->
 </div>
 
 

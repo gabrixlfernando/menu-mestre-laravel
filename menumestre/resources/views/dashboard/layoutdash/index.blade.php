@@ -8,7 +8,6 @@
     <title>Menu Mestre | Dashboard</title>
     <link rel="shortcut icon" href="{{ asset('../assets//images/dashboard/logo.png') }}" type="image/x-icon">
 
-
     <!--ICONES-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css"
         integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg=="
@@ -16,8 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 
     <!-- Sweet Alert -->
 
@@ -27,15 +24,9 @@
     <!-- Inclua os arquivos JavaScript do SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.12.6/dist/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.12.6/dist/sweetalert2.min.css"> --}}
-
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/bootstrap.css ') }}" />
     <link rel="stylesheet" href="{{ asset('../assets/css/home.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('../assets/css/inserir.css') }}">
-    <link rel="stylesheet" href="{{ asset('../assets/css/listar.css') }}"> --}}
-
 
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('../assets/css/dashboard.css') }}">
@@ -79,14 +70,6 @@
                         <a href="{{ url('dashboard/administrativo/mesa') }}"><span class="nav-icon"><i
                                     class="ri-calendar-todo-fill"></i></span><span class="nav-title">Mesas</span></a>
                     </li>
-                    <!-- Verificação se é Gerente ou Chef de Cozinha -->
-
-                    {{-- <li class="acesso-negado" >
-                            <a href="#" onclick="acessoNegado(); return false;">
-                                <span class="nav-icon"><i class="ri-restaurant-line"></i></span>
-                                <span class="nav-title">Cardápio</span>
-                            </a><span class="lock"><i class="ri-lock-line"></i></span>
-                        </li> --}}
 
                     <li>
                         <a href="{{ url('/dashboard/administrativo/cardapio') }}">

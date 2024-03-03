@@ -227,6 +227,13 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.funcionario', compact('funcionario', 'administradores', 'atendentes'));
     }
 
+    public function editFuncionario($idFuncionario)
+    {
+        $funcionario = Funcionario::findOrfail($idFuncionario);
+
+        return redirect()->route('dashboard.administrativo.funcionario', compact('funcionario'));
+    }
+
     // lista todas as mesas
 
     public function mesa()

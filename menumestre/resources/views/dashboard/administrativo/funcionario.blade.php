@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="{{ asset('../assets/css/funcionario.css') }}">
 
     <div class="container-funcionario">
-        <button onclick="window.location.href='/cadastro-funcionario'" class="btn btn-dark mb-3">Cadastrar Novo Funcionário</button>
+        <button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#createFuncionario">Cadastrar Novo Funcionário</button>
+        @include('dashboard.administrativo.funcionario.create')
         <div class="cont-funcionario">
             <div class="cont-gerentes">
                 <h4>Gerentes</h4>
@@ -15,10 +16,12 @@
 
                 <div class="gerentes-card">
 
+
                     @foreach($administradores as $administrador)
+                    @include('dashboard.administrativo.funcionario.edit', ['idFuncionario' => $administrador->idFuncionario])
                     <div class="card-container">
                         <div class="card-geral">
-                             <a href="" class="funcionario-link">
+                             <a href="" class="funcionario-link" data-toggle="modal" data-target="#editFuncionario{{ $administrador->idFuncionario }}">
                                 <img src="{{ asset('../assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" id="imagem{{$administrador->id}}">
                                 <i class="ri-pencil-fill"></i>
                             </a>
@@ -39,10 +42,11 @@
                 <div class="atendentes-card">
 
                     @foreach($atendentes as $atendente)
+                    @include('dashboard.administrativo.funcionario.editfunc', ['idFuncionario' => $atendente->idFuncionario])
                     <div class="card-container">
 
                         <div class="card-geral">
-                            <a href="" class="funcionario-link">
+                            <a href="" class="funcionario-link" data-toggle="modal" data-target="#editFuncionarioatd{{ $atendente->idFuncionario }}">
                                 <img src="{{ asset('../assets/images/funcionarios/' . $atendente->fotoFuncionario) }}" class="img-fluid" id="imagem{{$atendente->id}}">
                                 <i class="ri-pencil-fill"></i>
                             </a>
@@ -61,6 +65,6 @@
         </div>
     </div>
 
-
+    @include('sweetalert::alert')
 
 @endsection
