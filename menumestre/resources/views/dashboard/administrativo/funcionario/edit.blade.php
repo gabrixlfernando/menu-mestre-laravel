@@ -13,13 +13,23 @@
           <form action="{{ route('admin.funcionario.update', ['idFuncionario' => $administrador->idFuncionario]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>
-                <input type="file" class="form-control" id="fotoFuncionario" name="fotoFuncionario" value="{{ $administrador->fotoFuncionario }}" onchange="exibirImagem(this)">
+                <input type="file" class="form-control" id="fotoFuncionario" name="fotoFuncionario">
                 <div class="mt-3">
-                  <img id="imagemAtual" src="{{ asset('assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Produto">
+                  <img src="{{ asset('assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Produto">
               </div>
-              </div>
+              </div> --}}
+
+              <div class="mb-3">
+                <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>
+                <input type="file" class="form-control" id="fotoFuncionario{{ $administrador->idFuncionario }}" name="fotoFuncionario" onchange="exibirNovaImagem(this, {{ $administrador->idFuncionario }})">
+                <div class="mt-3">
+                    <img id="imagemFuncionario{{ $administrador->idFuncionario }}" src="{{ asset('assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Funcionário">
+                </div>
+            </div>
+
+
             <div class="mb-3">
               <label for="nomeFuncionario" class="form-label">Nome do Funcionário</label>
               <input type="text" class="form-control" id="nomeFuncionario" name="nomeFuncionario" required value="{{ $administrador->nomeFuncionario }}">
@@ -93,15 +103,27 @@
 
 
   <script>
-    function exibirImagem(input) {
+     function exibirNovaImagem(input, idFuncionario) {
+        // Verifica se um arquivo foi selecionado
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#imagemAtual')
-                    .attr('src', e.target.result)
-                    .removeClass('d-none'); // Remove a classe d-none para exibir a imagem
-            };
+
+            // Define a função que será chamada quando o arquivo for lido
+            reader.onload = function(e) {
+                // Obtém a URL da imagem carregada
+                var novaImagemURL = e.target.result;
+
+                // Monta o ID específico da tag img para o funcionário
+                var idImagem = 'imagemFuncionario' + idFuncionario;
+
+                // Atualiza a src da tag img com a nova imagem
+                document.getElementById(idImagem).src = novaImagemURL;
+            }
+
+            // Lê o conteúdo do arquivo como uma URL de dados
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+
 </script>

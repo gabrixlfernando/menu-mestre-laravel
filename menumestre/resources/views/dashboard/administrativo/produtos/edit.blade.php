@@ -21,12 +21,12 @@
                                         <div class="form-group">
                                             <label for="inputImagem">Imagem:</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fotoProduto" name="fotoProduto" onchange="exibirImagem(this)">
-                                                <label class="custom-file-label" for="fotoProduto">Escolha um arquivo</label>
+                                                <input type="file" class="custom-file-input" id="fotoProduto{{ $item->idProduto }}" name="fotoProduto" onchange="exibirImagem(this, {{ $item->idProduto }})">
+                                                <label class="custom-file-label" for="fotoProduto{{ $item->idProduto }}">Escolha um arquivo</label>
                                             </div>
                                             <!-- Exibir a imagem atual -->
                                             <div class="mt-3">
-                                                <img id="imagemAtual" src="{{ asset('assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto">
+                                                <img id="imagemAtual{{ $item->idProduto }}" src="{{ asset('assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -80,15 +80,32 @@
 
 
 <script>
-    function exibirImagem(input) {
+    // function exibirImagem(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function (e) {
+    //             $('#imagemAtual')
+    //                 .attr('src', e.target.result)
+    //                 .removeClass('d-none'); // Remove a classe d-none para exibir a imagem
+    //         };
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+    // }
+
+    function exibirImagem(input, idProduto) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#imagemAtual')
+                // Montar o ID da imagem atual usando o ID do produto
+                var imagemAtualId = '#imagemAtual' + idProduto;
+
+                // Exibir a imagem atualizada no modal
+                $(imagemAtualId)
                     .attr('src', e.target.result)
-                    .removeClass('d-none'); // Remove a classe d-none para exibir a imagem
+                    .removeClass('d-none'); // Remover a classe d-none para exibir a imagem
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
+
 </script>
