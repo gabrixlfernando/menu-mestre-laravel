@@ -29,6 +29,8 @@ class AdministrativoController extends Controller
 
         $totalMesas = Mesa::count();
 
+        $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(6)->get(); // mostra até 6 primeiros pratos
+
     // Recupera o número de acessos por dia nos últimos 7 dias
     $acessosDia = DB::table('log_acessos')
     ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
@@ -72,7 +74,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'cardapio'));
     }
 
     public function cardapio()
