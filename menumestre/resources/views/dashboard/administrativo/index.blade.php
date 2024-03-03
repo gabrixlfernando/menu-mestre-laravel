@@ -18,9 +18,9 @@
             <!-- Estatísticas de clientes -->
             <div class="estatisticas">
                 <div class="estatisticas-info">
-                    <h4>22</h4>
-                    <span>Clientes</span>
-                    <p>Clientes registrados.</p>
+                    <h4>{{ $totalMensagens }}</h4>
+                    <span>Mensagens</span>
+                    <p>Mensagens registrados.</p>
                 </div>
                 <div class="estatisticas-icon"  style="background-color: rgba(226, 208, 45, 0.568);">
                     <i class="ri-user-smile-fill"  style="color: rgb(226, 208, 45);"></i>
@@ -29,9 +29,9 @@
             <!-- Estatísticas de pedidos -->
             <div class="estatisticas">
                 <div class="estatisticas-info">
-                    <h4>10</h4>
-                    <span>Pedidos</span>
-                    <p>Pedidos realizados.</p>
+                    <h4>{{ $totalAcessosDia }}</h4>
+                    <span>Visitantes por dia</span>
+                    <p>Acessos por ao site por dia.</p>
                 </div>
                 <div class="estatisticas-icon" style="background-color: rgba(45, 169, 226, 0.568);">
                     <i class="ri-file-list-3-fill" style="color: rgb(45, 169, 226);"></i>
@@ -51,7 +51,7 @@
         <!-- Estatísticas de vendas -->
         <div class="estatisticas">
             <div class="estatisticas-info">
-                <h4>R$ 400</h4>
+                <h4>R$ ??</h4>
                 <span>Vendas Totais</span>
                 <p>Vendas totais realizadas.</p>
             </div>
@@ -81,7 +81,7 @@
                         <a href="{{ url('/dashboard/administrativo/cardapio')}}">Acessar</a>
                 </div>                <!-- Condição que verifica se o funcionário é Atendente -->
             </div>
-               
+
             </div>
         </div>
     </div>

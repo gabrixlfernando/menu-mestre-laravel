@@ -6,11 +6,15 @@ use App\Models\Cardapio;
 use App\Models\Contato;
 use App\Models\Funcionario;
 use App\Models\Mesa;
+use App\Models\LogAcesso;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AdministrativoController extends Controller
 {
@@ -21,7 +25,36 @@ class AdministrativoController extends Controller
 
         $totalPratos = Cardapio::count();
 
+        $totalMensagens= Contato::count();
+
         $totalMesas = Mesa::count();
+
+    // Recupera o número de acessos por dia nos últimos 7 dias
+    $acessosDia = DB::table('log_acessos')
+    ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+    ->where('created_at', '>=', Carbon::now()->subDays(7))
+    ->where('log', 'like', '%/ %')
+    ->groupBy('date')
+    ->orderBy('date')
+    ->get();
+    $totalAcessosDia = $acessosDia->sum('total');
+
+    // Recupera o número de acessos por semana nos últimos 8 semanas
+    $acessosSemana = DB::table('log_acessos')
+    ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('count(*) as total'))
+    ->where('created_at', '>=', Carbon::now()->subWeeks(8))
+    ->where('log', 'like', '%/ %')
+    ->groupBy('year', 'week')
+    ->orderBy('year')
+    ->orderBy('week')
+    ->get();
+    $totalAcessosSemana = $acessosSemana->sum('total');
+
+    // Recupera o número total de acessos à página '/'
+    $totalAcessos = DB::table('log_acessos')
+    ->where('log', 'like', '%/ %')
+    ->count();
+
         //recuperando o id do funcionario da sessão
         $id = session('id');
 
@@ -39,7 +72,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos'));
     }
 
     public function cardapio()

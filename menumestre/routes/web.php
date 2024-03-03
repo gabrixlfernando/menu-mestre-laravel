@@ -4,6 +4,7 @@ use App\Http\Controllers\AdministrativoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\AutRestauranteMiddleware;
+use App\Http\Middleware\LogAcessoRestaurante;
 use Illuminate\Support\Facades\Route;
 
 /*
