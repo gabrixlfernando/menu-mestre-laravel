@@ -9,6 +9,7 @@ use App\Models\Mesa;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class AdministrativoController extends Controller
@@ -122,6 +123,7 @@ class AdministrativoController extends Controller
             $dadosProduto['fotoProduto'] = $nomeOriginalImagem;
         }
 
+
         // Cria um novo produto no banco de dados com os dados fornecidos
         $produto = Cardapio::create($dadosProduto);
 
@@ -195,10 +197,6 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.cardapio');
     }
 
-
-
-
-
     // lista funcionarios
     public function funcionario()
     {
@@ -226,12 +224,79 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.funcionario', compact('funcionario', 'administradores', 'atendentes'));
     }
 
+    public function createFuncionario(Request $request)
+    {
+        $request->merge([
+            'dataContratacao' => now(),
+            'criado_em' => now(),
+            'atualizado_em' => now()
+        ]);
+
+        $request->validate([
+            'nomeFuncionario'       => 'required|string|max:255',
+            'email'                 => 'required|email|max:255',
+            'dataNascimento'        => 'required|date',
+            'foneFuncionario'       => 'required|string|max:20',
+            'enderecoFuncionario'   => 'required|string|max:255',
+            'cidadeFuncionario'     => 'required|string|max:100',
+            'estadoFuncionario'     => 'required|string|max:50',
+            'cepFuncionario'        => 'required|string|max:10',
+            'dataContratacao'       => 'required|date',
+            'cargo'                 => 'required|string|max:100',
+            'salario'               => 'required|numeric',
+            'tipoFuncionario'       => 'required|in:administrativo,atendente,cozinheiro',
+            'statusFuncionario'     => 'required|in:ativo,inativo',
+            'fotoFuncionario'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $ultimoFuncionario = Funcionario::latest('idFuncionario')->first();
+        $ultimoID = $ultimoFuncionario ? $ultimoFuncionario->idFuncionario : 0;
+
+        $proximoID = $ultimoID + 1;
+
+        $funcionario = new Funcionario();
+
+        $funcionario->nomeFuncionario           = $request->input('nomeFuncionario');
+        $funcionario->email                     = $request->input('email');
+        $funcionario->dataNascimento            = $request->input('dataNascimento');
+        $funcionario->foneFuncionario           = $request->input('foneFuncionario');
+        $funcionario->enderecoFuncionario       = $request->input('enderecoFuncionario');
+        $funcionario->cidadeFuncionario         = $request->input('cidadeFuncionario');
+        $funcionario->estadoFuncionario         = $request->input('estadoFuncionario');
+        $funcionario->cepFuncionario            = $request->input('cepFuncionario');
+        $funcionario->dataContratacao           = $request->input('dataContratacao');
+        $funcionario->cargo                     = $request->input('cargo');
+        $funcionario->salario                   = $request->input('salario');
+        $funcionario->tipoFuncionario           = $request->input('tipoFuncionario');
+        $funcionario->statusFuncionario         = $request->input('statusFuncionario');
+        $funcionario->fotoFuncionario           = $request->input('fotoFuncionario');
+
+
+        if ($request->hasFile('fotoFuncionario')) {
+            $fotoFuncionario = $request->file('fotoFuncionario');
+            $nomeArquivo = $proximoID . '_' . str_replace(' ', '_', $funcionario->nomeFuncionario) . '.' . $fotoFuncionario->getClientOriginalExtension();
+            $caminhoDestino = public_path('assets/images/funcionarios/');
+
+            $fotoFuncionario->move($caminhoDestino, $nomeArquivo);
+
+            $funcionario->fotoFuncionario = $nomeArquivo;
+        }
+
+        $funcionario->save();
+
+        Alert::success('Funcionario Cadastrado!', 'O funcionario foi cadastrado com sucesso.');
+
+        return Redirect::route('dashboard.administrativo.funcionario');
+    }
+
     public function editFuncionario($idFuncionario)
     {
         $funcionario = Funcionario::findOrfail($idFuncionario);
 
         return redirect()->route('dashboard.administrativo.funcionario', compact('funcionario'));
     }
+
+
 
     // lista todas as mesas
 
@@ -243,8 +308,6 @@ class AdministrativoController extends Controller
 
         //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::find($id);
-
-        // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
         return view('dashboard.administrativo.mesa', compact('mesas', 'funcionario'));
     }
@@ -266,8 +329,6 @@ class AdministrativoController extends Controller
 
         $mesa->status = $request->input('status');
 
-        // Atualize os campos capacidade e status com os valores do formulário
-        // $mesa->pessoas_sentadas = $request->input('pessoas_sentadas');
         // Se o status for "disponível", defina pessoas_sentadas como 0, caso contrário, obtenha o valor do formulário
         if ($mesa->status === 'disponivel') {
             $mesa->pessoas_sentadas = 0;
