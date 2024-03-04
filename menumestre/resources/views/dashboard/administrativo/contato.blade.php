@@ -9,8 +9,7 @@
 <div class="container-contato">
     <div class="header-contato">
         <div class="header-titulo">
-            <h1>Mensagens</h1>
-            <p>Mensagens de nossos clientes</p>
+            <a><i class="ri-mail-open-line"></i><span>Mensagens</span></a>
         </div>
         <div role="navigation" aria-label="Pagination Navigation" class="pagination-container">
             <div class="pagination">
@@ -50,8 +49,12 @@
             <ul>
             <!-- Loop sobre as mensagens e exibir cada uma -->
 
+            @php
+                $maxId = App\Models\Contato::max('id');
+            @endphp
+
             @foreach($contatos as $contato)
-                <li class="cont-list-contato abrirModal" data-id="{{ $contato->id }}" data-toggle="modal" data-target="#show{{ $contato->id }}">
+                <li class="cont-list-contato abrirModal {{ $contato->lidoContato == '1' ? 'lido' : '' }}" data-id="{{ $contato->id }}" data-toggle="modal" data-target="#show{{ $contato->id }}">
                     <div class="cont-info-contato">
                         <img src="{{ asset('../assets/images/contatos/perfil_contato.png') }}" alt="">
                         <div>
@@ -61,8 +64,11 @@
                     </div>
                     <div class="cont-info-assunto">
                         <span>{{ $contato->assuntoContato }}: </span>
-                        <span>{{ Str::limit($contato->mensContato, 40, '...') }}</span>
+                        <span>{{ Str::limit($contato->mensContato, 25, '...') }}</span>
                     </div>
+                    @if($contato->lidoContato == '0')
+                    <p class="card-new-item" data-id="{{ $contato->id }}">Novo!</p>
+                    @endif
                     <div class="cont-info-data">
                         <span>{{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }}</span>
                     </div>
@@ -79,31 +85,49 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Verificar cada contato na página ao carregar
-        $('.cont-list-contato').each(function() {
-            var id = $(this).data('id');
-            $.get('/verificar-lido/' + id, function(data) {
-                if (data.lido) {
-                    $('.cont-list-contato[data-id="' + id + '"]').addClass('lido');
-                }
-            });
-        });
-        // Captura o evento de fechamento do modal
-        $('.modal').on('hidden.bs.modal', function () {
-            var id = $(this).attr('id').replace('show', '');
-            $('.cont-list-contato[data-id="' + id + '"]').addClass('lido');
-            $.ajax({
-                url: '/atualizar-lido/' + id,
-                type: 'PUT',
-                data: { lidoContato: true },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
+ $(document).ready(function() {
+    // Verificar cada contato na página ao carregar
+    $('.cont-list-contato').each(function() {
+        var id = $(this).data('id');
+        $.get('/verificar-lido/' + id, function(data) {
+            if (data.lido) {
+                $(this).addClass('lido');
+            }
         });
     });
+
+    // Verificar cada parágrafo .card-new-item na página ao carregar
+    $('.card-new-item').each(function() {
+        var id = $(this).data('id');
+        $.get('/verificar-lido/' + id, function(data) {
+            if (data.lido) {
+                $(this).hide(); // Oculta o parágrafo
+            }
+        });
+    });
+
+    // Captura o evento de fechamento do modal
+    $('.modal').on('hidden.bs.modal', function () {
+        var id = $(this).attr('id').replace('show', '');
+
+        // Marca o contato como lido
+        $('.cont-list-contato[data-id="' + id + '"]').addClass('lido');
+
+        // Oculta o parágrafo .card-new-item associado ao modal
+        $('.card-new-item[data-id="' + id + '"]').hide();
+
+        // Atualiza o status de lido no servidor
+        $.ajax({
+            url: '/atualizar-lido/' + id,
+            type: 'PUT',
+            data: { lidoContato: true },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+});
     </script>
