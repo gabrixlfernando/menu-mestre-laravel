@@ -51,10 +51,37 @@
                         <span class="perfil-nome">{{ $funcionario->nomeFuncionario }}</span>
                         <span class="perfil-cargo">{{ ucwords($funcionario->tipoFuncionario) }}</span>
                     </div>
-                </div>
 
-                <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i
-                        class="ri-logout-circle-r-line"></i>Sair</a>
+                </div>
+                <div class="header-link">
+                    <!-- Notificações -->
+                    <div class="notification-link">
+                        <i class="ri-notification-2-line"></i>
+                        @if($naoLidas > 0)
+                        <div class="notification-ativo" title="Notificações">
+
+                                <span>{{ $naoLidas }}</span>
+
+                        </div>
+                        @endif
+                        <!-- Dropdown de notificações -->
+                        <div class="notification-dropdown" id="notificationDropdown">
+
+                                <div class="notification-item">
+                                    <a href="{{ url('dashboard/administrativo/contato') }}">
+                                        @if($naoLidas > 0)
+                                        <span>{{ $naoLidas }} {{ $naoLidas == '1' ? 'Mensagem': 'Mensagens'}} {{ $naoLidas == '1' ? 'nova': 'novas'}} </span>
+                                        @else
+                                        <span>Nenhuma mensagem nova</span>
+                                        @endif
+                                    </a>
+                                </div>
+
+                        </div>
+                    </div>
+                    <a class="btn btn-danger btn-sair" href="{{ route('sair') }}"><i
+                            class="ri-logout-circle-r-line"></i>Sair</a>
+                </div>
 
             </div>
         </header>
@@ -84,8 +111,16 @@
                                 class="nav-title">Funcionários</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('dashboard/administrativo/contato') }}"><span class="nav-icon"><i class="ri-question-answer-fill"></i></span><span
-                                class="nav-title">Mensagens</span></a>
+                        <a href="{{ url('dashboard/administrativo/contato') }}">
+                            <span class="nav-icon notification-message">
+                                <i class="ri-question-answer-fill"></i>
+                                @if($naoLidas > 0)
+                                <div class="notification-ativo" title="Notificações">
+                                    <span>{{ $naoLidas }}</span>
+                                </div>
+                                @endif
+                            </span>
+                            <span class="nav-title">Mensagens</span></a>
                     </li>
                 </ul>
             </div>
@@ -105,6 +140,52 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--js-->
     <script src="{{ asset('../assets/js/main.js') }}"></script>
+
+    <script>
+
+
+    // Controle das notificações
+    document.addEventListener("DOMContentLoaded", function() {
+        var notificationLink = document.querySelector(".notification-link");
+        var notificationDropdown = document.querySelector(".notification-dropdown");
+
+        // Função para atualizar o conteúdo do dropdown
+        function updateNotificationDropdown() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.count > 0) {
+                            notificationDropdown.textContent = response.count + " Mensagens novas";
+                        } else {
+                            notificationDropdown.textContent = "Nenhuma mensagem nova";
+                        }
+                    } else {
+                        console.error('Erro ao buscar as mensagens: ' + xhr.status);
+                    }
+                }
+            };
+
+            xhr.open('GET', '/notifications', true);
+            xhr.send();
+        }
+
+        // Atualizar o conteúdo do dropdown ao passar o mouse sobre o ícone de sino
+        notificationLink.addEventListener("mouseover", function() {
+            // Atualizar o conteúdo do dropdown
+            updateNotificationDropdown();
+
+            // Exibir o dropdown
+            notificationDropdown.classList.add("show");
+        });
+
+        // Ocultar o dropdown ao remover o mouse do ícone de sino
+        notificationLink.addEventListener("mouseout", function() {
+            notificationDropdown.classList.remove("show");
+        });
+    });
+    </script>
 
 </body>
 

@@ -26,7 +26,6 @@ class AdministrativoController extends Controller
 
         $contatosNaoLidos = Contato::where('lidoContato', 0)->count();
         //recuperando o id do funcionario da sessão
-
         $id = session('id');
 
         //busacando o funcionario pelo id no banco de dados
