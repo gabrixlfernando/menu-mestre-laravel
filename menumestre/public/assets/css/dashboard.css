@@ -80,14 +80,17 @@ header > div {
   display: flex;
   align-items: center;
   width: 80%;
-  justify-content: center;
+  justify-content: space-between;
+
 }
+
 header .perfil-info {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 100%;
+  width: 85%;
+
 }
 
 header .perfil-info > .perfil-title {
@@ -103,26 +106,90 @@ header .perfil-info .perfil-title .perfil-cargo {
   font-size: 1rem;
   color: var(--gray);
 }
+header .header-link{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+    min-width: 200px;
+}
+header .header-link .notification-link{
+    font-size: 2rem;
+    position: relative;
+    color: var(--gray);
+    text-decoration: none;
+}
+.notification-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease; /* Adiciona transição para a opacidade */
+    position: absolute; /* Posicionamento absoluto */
+    top: calc(100% + 10px); /* Aparece abaixo do ícone de sino */
+    left: 0; /* Alinhado com o ícone de sino */
+    background-color: var(--gray); /* Cor de fundo */
+    border: 1px solid #ccc; /* Borda */
+    padding: 10px; /* Espaçamento interno */
+    z-index: 2; /* Garante que esteja acima de outros elementos */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave */
+    opacity: 0; /* Opacidade inicialmente definida como 0 */
+    transform: translateY(-10px); /* Deslocamento para cima */
+    font-size: 1.2rem;
+    border-radius: 20px;
+    min-width: 300px;
+    min-height: 100px;
+}
+
+.notification-dropdown:after{
+    content: " ";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent; /* Lado esquerdo */
+    border-right: 20px solid transparent; /* Lado direito */
+    border-top: 30px solid var(--gray); /* Base (inferior) */
+    transform: rotate(180deg); /* Rotaciona 180 graus para transformar em um tr*/
+
+}
+.notification-dropdown.show {
+    visibility: visible;
+    opacity: 1;
+
+    opacity: 1; /* Torna a opacidade 1 para torná-lo visível */
+    transform: translateY(0); /* Retorna à posição original */
+}
+.notification-item a{
+    color: var(--white);
+    text-decoration: none;
+}
+
+.notification-message{
+    position: relative;
+}
+.notification-ativo{
+    position: absolute;
+    background-color: #17da52;
+    width: 25px;
+    height: 25px;
+    top: -5px;
+    right: -10px;
+    border-radius: 9999px;
+    border: solid 3px var(--white);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
 
 .btn-sair i{
     margin-right: 5px;
 }
 
-header .login .btn-sair {
-  font-size: 1.5rem;
-  border-radius: 10px;
-  background: none;
-  padding: 1%;
-  width: 6rem;
-  border: none;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: all 0.9s;
-}
-
-header .login .btn-sair span:nth-child(2) {
-  margin-left: 0.7rem;
-}
 /*#endregion Topo*/
 
 /*#region Barra de navegação*/
