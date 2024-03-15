@@ -85,7 +85,6 @@ function filtrarCardapio(categoria) {
 }
 
 // filtro mesa
-
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.filtro-btn-mesa button');
 
@@ -97,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Adiciona a classe 'filtro-ativo' ao botão clicado
             button.classList.add('filtro-ativo');
 
-            // Obtém o status do botão clicado
+            // Obtém a categoria do botão clicado
             const status = button.getAttribute('data-status');
 
             // Filtra os cards com base no status
@@ -145,9 +144,5 @@ function filtrarMesa(status) {
 
     // Exibir a data atual no elemento
     dataAtualElement.textContent = dataFormatada;
-
-
-
-
 
 

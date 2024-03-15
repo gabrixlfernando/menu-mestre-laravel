@@ -6,12 +6,16 @@ use App\Models\Cardapio;
 use App\Models\Contato;
 use App\Models\Funcionario;
 use App\Models\Mesa;
+use App\Models\LogAcesso;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AdministrativoController extends Controller
 {
@@ -22,11 +26,39 @@ class AdministrativoController extends Controller
 
         $totalPratos = Cardapio::count();
 
+        $totalMensagens = Contato::count();
+
         $totalMesas = Mesa::count();
 
-        $contatosNaoLidos = Contato::where('lidoContato', 0)->count();
-        //recuperando o id do funcionario da sessão
+        $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(6)->get(); // mostra até 6 primeiros pratos
 
+        // Recupera o número de acessos por dia nos últimos 7 dias
+        $acessosDia = DB::table('log_acessos')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+            ->where('created_at', '>=', Carbon::now()->subDays(7))
+            ->where('log', 'like', '%/ %')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+        $totalAcessosDia = $acessosDia->sum('total');
+
+        // Recupera o número de acessos por semana nos últimos 8 semanas
+        $acessosSemana = DB::table('log_acessos')
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('count(*) as total'))
+            ->where('created_at', '>=', Carbon::now()->subWeeks(8))
+            ->where('log', 'like', '%/ %')
+            ->groupBy('year', 'week')
+            ->orderBy('year')
+            ->orderBy('week')
+            ->get();
+        $totalAcessosSemana = $acessosSemana->sum('total');
+
+        // Recupera o número total de acessos à página '/'
+        $totalAcessos = DB::table('log_acessos')
+            ->where('log', 'like', '%/ %')
+            ->count();
+
+        //recuperando o id do funcionario da sessão
         $id = session('id');
 
         //busacando o funcionario pelo id no banco de dados
@@ -43,7 +75,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'contatosNaoLidos'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'cardapio'));
     }
 
     public function cardapio()
@@ -174,110 +206,57 @@ class AdministrativoController extends Controller
     // Atualizar Produto
     public function updateProduto(Request $request, $idProduto)
     {
-        // // Regras de validação
-        // $rules = [
-        //     'nomeProduto' => 'required|max:255',
-        //     'descricaoProduto' => 'required|max:255',
-        //     'valorProduto' => 'required|numeric',
-        //     'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
-        //     'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
-        // ];
+        // Regras de validação
+        $rules = [
+            'nomeProduto' => 'required|max:255',
+            'descricaoProduto' => 'required|max:255',
+            'valorProduto' => 'required|numeric',
+            'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
+            'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
+        ];
 
-        // // Mensagens de erro personalizadas
-        // $messages = [
-        //     'categoriaProduto.in' => 'A categoria selecionada é inválida.',
-        //     'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
-        //     'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
-        //     'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
-        // ];
+        // Mensagens de erro personalizadas
+        $messages = [
+            'categoriaProduto.in' => 'A categoria selecionada é inválida.',
+            'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
+            'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
+            'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
+        ];
 
-        // // Validação dos dados
-        // $validator = Validator::make($request->all(), $rules, $messages);
+        // Validação dos dados
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-        // // Verifica se há erros de validação
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
+        // Verifica se há erros de validação
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // // Se não houver erros de validação, continue com o processo de atualização do produto
-        // // Encontre o produto pelo ID
-        // $item = Cardapio::findOrFail($idProduto);
+        // Se não houver erros de validação, continue com o processo de atualização do produto
+        // Encontre o produto pelo ID
+        $produto = Cardapio::findOrFail($idProduto);
 
-        // // Verifique se uma nova imagem foi enviada
-        // if ($request->hasFile('fotoProduto')) {
-        //     $imagem = $request->file('fotoProduto');
-        //     $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
-        //     $imagem->move(public_path('assets/images/cardapio/'), $nomeImagem);
-        //     // Atualize o nome da imagem no produto
-        //     $item->fotoProduto = $nomeImagem;
-        // }
+        // Verifique se uma nova imagem foi enviada
+        if ($request->hasFile('fotoProduto')) {
+            // Se uma nova imagem foi enviada, mova-a para o diretório e atualize o nome da imagem no produto
+            $imagem = $request->file('fotoProduto');
+            $nomeArquivo = $idProduto . '_' . Str::slug($request->input('nomeProduto')) . '.' . $imagem->getClientOriginalExtension();
+            $imagem->move(public_path('assets/images/cardapio/'), $nomeArquivo);
+            $produto->fotoProduto = $nomeArquivo;
+        }
 
-        // // Atualize os outros campos do produto
-        // $item->nomeProduto = $request->input('nomeProduto');
-        // $item->descricaoProduto = $request->input('descricaoProduto');
-        // $item->valorProduto = $request->input('valorProduto');
-        // $item->categoriaProduto = $request->input('categoriaProduto');
+        // Atualize os outros campos do produto
+        $produto->nomeProduto = $request->input('nomeProduto');
+        $produto->descricaoProduto = $request->input('descricaoProduto');
+        $produto->valorProduto = $request->input('valorProduto');
+        $produto->categoriaProduto = $request->input('categoriaProduto');
 
-        // // Salve as alterações no banco de dados
-        // $item->save();
+        // Salve as alterações no banco de dados
+        $produto->save();
 
-        // Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
-        // // Redirecione de volta para a página de visualização do produto
-        // return redirect()->route('dashboard.administrativo.cardapio');
+        Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
 
-
-
-         // Regras de validação
-    $rules = [
-        'nomeProduto' => 'required|max:255',
-        'descricaoProduto' => 'required|max:255',
-        'valorProduto' => 'required|numeric',
-        'categoriaProduto' => 'required|in:comida,bebida,sobremesa,massa',
-        'fotoProduto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // opcional, máximo de 2MB
-    ];
-
-    // Mensagens de erro personalizadas
-    $messages = [
-        'categoriaProduto.in' => 'A categoria selecionada é inválida.',
-        'fotoProduto.image' => 'O arquivo enviado não é uma imagem válida.',
-        'fotoProduto.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg ou gif.',
-        'fotoProduto.max' => 'A imagem não pode ter mais de 2MB.',
-    ];
-
-    // Validação dos dados
-    $validator = Validator::make($request->all(), $rules, $messages);
-
-    // Verifica se há erros de validação
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    // Se não houver erros de validação, continue com o processo de atualização do produto
-    // Encontre o produto pelo ID
-    $produto = Cardapio::findOrFail($idProduto);
-
-    // Verifique se uma nova imagem foi enviada
-    if ($request->hasFile('fotoProduto')) {
-        // Se uma nova imagem foi enviada, mova-a para o diretório e atualize o nome da imagem no produto
-        $imagem = $request->file('fotoProduto');
-        $nomeArquivo = $idProduto . '_' . Str::slug($request->input('nomeProduto')) . '.' . $imagem->getClientOriginalExtension();
-        $imagem->move(public_path('assets/images/cardapio/'), $nomeArquivo);
-        $produto->fotoProduto = $nomeArquivo;
-    }
-
-    // Atualize os outros campos do produto
-    $produto->nomeProduto = $request->input('nomeProduto');
-    $produto->descricaoProduto = $request->input('descricaoProduto');
-    $produto->valorProduto = $request->input('valorProduto');
-    $produto->categoriaProduto = $request->input('categoriaProduto');
-
-    // Salve as alterações no banco de dados
-    $produto->save();
-
-    Alert::success('Produto Atualizado!', 'O item foi atualizado com sucesso.');
-
-    // Redirecione de volta para a página de visualização do produto
-    return redirect()->route('dashboard.administrativo.cardapio');
+        // Redirecione de volta para a página de visualização do produto
+        return redirect()->route('dashboard.administrativo.cardapio');
     }
 
     // lista funcionarios
@@ -328,7 +307,6 @@ class AdministrativoController extends Controller
             'cargo'                 => 'required|string|max:100',
             'salario'               => 'required|numeric',
             'tipoFuncionario'       => 'required|in:administrativo,atendente,cozinheiro',
-            'statusFuncionario'     => 'required|in:ativo,inativo',
             'fotoFuncionario'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -351,7 +329,6 @@ class AdministrativoController extends Controller
         $funcionario->cargo                     = $request->input('cargo');
         $funcionario->salario                   = $request->input('salario');
         $funcionario->tipoFuncionario           = $request->input('tipoFuncionario');
-        $funcionario->statusFuncionario         = $request->input('statusFuncionario');
         $funcionario->fotoFuncionario           = $request->input('fotoFuncionario');
 
 
