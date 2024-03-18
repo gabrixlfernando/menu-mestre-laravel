@@ -118,7 +118,7 @@
 
                 <div class="pratos-elemento">
                         <div >
-                            <img class="categoria-{{ $item['categoriaProduto'] }}" style="border: 4px solid{{ $cor }}; " src="{{ asset('../assets/images/cardapio/' . $item['fotoProduto']) }}" >
+                            <img class="categoria-{{ $item['categoriaProduto'] }}" style="border: 4px solid{{ $cor }}; " src="{{ asset('../assets/images/cardapio/' . $item['fotoProduto']) }}" alt="teste" >
                         </div>
                         <div class="pratos-elemento-detalhes">
                             <h4>{{ $item['nomeProduto'] }}</h4>
