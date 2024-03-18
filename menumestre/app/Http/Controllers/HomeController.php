@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('site.home');
     }
 
@@ -22,7 +23,7 @@ class HomeController extends Controller
         $dados = $request->json()->all();
 
 
-       // dd($request);
+        // dd($request);
 
 
         // Valida os dados recebidos
@@ -40,7 +41,6 @@ class HomeController extends Controller
         if ($validarDados->fails()) {
 
             return response()->json(['erros' => $validarDados->errors()], 422);
-
         } else {
             // Cria um novo registro de contato no banco de dados
             $contato = Contato::create($validarDados->validated());
@@ -63,14 +63,12 @@ class HomeController extends Controller
     {
         // $cardapio = Cardapio::all();
 
-         // Consulta todos os produtos com cada categoria
-         $pratos = Cardapio::where('categoriaProduto', 'comida')->where('statusProduto', 'ativo')->get();
-    $massas = Cardapio::where('categoriaProduto', 'massa')->where('statusProduto', 'ativo')->get();
-    $bebidas = Cardapio::where('categoriaProduto', 'bebida')->where('statusProduto', 'ativo')->get();
-    $sobremesas = Cardapio::where('categoriaProduto', 'sobremesa')->where('statusProduto', 'ativo')->get();
+        // Consulta todos os produtos com cada categoria
+        $pratos = Cardapio::where('categoriaProduto', 'comida')->where('statusProduto', 'ativo')->get();
+        $massas = Cardapio::where('categoriaProduto', 'massa')->where('statusProduto', 'ativo')->get();
+        $bebidas = Cardapio::where('categoriaProduto', 'bebida')->where('statusProduto', 'ativo')->get();
+        $sobremesas = Cardapio::where('categoriaProduto', 'sobremesa')->where('statusProduto', 'ativo')->get();
 
         return view('site.home', compact('pratos', 'massas', 'bebidas', 'sobremesas'));
     }
-
-
 }

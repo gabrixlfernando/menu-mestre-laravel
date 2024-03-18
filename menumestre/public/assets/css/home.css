@@ -25,169 +25,89 @@ main{
     display: flex!important;
     width: 100%;
     flex-direction: column;
-} 
-.home-container{ 
+}
+.home-container{
     display: flex;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     gap: 15px;
+    justify-content: space-around;
 }
 .home-estatisticas{
-    width: 50%; 
-    height: 100%;
-}
-.home-pratos{
-    width: 50%;
-    background-color: var(--white);
-    height: 100%;
-    border-radius: 30px;
-
-}
-.pratos-container{
-    width: 100%;
-    height: 100%;
-    padding: 40px;
-}
-.pratos-info {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.pratos-info h2{
-    font-size: 2rem;
-    font-weight: 500;
-}
-.pratos-info p{
-    color: var(--gray);
-    font-size: 0.9rem;
-    font-weight: 400;
-}
-.pratos-filtro{
-    display: flex;
-    background-color: rgba(128, 128, 128, 0.219);
-    padding: 5px;
-    border-radius: 40px;
-}
-.pratos-filtro button{
-    color: var(--fundo);
-    border: none;
-    font-weight: 500;
-    border-radius: 9999px;
-    font-size: 1rem;
-    cursor: pointer; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    width: 90px;
-    background: none;
-}
-.filtro-ativo-prato{
-    background-color: var(--white)!important;
-    font-weight: 500;
-}
-.pratos-lista{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;    
+    justify-content: space-between;
+    width: 50%;
+    /* height: 100%; */
 }
-.pratos-elemento{
-    display: flex;
-}
-.pratos-elemento-info{
-    background-color: var(--white)!important;
-    display: flex;
-    width: 80%;
-}
-.pratos-elemento-info img{
-    width: 90px;
-    height: 90px;
-    border-radius: 9999px;
-    align-self: center;
-}
-.pratos-elemento-info div:nth-child(1){
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 166, 0, 0.212);
-    border-radius: 20px;
-    padding: 8px;
-}
-.pratos-elemento-info div:nth-child(2){
+
+.cabecalho-container{
+    height: 12.5%;
     background-color: var(--white);
-    margin-left: 20px;
-}
-.pratos-elemento-info h4{
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--fundo);
-}
-.pratos-elemento-info p{
-    font-size: 0.9rem;
-    color: var(--fundo);
-    font-weight: 300;
-    height: 50px;
-    width: 400px;
-}
-.pratos-elemento-info span{
-    font-size: 1rem;
-    color: var(--gray);
-    font-weight: 300;
-
-}
-.pratos-elemento-price{
+    border-radius: 15px;
+    box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
-}
-.pratos-elemento-price span{
-    color: var(--green);  
-    font-size: 1.7rem;
-    font-weight: 700;
-
-}
-.cabecalho-container{  
-    height: 10%;
+    justify-content: center;
+    gap: 50px;
 }
 .cabecalho-container h2{
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    margin-left: 10px;
+    font-weight: 600;
 }
+
 .cabecalho-container p{
     font-size: 1rem;
+    margin: 0;
 }
+.estatisticas-container {
+    display: flex;
+    align-items: center;
+}
+
 .estatisticas-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-    grid-template-rows: auto auto auto; /* 3 fileiras */
+    /* display: grid; */
+    /* grid-template-columns: repeat(2, 1fr); 2 colunas */
+    /* grid-template-rows: auto auto auto; 3 fileiras */
+    /* width: 100%;
+    height: 85%;
+    gap: 15px; */
+    display: flex;
+    flex-wrap: wrap; /* permite que os itens sejam embrulhados em várias linhas */
+    justify-content: space-between; /* distribui os itens uniformemente ao longo do eixo principal */
     width: 100%;
     height: 85%;
     gap: 15px;
 }
 .estatisticas{
     background-color: var(--white);
-    border-radius: 15px;
+     border-radius: 20px;
     display: flex;
     align-items: center;
-    padding: 5px 30px;
-    height: 215px;
+    padding: 5px 15px;
+    /* width: 48%; */
+    max-height: 200px;
+    min-height: 200px;
     box-shadow: var(--shadow-card);
+    width: calc(50% - 7.5px);
+    /* margin-bottom: 15px; espaçamento vertical */
 }
 .estatisticas-info{
     width: 70%;
 }
 .estatisticas-info h4{
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--fundo);
     font-weight: 500;
     opacity: 0.9;
 }
 .estatisticas-info span{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--fundo);
 }
 .estatisticas-info p{
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--gray);
     font-weight: 400;
 }
@@ -195,7 +115,7 @@ main{
 .estatisticas-icon{
     background-color: rgba(146, 123, 123, 0.568);
     width: 30%;
-    height: 50%; 
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,63 +129,58 @@ main{
     color: rgb(179, 8, 8);
 }
 .estatisticas:nth-child(5){
-    justify-content: space-between;
+    justify-content: space-around;
     background: rgb(255,196,0);
     background: linear-gradient(90deg, rgba(255,196,0,1) 0%, rgba(0,78,255,1) 0%, rgba(0,194,255,1) 100%);
-    width: 100%;
+    /* width: 100%; */
 }
 .estatisticas:nth-child(6){
     background: rgb(255,196,0);
     background: linear-gradient(90deg, rgba(255,196,0,1) 0%, rgba(255,158,0,1) 0%, rgba(255,218,0,1) 100%);
-    justify-content: space-between;
-    width: 100%;
+     justify-content: space-around;
+    /* width: 100%; */
 }
 .estatisticas:nth-child(5) div{
     display: flex;
     flex-direction: column;
-    width: 45%;
-    justify-content: space-between;
-    
+    width: 50%;
  /* Define a 5ª div para ocupar duas colunas */
 }
 
 .estatisticas:nth-child(5) h4{
     font-size: 3rem;
     color: var(--white);
-    
+
 }
 .estatisticas:nth-child(5) span{
     color: var(--white);
-    font-size: 1.7rem;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 .estatisticas:nth-child(5) p{
     color: var(--white);
-    font-size: 0.9rem;
+    font-size: 17px;
     font-weight: 400;
 }
 .estatisticas:nth-child(6) div{
     display: flex;
     flex-direction: column;
-    width: 45%;
-    justify-content: space-between;
+    width: 50%;
  /* Define a 5ª div para ocupar duas colunas */
 }
-.estatisticas:nth-child(6) {
 
-    display: flex;
-    justify-content: space-between;
- /* Define a 5ª div para ocupar duas colunas */
-}
 .estatisticas:nth-child(6) h4{
     color: var(--white);
 }
 .estatisticas:nth-child(6) span{
     color: var(--white);
-    font-size: 1.7rem;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 .estatisticas:nth-child(6) p{
     color: var(--white);
     font-weight: 400;
+    font-size: 17px;
 }
 .estatisticas a{
     text-align: center;
@@ -281,7 +196,7 @@ main{
     cursor: pointer;
 }
 .estatisticas img{
-    width: 170px;
+    width: 150px;
 
 }
 .estatisticas:nth-child(5) .link-lock{
@@ -292,8 +207,223 @@ main{
     margin-left: 15px;
     font-size: 1.5rem;
 }
-@media screen and (max-width: 912px) {
-    .home-container{ 
+
+
+.home-pratos{
+    width: 50%;
+    background-color: var(--white);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+
+}
+.pratos-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+
+}
+.pratos-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: flex-start;
+}
+.pratos-info h2{
+    font-size: 2rem;
+    font-weight: 500;
+    margin-left: 20px;
+}
+.pratos-info p{
+    color: var(--gray);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-left: 20px;
+}
+.pratos-filtro{
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.219);
+    padding: 5px;
+    border-radius: 40px;
+}
+.pratos-filtro button{
+    color: var(--fundo);
+    border: none;
+    font-weight: 500;
+    border-radius: 9999px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 90px;
+    background: none;
+}
+.filtro-ativo-prato{
+    background-color: var(--white)!important;
+    font-weight: 500;
+}
+.pratos-lista{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    width: 95%;
+
+}
+
+.pratos-elemento{
+    background-color: var(--white)!important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.pratos-elemento img{
+    width: 100px;
+    height: 100px;
+    border-radius: 9999px;
+    align-self: center;
+}
+.pratos-elemento div:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.pratos-elemento div:nth-child(2){
+    background-color: var(--white);
+    margin-left: 10px;
+}
+.pratos-elemento h4{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--fundo);
+}
+
+.pratos-elemento-detalhes p{
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 300;
+    height: 50px;
+    width: 400px;
+}
+.pratos-elemento span{
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 300;
+
+}
+
+.pratos-elemento-price{
+    align-self: flex-start;
+}
+
+
+.card-new-item{
+    border: solid 3p #17da52;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #17da52;
+    font-weight: 500;
+    padding: 7px;
+    width: 90px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1700px) {
+    .estatisticas{
+        width: calc(50% - 7.5px);
+    }
+
+    .estatisticas img{
+        width: 130px;
+}
+    .estatisticas a{
+        width: 120px;
+    }
+
+    .estatisticas-info h4{
+        font-size: 2.1rem;
+    }
+
+    .estatisticas:nth-child(5) h4 {
+        font-size: 2rem;
+    }
+
+    .estatisticas:nth-child(6) h4{
+        font-size: 2rem;
+    }
+
+    .estatisticas:nth-child(6) div{
+        align-items: center;
+        width: 40%;
+    }
+
+    .estatisticas:nth-child(5) div{
+        align-items: center;
+        width: 40%;
+    }
+
+    .estatisticas-icon{
+        width: 35%;
+    }
+
+    .estatisticas-icon i {
+        font-size: 3rem;
+    }
+
+}
+
+@media screen and (max-width: 1350px){
+    .home-container{
         flex-direction: column;
     }
+
+    .home-estatisticas{
+        margin-bottom: 100px;
+        width: 100%;
+    }
+
+    .home-pratos{
+        width: 100%;
+    }
+    .cabecalho-container h2{
+        font-size: 1.1rem;
+    }
+    .estatisticas{
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .estatisticas:nth-child(5) {
+       text-align: center;
+       align-items: center;
+    }
+
+    .estatisticas:nth-child(6) {
+       text-align: center;
+       align-items: center;
+    }
+
+    .pratos-lista{
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .estatisticas-info span{
+        font-size: 1.1rem;
+    }
+
+    .estatisticas-info p{
+        font-size: 0.8rem;
+    }
+
 }

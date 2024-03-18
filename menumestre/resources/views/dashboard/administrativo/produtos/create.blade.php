@@ -29,9 +29,9 @@
                                             </div>
                                         </div>
                                         <!-- Div para exibir a miniatura da imagem -->
-                                        <div class="form-group">
+                                        <div class="form-group" style="text-align: center;">
                                             <img src="#" id="preview" class="img-fluid" alt="Preview da Imagem"
-                                                style="display: none;">
+                                            style="display: none; margin: 0 auto;">
                                             <p id="filename" style="display: none;"></p>
                                         </div>
                                         <div class="form-group">

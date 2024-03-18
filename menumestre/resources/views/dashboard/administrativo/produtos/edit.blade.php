@@ -25,8 +25,8 @@
                                                 <label class="custom-file-label" for="fotoProduto{{ $item->idProduto }}">Escolha um arquivo</label>
                                             </div>
                                             <!-- Exibir a imagem atual -->
-                                            <div class="mt-3">
-                                                <img id="imagemAtual{{ $item->idProduto }}" src="{{ asset('assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto">
+                                            <div class="mt-3" style="text-align: center;">
+                                                <img id="imagemAtual{{ $item->idProduto }}" src="{{ asset('assets/images/cardapio/' . $item->fotoProduto) }}" class="img-fluid" alt="Imagem do Produto" style="margin: 0 auto;">
                                             </div>
                                         </div>
                                         <div class="form-group">

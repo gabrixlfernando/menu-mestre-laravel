@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
+use \App\Models\Contato;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'funcionario' => 'App\Models\Funcionario',
         ]);
+
+        // Compartilhe a variável com todas as views usando a função view()->share()
+        view()->share('naoLidas', Contato::where('lidoContato', false)->count());
     }
 }
