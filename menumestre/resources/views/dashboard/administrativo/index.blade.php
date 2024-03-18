@@ -129,8 +129,8 @@
                         <div class="pratos-elemento-price">
                             <p class="card-new-item">Novo!</p>
                         </div>
-
                 </div>
+               <hr>
                 @endforeach
             </div>
 

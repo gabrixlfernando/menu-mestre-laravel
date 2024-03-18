@@ -30,7 +30,7 @@ class AdministrativoController extends Controller
 
         $totalMesas = Mesa::count();
 
-        $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(6)->get(); // mostra até 6 primeiros pratos
+        $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(5)->get(); // mostra até 6 primeiros pratos
 
         // Recupera o número de acessos por dia nos últimos 7 dias
         $acessosDia = DB::table('log_acessos')
