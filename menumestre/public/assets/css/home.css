@@ -294,10 +294,11 @@ main{
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    
 }
 .pratos-elemento div:nth-child(2){
     background-color: var(--white);
-    margin-left: 10px;
+    width: 50%;
 }
 .pratos-elemento h4{
     font-size: 1rem;
@@ -309,8 +310,6 @@ main{
     font-size: 0.9rem;
     color: var(--gray);
     font-weight: 300;
-    height: 50px;
-    width: 400px;
 }
 .pratos-elemento span{
     font-size: 1rem;

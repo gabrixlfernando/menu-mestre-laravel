@@ -101,7 +101,8 @@
                 $cor = '';
                 switch ($item['categoriaProduto']) {
                     case 'comida':
-                        $cor = '#dbd70096';
+                        $cor = '#A9ED4A';
+                        break;
                     case 'massa':
                         $cor = '#dbd70096';
                         break;
