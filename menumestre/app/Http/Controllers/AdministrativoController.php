@@ -539,6 +539,25 @@ class AdministrativoController extends Controller
         }
     }
 
+
+    public function showMesa($id)
+    {
+
+        $idFuncionario = session('id');
+
+        //busacando o funcionario pelo id no banco de dados
+        $funcionario = Funcionario::findOrFail($idFuncionario);
+
+        $mesa = Mesa::findOrfail($id); // Recupera a mesa com o ID fornecido
+
+
+        $cardapio = Cardapio::all();  //Recupera todos os cardápios
+
+
+
+        return view('dashboard.administrativo.mesa.show',  compact('funcionario', 'mesa', 'cardapio'));
+    }
+
     // Lista Contato
     public function contato()
     {

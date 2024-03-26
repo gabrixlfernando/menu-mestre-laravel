@@ -79,7 +79,14 @@
                     </div>
                 @endif
 
-                <div class="card-info" data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}">
+                <div class="card-info"
+                @if ($mesa->status === 'ocupada')
+                    onclick="window.location.href = '{{ route('mesa.show', ['id' => $mesa->id]) }}'"
+                @else
+                    data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}"
+                @endif
+                >
+                    {{-- data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}" --}}
 
                     <!-- Adiciona o estilo condicional ao campo card-stats -->
                     <div class="card-stats" style="background-color: {{ $statusColor }}">
