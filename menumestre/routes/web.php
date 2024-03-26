@@ -70,6 +70,18 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::get('/dashboard/administrativo/mesa/ativar-mesa/{id}', [AdministrativoController::class, 'ativarMesa'])->name('mesa.ativar');
 
+    Route::get('/dashboard/administrativo/mesa/ativar-mesa/{id}', [AdministrativoController::class, 'ativarMesa'])->name('mesa.ativar');
+
+    Route::get('/dashboard/administrativo/mesa/show/{id}', [AdministrativoController::class, 'showMesa'])->name('mesa.show');
+
+    Route::put('/dashboard/administrativo/mesa/fechar/{id}', [AdministrativoController::class, 'fecharMesa'])->name('mesa.fechar');
+
+    Route::post('/dashboard/administrativo/mesa/adicionar', [AdministrativoController::class, 'adicionarProduto'])->name('mesa.adicionar');
+
+
+
+
+
     // Contato (Página Mensagens)
     Route::get('/dashboard/administrativo/contato', [AdministrativoController::class, 'contato'])->name('dashboard.administrativo.contato');
 

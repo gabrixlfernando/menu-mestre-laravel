@@ -7,6 +7,7 @@ use App\Models\Contato;
 use App\Models\Funcionario;
 use App\Models\Mesa;
 use App\Models\LogAcesso;
+use App\Models\Pedido;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
@@ -539,10 +540,7 @@ class AdministrativoController extends Controller
         }
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
     public function showMesa($id)
     {
 
@@ -561,10 +559,57 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.mesa.show',  compact('funcionario', 'mesa', 'cardapio'));
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
+    public function fecharMesa($id)
+    {
+        // Encontrar a mesa pelo ID
+    $mesa = Mesa::findOrFail($id);
+
+    // Atualizar o status da mesa para "disponível"
+    $mesa->update(['status' => 'disponivel']);
+
+    $mesa->update(['pessoas_sentadas' => '0']);
+
+
+    Alert::success('Mesa Finalizada!', 'A mesa foi finalizada com sucesso.');
+
+    // Redirecionar de volta para a página de mesas ou para onde desejar
+    return redirect()->route('dashboard.administrativo.mesa')->with('success', 'Mesa fechada com sucesso.');
+    }
+
+    public function adicionarProduto(Request $request)
+    {
+    // Validar os dados do formulário
+    $request->validate([
+        'produto' => 'required|exists:tblprodutos,idProduto',
+        'quantidade' => 'required|integer|min:1',
+        'mesa_id' => 'required|exists:mesas,id',
+    ]);
+
+     // Obter o produto selecionado
+     $produto = Cardapio::findOrFail($request->produto);
+
+
+
+    // Criar um novo pedido
+    $pedido = new Pedido();
+    $pedido->produto_id = $produto->idProduto; // ID do produto
+    $pedido->quantidade = $request->quantidade;
+    $pedido->mesa_id = $request->mesa_id;
+
+    //preço unitario e calcula o total
+    $pedido->preco_unitario = $produto->valorProduto;
+    $pedido->total_item = $produto->valorProduto * $request->quantidade;
+
+    
+   //salva na tabela pedidos
+    $pedido->save();
+
+    // Redirecionar de volta para a página ou para onde desejar
+    return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
+    }
+
+
     // Lista Contato
     public function contato()
     {

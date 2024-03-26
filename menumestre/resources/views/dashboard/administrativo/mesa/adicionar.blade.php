@@ -9,23 +9,20 @@
             </div>
             <div class="modal-body">
                 <!-- Conteúdo do formulário -->
-                <form action="" method="POST">
+                <form action="{{ route('mesa.adicionar') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="produto">Selecione o Produto:</label>
                         <select class="form-control" id="produto" name="produto">
                             @foreach($cardapio as $item)
-<<<<<<< HEAD
                                 <option value="{{ $item->idProduto }}">{{ $item->idProduto }} - {{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
-=======
-                                <option value="{{ $item->idProduto }}">{{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
->>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="quantidade">Quantidade:</label>
                         <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" value="1">
+                        <input type="number" class="form-control" id="mesa_id" name="mesa_id"  value="{{ $mesa -> id }}" style="display: none;">
                     </div>
                     <button type="submit" class="btn btn-primary">Adicionar Produto</button>
                 </form>

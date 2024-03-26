@@ -9,12 +9,13 @@
             </div>
             <div class="modal-body">
                 <!-- Formulário para fechar a conta -->
-                <form action="" method="POST">
+                <form action="{{ route('mesa.fechar', ['id' => $mesa->id]) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <p>Total: R$ {{ $mesa->preco }}</p>
                     <div class="form-group">
                         <label for="valor_dado_cliente">Valor Dado pelo Cliente:</label>
-                        <input type="number" class="form-control" id="valor_dado_cliente" name="valor_dado_cliente" min="{{ $mesa->preco }}" step="0.01" required>
+                        <input type="number" class="form-control" id="valor_dado_cliente" name="valor_dado_cliente" min="{{ $mesa->preco }}" step="0.01">
                     </div>
 
                     <!-- Botão para calcular o troco -->

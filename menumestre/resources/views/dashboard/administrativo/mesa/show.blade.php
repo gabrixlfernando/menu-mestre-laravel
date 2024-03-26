@@ -47,6 +47,7 @@
 
 
     <p>Total dos Pedidos: R$ <span id="total-pedidos">0</span></p>
+    <p>Taxa Garçom: 10% </p>
 
    <div class="row">
     <div class="col-md-6">
