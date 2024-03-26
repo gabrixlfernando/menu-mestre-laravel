@@ -79,7 +79,14 @@
                     </div>
                 @endif
 
-                <div class="card-info" data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}">
+                <div class="card-info"
+                @if ($mesa->status === 'ocupada')
+                    onclick="window.location.href = '{{ route('mesa.show', ['id' => $mesa->id]) }}'"
+                @else
+                    data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}"
+                @endif
+                >
+                    {{-- data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}" --}}
 
                     <!-- Adiciona o estilo condicional ao campo card-stats -->
                     <div class="card-stats" style="background-color: {{ $statusColor }}">
@@ -99,7 +106,7 @@
                     @if ($mesa->status === 'reservada')
                         <div class="card-price-pessoas" style="justify-content: flex-end">
                             <span class="card-pessoas">
-                                <p>{{ $mesa->pessoas_sentadas }}</p>
+                                <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>
@@ -107,7 +114,7 @@
                         <div class="card-price-pessoas">
                             <span class="card-price">R${{ $mesa->preco }}</span>
                             <span class="card-pessoas">
-                                <p>{{ $mesa->pessoas_sentadas }}</p>
+                                <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>
