@@ -15,7 +15,11 @@
                         <label for="produto">Selecione o Produto:</label>
                         <select class="form-control" id="produto" name="produto">
                             @foreach($cardapio as $item)
+<<<<<<< HEAD
                                 <option value="{{ $item->idProduto }}">{{ $item->idProduto }} - {{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
+=======
+                                <option value="{{ $item->idProduto }}">{{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
+>>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
                             @endforeach
                         </select>
                     </div>

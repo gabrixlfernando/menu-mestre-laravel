@@ -539,6 +539,10 @@ class AdministrativoController extends Controller
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
     public function showMesa($id)
     {
 
@@ -557,7 +561,10 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.mesa.show',  compact('funcionario', 'mesa', 'cardapio'));
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dfa390213f3f90948853300e950bc9c6d519150b
     // Lista Contato
     public function contato()
     {
