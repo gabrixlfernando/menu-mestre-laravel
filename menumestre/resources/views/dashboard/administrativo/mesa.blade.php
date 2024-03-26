@@ -114,7 +114,7 @@
                         <div class="card-price-pessoas">
                             <span class="card-price">R${{ $mesa->preco }}</span>
                             <span class="card-pessoas">
-                                <p>{{ $mesa->pessoas_sentadas }}</p>
+                                <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
                                 <i class="ri-group-fill"></i>
                             </span>
                         </div>
