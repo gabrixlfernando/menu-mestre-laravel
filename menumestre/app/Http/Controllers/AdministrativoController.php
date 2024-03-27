@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
+use App\Models\Comanda;
 use App\Models\Contato;
 use App\Models\Funcionario;
 use App\Models\Mesa;
@@ -555,59 +556,121 @@ class AdministrativoController extends Controller
         $cardapio = Cardapio::all();  //Recupera todos os cardápios
 
 
+        if ($mesa->status === 'ocupada') {
+            // Verifica se a mesa já possui uma comanda aberta
+            $comandaExistente = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
+            if (!$comandaExistente) {
+                // Inicia uma sessão para a mesa
+                // session()->put('mesa_' . $id, ['produtos' => []]);
+                session()->put('mesa_id');
+                session()->put('produtos');
+
+                // Cria uma nova comanda para a mesa
+                $comanda = new Comanda();
+                $comanda->mesa_id = $id;
+                $comanda->status = 'aberta'; // Define o status da comanda como "aberta"
+                $comanda->save();
+            }
+        }
+
+
+        // // Verificar se a mesa está ocupada e se há uma comanda aberta para ela
+        // if ($mesa->status === 'ocupada') {
+        //     $comandaExistente = Comanda::where('mesa_id', $id)->where('status', 'aberta')->exists();
+        //     if ($comandaExistente) {
+        //         // Substituir a sessão existente pela nova sessão vazia
+        //         session()->put('mesa_' . $id . '_produtos', []);
+        //     } else {
+        //         // Iniciar uma nova sessão para a mesa
+        //         session()->forget('mesa_' . $id . '_produtos');
+        //         session()->put('mesa_' . $id . '_produtos', []);
+
+        //         // Criar uma nova comanda para a mesa
+        //         $comanda = new Comanda();
+        //         $comanda->mesa_id = $id;
+        //         $comanda->status = 'aberta';
+        //         $comanda->save();
+        //     }
+        // }
+
+
+
+
+
 
         return view('dashboard.administrativo.mesa.show',  compact('funcionario', 'mesa', 'cardapio'));
+    }
+
+    public function adicionarProduto(Request $request)
+    {
+
+
+        $request->validate([
+            'produto' => 'required|exists:tblprodutos,idProduto',
+            'quantidade' => 'required|integer|min:1',
+        ]);
+
+        // Obter o produto selecionado
+        $produto = Cardapio::findOrFail($request->produto);
+
+        // Criar o pedido
+        $pedido = [
+            'produto' => $produto,
+            'quantidade' => $request->quantidade,
+            'preco_unitario' => $produto->valorProduto,
+            'total_item' => $produto->valorProduto * $request->quantidade,
+        ];
+
+        // Verificar se a sessão para a mesa existe
+        if (session()->has('produtos')) {
+            // Adicionar o pedido à sessão de produtos da mesa
+            session()->push('produtos', $pedido);
+        } else {
+            // Criar a sessão de produtos para a mesa e adicionar o primeiro pedido
+            session(['produtos' => [$pedido]]);
+        }
+
+        return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
     }
 
 
     public function fecharMesa($id)
     {
+
+        // Verifica se a sessão para a mesa existe
+        if (session()->has('mesa_id')) {
+            // Verifica se a mesa possui uma comanda aberta
+            $mesa_id = session('mesa_id');
+            $comanda = Comanda::where('mesa_id', $mesa_id)->where('status', 'aberta')->first();
+            dd($comanda);
+            if ($comanda) {
+                // Atualiza o status da comanda para "fechada"
+                $comanda->status = 'fechada';
+                $comanda->save();
+            }
+
+
+
+            // Limpa a sessão
+            session()->forget('mesa_id');
+            session()->forget('produtos');
+            // session()->forget('mesa_' . $mesa_id . '_produtos');
+        }
         // Encontrar a mesa pelo ID
-    $mesa = Mesa::findOrFail($id);
+        $mesa = Mesa::findOrFail($id);
 
-    // Atualizar o status da mesa para "disponível"
-    $mesa->update(['status' => 'disponivel']);
+        // Atualizar o status da mesa para "disponível"
+        $mesa->update(['status' => 'disponivel']);
 
-    $mesa->update(['pessoas_sentadas' => '0']);
+        $mesa->update(['pessoas_sentadas' => '0']);
 
 
-    Alert::success('Mesa Finalizada!', 'A mesa foi finalizada com sucesso.');
+        Alert::success('Mesa Finalizada!', 'A mesa foi finalizada com sucesso.');
 
-    // Redirecionar de volta para a página de mesas ou para onde desejar
-    return redirect()->route('dashboard.administrativo.mesa')->with('success', 'Mesa fechada com sucesso.');
+        // Redirecionar de volta para a página de mesas ou para onde desejar
+        return redirect()->route('dashboard.administrativo.mesa')->with('success', 'Mesa fechada com sucesso.');
     }
 
-    public function adicionarProduto(Request $request)
-    {
-    // Validar os dados do formulário
-    $request->validate([
-        'produto' => 'required|exists:tblprodutos,idProduto',
-        'quantidade' => 'required|integer|min:1',
-        'mesa_id' => 'required|exists:mesas,id',
-    ]);
-
-     // Obter o produto selecionado
-     $produto = Cardapio::findOrFail($request->produto);
-
-
-
-    // Criar um novo pedido
-    $pedido = new Pedido();
-    $pedido->produto_id = $produto->idProduto; // ID do produto
-    $pedido->quantidade = $request->quantidade;
-    $pedido->mesa_id = $request->mesa_id;
-
-    //preço unitario e calcula o total
-    $pedido->preco_unitario = $produto->valorProduto;
-    $pedido->total_item = $produto->valorProduto * $request->quantidade;
-
-    
-   //salva na tabela pedidos
-    $pedido->save();
-
-    // Redirecionar de volta para a página ou para onde desejar
-    return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
-    }
 
 
     // Lista Contato

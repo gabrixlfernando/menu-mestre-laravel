@@ -1,4 +1,4 @@
-<div class="modal fade" id="AdicionarProduto" tabindex="-1" role="dialog" aria-labelledby="modalAdicionarProdutoLabel" aria-hidden="true">
+<div class="modal fade" id="AdicionarProduto{{ $mesa->id}}" tabindex="-1" role="dialog" aria-labelledby="modalAdicionarProdutoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <!-- Conteúdo do formulário -->
-                <form action="{{ route('mesa.adicionar') }}" method="POST">
+                <form action="{{ route('mesa.adicionar', ['id' => $mesa->id]) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="produto">Selecione o Produto:</label>

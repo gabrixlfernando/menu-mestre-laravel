@@ -76,7 +76,7 @@ Route::middleware(['autenticacao:administrativo'])->group(function(){
 
     Route::put('/dashboard/administrativo/mesa/fechar/{id}', [AdministrativoController::class, 'fecharMesa'])->name('mesa.fechar');
 
-    Route::post('/dashboard/administrativo/mesa/adicionar', [AdministrativoController::class, 'adicionarProduto'])->name('mesa.adicionar');
+    Route::post('/dashboard/administrativo/mesa/show/{id}', [AdministrativoController::class, 'adicionarProduto'])->name('mesa.adicionar');
 
 
 
