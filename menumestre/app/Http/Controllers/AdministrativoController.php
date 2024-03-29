@@ -431,17 +431,35 @@ class AdministrativoController extends Controller
 
 
     // lista todas as mesas
-
     public function mesa()
     {
         $mesas = Mesa::all();
-
         $id = session('id');
-
-        //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::find($id);
+        $totalPedidosPorMesa = [];
 
-        return view('dashboard.administrativo.mesa', compact('mesas', 'funcionario'));
+        foreach ($mesas as $mesa) {
+            $mesaId = $mesa->id;
+            $mesa_session_key = 'mesa_' . $mesaId;
+
+            // Obtém os pedidos da mesa atual da sessão
+            $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+
+            // Inicializa o total de pedidos para esta mesa como zero
+            $totalPedidosMesa = 0;
+
+            // Calcula o total dos pedidos para a mesa atual
+            foreach ($produtosMesa as $pedido) {
+                $totalPedidosMesa += $pedido['total_item'];
+            }
+
+            // Armazena o total dos pedidos para a mesa atual
+            $totalPedidosPorMesa[$mesaId] = $totalPedidosMesa;
+        }
+
+
+
+        return view('dashboard.administrativo.mesa', compact('mesas',  'funcionario', 'totalPedidosPorMesa'));
     }
 
     // busca mesa pelo id
@@ -542,78 +560,36 @@ class AdministrativoController extends Controller
     }
 
 
+
     public function showMesa($id)
     {
-
         $idFuncionario = session('id');
-
-        //busacando o funcionario pelo id no banco de dados
         $funcionario = Funcionario::findOrFail($idFuncionario);
-
-        $mesa = Mesa::findOrfail($id); // Recupera a mesa com o ID fornecido
-
-
-        $cardapio = Cardapio::all();  //Recupera todos os cardápios
-
+        $mesa = Mesa::findOrFail($id);
+        $cardapio = Cardapio::all();
 
         if ($mesa->status === 'ocupada') {
-            // Verifica se a mesa já possui uma comanda aberta
             $comandaExistente = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
             if (!$comandaExistente) {
-                // Inicia uma sessão para a mesa
-                // session()->put('mesa_' . $id, ['produtos' => []]);
-                session()->put('mesa_id');
-                session()->put('produtos');
-
-                // Cria uma nova comanda para a mesa
+                session()->put('mesa_' . $id, ['produtos' => []]);
                 $comanda = new Comanda();
                 $comanda->mesa_id = $id;
-                $comanda->status = 'aberta'; // Define o status da comanda como "aberta"
+                $comanda->status = 'aberta';
                 $comanda->save();
             }
         }
 
-
-        // // Verificar se a mesa está ocupada e se há uma comanda aberta para ela
-        // if ($mesa->status === 'ocupada') {
-        //     $comandaExistente = Comanda::where('mesa_id', $id)->where('status', 'aberta')->exists();
-        //     if ($comandaExistente) {
-        //         // Substituir a sessão existente pela nova sessão vazia
-        //         session()->put('mesa_' . $id . '_produtos', []);
-        //     } else {
-        //         // Iniciar uma nova sessão para a mesa
-        //         session()->forget('mesa_' . $id . '_produtos');
-        //         session()->put('mesa_' . $id . '_produtos', []);
-
-        //         // Criar uma nova comanda para a mesa
-        //         $comanda = new Comanda();
-        //         $comanda->mesa_id = $id;
-        //         $comanda->status = 'aberta';
-        //         $comanda->save();
-        //     }
-        // }
-
-
-
-
-
-
-        return view('dashboard.administrativo.mesa.show',  compact('funcionario', 'mesa', 'cardapio'));
+        return view('dashboard.administrativo.mesa.show', compact('funcionario', 'mesa', 'cardapio'));
     }
 
     public function adicionarProduto(Request $request)
     {
-
-
         $request->validate([
             'produto' => 'required|exists:tblprodutos,idProduto',
             'quantidade' => 'required|integer|min:1',
         ]);
 
-        // Obter o produto selecionado
         $produto = Cardapio::findOrFail($request->produto);
-
-        // Criar o pedido
         $pedido = [
             'produto' => $produto,
             'quantidade' => $request->quantidade,
@@ -621,56 +597,100 @@ class AdministrativoController extends Controller
             'total_item' => $produto->valorProduto * $request->quantidade,
         ];
 
-        // Verificar se a sessão para a mesa existe
-        if (session()->has('produtos')) {
-            // Adicionar o pedido à sessão de produtos da mesa
-            session()->push('produtos', $pedido);
-        } else {
-            // Criar a sessão de produtos para a mesa e adicionar o primeiro pedido
-            session(['produtos' => [$pedido]]);
+        $mesa_id = $request->input('mesa_id'); // Certifique-se de que 'mesa_id' está sendo enviado no formulário
+        $mesa_session_key = 'mesa_' . $mesa_id;
+
+        if ($request->session()->has($mesa_session_key)) {
+            $produtos = $request->session()->get($mesa_session_key . '.produtos', []);
+            $produtos[] = $pedido;
+            $request->session()->put($mesa_session_key . '.produtos', $produtos);
         }
 
         return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
     }
 
 
-    public function fecharMesa($id)
-    {
+    public function removerProduto(Request $request)
+{
+    $mesaId = $request->input('mesa_id');
+    $index = $request->input('index');
 
-        // Verifica se a sessão para a mesa existe
-        if (session()->has('mesa_id')) {
-            // Verifica se a mesa possui uma comanda aberta
-            $mesa_id = session('mesa_id');
-            $comanda = Comanda::where('mesa_id', $mesa_id)->where('status', 'aberta')->first();
-            dd($comanda);
+    // Recupere os produtos da sessão
+    $mesa_session_key = 'mesa_' . $mesaId;
+    $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+
+    // Verifique se o índice é válido
+    if (isset($produtosMesa[$index])) {
+        // Remova o produto do array
+        unset($produtosMesa[$index]);
+
+        // Atualize a sessão com os produtos atualizados
+        session()->put($mesa_session_key . '.produtos', $produtosMesa);
+
+        // Retorne uma resposta de sucesso
+        return response()->json(['success' => 'Produto removido com sucesso.']);
+    } else {
+        // Retorne uma resposta de erro se o índice não for válido
+        return response()->json(['error' => 'Ocorreu um erro ao tentar remover o produto.']);
+    }
+}
+
+
+
+    public function fecharMesa(Request $request, $id)
+    {
+        $mesa_session_key = 'mesa_' . $id;
+        if (session()->has($mesa_session_key)) {
+            // Obter os produtos da sessão
+            $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+
+            // Calcular o total da mesa
+            $totalMesa = 0;
+            foreach ($produtosMesa as $pedido) {
+                $totalMesa += $pedido['total_item'];
+            }
+
+            // Verificar se o cliente deseja pagar a taxa de serviço
+            $pagarTaxa = $request->has('pagar_taxa');
+
+            // Calcular o total com ou sem taxa de serviço
+            if ($pagarTaxa) {
+                $totalComTaxa = $totalMesa * 1.1; // Adiciona 10% de taxa de serviço
+            } else {
+                $totalComTaxa = $totalMesa; // Sem taxa de serviço
+            }
+
+            // Gravar os produtos na tabela de pedidos
+            foreach ($produtosMesa as $pedido) {
+                Pedido::create([
+                    'mesa_id' => $id,
+                    'produto_id' => $pedido['produto']->idProduto,
+                    'quantidade' => $pedido['quantidade'],
+                    'preco_unitario' => $pedido['preco_unitario'],
+                    'total_item' => $pedido['total_item'],
+                ]);
+            }
+
+            // Atualizar o status da comanda para "fechada" e salvar o total da mesa
+            $comanda = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
             if ($comanda) {
-                // Atualiza o status da comanda para "fechada"
                 $comanda->status = 'fechada';
+                $comanda->total = $totalComTaxa; // Atualiza o total da comanda com ou sem a taxa de serviço
                 $comanda->save();
             }
 
-
-
-            // Limpa a sessão
-            session()->forget('mesa_id');
-            session()->forget('produtos');
-            // session()->forget('mesa_' . $mesa_id . '_produtos');
+            // Limpar a sessão
+            session()->forget($mesa_session_key);
         }
-        // Encontrar a mesa pelo ID
+
+        // Atualizar o status e a quantidade de pessoas sentadas da mesa
         $mesa = Mesa::findOrFail($id);
+        $mesa->update(['status' => 'disponivel', 'pessoas_sentadas' => 0]);
 
-        // Atualizar o status da mesa para "disponível"
-        $mesa->update(['status' => 'disponivel']);
-
-        $mesa->update(['pessoas_sentadas' => '0']);
-
-
+        // Retornar uma resposta de sucesso
         Alert::success('Mesa Finalizada!', 'A mesa foi finalizada com sucesso.');
-
-        // Redirecionar de volta para a página de mesas ou para onde desejar
         return redirect()->route('dashboard.administrativo.mesa')->with('success', 'Mesa fechada com sucesso.');
     }
-
 
 
     // Lista Contato

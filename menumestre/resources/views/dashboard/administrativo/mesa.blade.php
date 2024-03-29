@@ -80,12 +80,9 @@
                 @endif
 
                 <div class="card-info"
-                @if ($mesa->status === 'ocupada')
-                    onclick="window.location.href = '{{ route('mesa.show', ['id' => $mesa->id]) }}'"
+                    @if ($mesa->status === 'ocupada') onclick="window.location.href = '{{ route('mesa.show', ['id' => $mesa->id]) }}'"
                 @else
-                    data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}"
-                @endif
-                >
+                    data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}" @endif>
                     {{-- data-toggle="modal" data-target="#alterarMesaModal{{ $mesa->id }}" --}}
 
                     <!-- Adiciona o estilo condicional ao campo card-stats -->
@@ -103,7 +100,7 @@
                     <h3>Mesa {{ $mesa->numero_mesa }}</h3>
                     <p>Capacidade: {{ $mesa->capacidade }}</p>
 
-                    @if ($mesa->status === 'reservada')
+                    @if ($mesa->status === 'reservada' || $mesa->status === 'disponivel')
                         <div class="card-price-pessoas" style="justify-content: flex-end">
                             <span class="card-pessoas">
                                 <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
@@ -111,21 +108,21 @@
                             </span>
                         </div>
                     @elseif ($mesa->status !== 'disponivel')
-                        <div class="card-price-pessoas">
-                            <span class="card-price">R${{ $mesa->preco }}</span>
-                            <span class="card-pessoas">
-                                <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
-                                <i class="ri-group-fill"></i>
-                            </span>
-                        </div>
+                            <div class="card-price-pessoas">
+                                <span
+                                    class="card-price">R${{ number_format($totalPedidosPorMesa[$mesa->id], 2, ',', '.') }}</span>
+                                <span class="card-pessoas">
+                                    <p>{{ $mesa->pessoas_sentadas }}/{{ $mesa->capacidade }}</p>
+                                    <i class="ri-group-fill"></i>
+                                </span>
+                            </div>
+
                     @endif
 
                 </div>
                 <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
                     href="{{ route('mesa.desativar', ['id' => $mesa->id]) }}"><i class="ri-eye-line"></i></a>
             </div>
-
-
         @endforeach
     </div>
     </div>

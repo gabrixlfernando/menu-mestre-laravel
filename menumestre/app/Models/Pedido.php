@@ -10,7 +10,7 @@ class Pedido extends Model
     use HasFactory;
 
     protected $fillable = [
-        'mesa_id', 'produto_id', 'quantidade', 'preco_unitario', 'total_item'
+        'mesa_id', 'produto_id','comanda_id' ,'quantidade', 'preco_unitario', 'total_item'
     ];
 
     public function mesa()
@@ -22,4 +22,5 @@ class Pedido extends Model
     {
         return $this->belongsTo(Cardapio::class, 'produto_id', 'idProduto');
     }
+
 }
