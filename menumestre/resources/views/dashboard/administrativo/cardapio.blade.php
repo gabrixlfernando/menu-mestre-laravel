@@ -58,6 +58,26 @@
                 @endphp
 
                 @foreach ($cardapio as $item)
+
+                @php
+                $cor = '';
+                switch ($item['categoriaProduto']) {
+                    case 'comida':
+                        $cor = '#A9ED4A';
+                        break;
+                    case 'massa':
+                        $cor = '#dbd70096';
+                        break;
+                    case 'bebida':
+                        $cor = '#009ddb96';
+                        break;
+                    case 'sobremesa':
+                        $cor = '#db000096';
+                        break;
+                    default:
+                        $cor = 'rgba(0, 0, 0, 0.5)'; // Preto como padrão
+                }
+                @endphp
                     <div class="card card-show" data-categoria="{{ $item->categoriaProduto }}">
 
                         @if (empty($item['statusProduto']) || strtolower($item['statusProduto']) == 'inativo')
@@ -81,7 +101,7 @@
                             <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
                                 href="{{ route('dashboard.administrativo.cardapio.desativar', ['idProduto' => $item->idProduto]) }}"><i
                                     class="ri-eye-line"></i></a>
-                            <img src="{{ asset('../assets/images/cardapio/'. $item['fotoProduto']) }}">
+                            <img src="{{ asset('../assets/images/cardapio/'. $item['fotoProduto']) }}" style="border: 4px solid{{ $cor }}; " >
                             <h3>{{ $item->nomeProduto }}</h3>
                             <p>{{ $item->descricaoProduto }}</p>
                             <span class="card-price">R${{ $item->valorProduto }}</span>

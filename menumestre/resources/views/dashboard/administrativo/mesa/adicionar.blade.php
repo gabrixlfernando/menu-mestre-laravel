@@ -24,12 +24,17 @@
                         <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" value="1">
                         <input type="number" class="form-control" id="mesa_id" name="mesa_id"  value="{{ $mesa -> id }}" style="display: none;">
                     </div>
-                    <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+                    <div class="modal-footer">
+                        <div class="col">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                        </div>
+                        <button type="submit" class="btn btn-success">Adicionar Produto</button>
+
+                    </div>
+
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
+
         </div>
     </div>
 </div>

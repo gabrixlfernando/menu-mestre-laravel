@@ -32,6 +32,8 @@ class AdministrativoController extends Controller
 
         $totalMesas = Mesa::count();
 
+        $totalComandas = Comanda::sum('total');
+
         $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(5)->get(); // mostra até 6 primeiros pratos
 
         // Recupera o número de acessos por dia nos últimos 7 dias
@@ -77,7 +79,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'cardapio'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalComandas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'cardapio'));
     }
 
     public function cardapio()
@@ -506,7 +508,7 @@ class AdministrativoController extends Controller
         $validatedData = $request->validate([
             'capacidade' => 'required|integer',
             'status' => 'required|in:disponivel,reservada,ocupada',
-            'preco' => 'required|numeric',
+            // 'preco' => 'required|numeric',
         ]);
 
         // Criação da nova mesa
@@ -514,7 +516,7 @@ class AdministrativoController extends Controller
         $mesa->numero_mesa = $numeroMesa;
         $mesa->capacidade = $validatedData['capacidade'];
         $mesa->status = $validatedData['status'];
-        $mesa->preco = $validatedData['preco'];
+        // $mesa->preco = $validatedData['preco'];
         $mesa->save();
 
         Alert::success('Mesa Cadastrada!', 'A mesa foi cadastrada com sucesso.');

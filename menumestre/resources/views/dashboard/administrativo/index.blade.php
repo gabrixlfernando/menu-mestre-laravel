@@ -51,7 +51,7 @@
             <!-- Estatísticas de vendas -->
             <div class="estatisticas">
                 <div class="estatisticas-info">
-                    <h4>R$ ??</h4>
+                    <h4>R$ {{ $totalComandas }}</h4>
                     <span>Vendas Totais</span>
                     <p>Vendas totais realizadas.</p>
                 </div>
