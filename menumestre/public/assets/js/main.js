@@ -49,22 +49,53 @@ const nav = document.getElementById('menu');
 
  // Filtro do cardápio
 
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.filtro-btn-cardapio button');
 
     buttons.forEach(button => {
         button.addEventListener('click', function() {
             // Remove a classe 'filtro-ativo' de todos os botões
-            buttons.forEach(btn => btn.classList.remove('filtro-ativo'));
+            buttons.forEach(btn => {
+                btn.classList.remove('filtro-ativo');
+                // Retorna a cor padrão para todos os botões
+                btn.querySelector('i').style.color = '#000';
+                btn.querySelector('span').style.color = '#000';
+            });
 
-            // Adiciona a classe 'filtro-ativo' ao botão clicado
+            // Adiciona a classe 'filtro-ativo' apenas ao botão clicado
             button.classList.add('filtro-ativo');
+
+
 
             // Obtém a categoria do botão clicado
             const categoria = button.getAttribute('data-categoria');
 
             // Filtra os cards com base na categoria
             filtrarCardapio(categoria);
+
+            // Altera a cor do ícone e do texto ativo com base na categoria
+            switch (categoria) {
+                case 'todos':
+                    button.querySelector('i').style.color = 'var(--orange)';
+                    button.querySelector('span').style.color = 'var(--orange)';
+                    break;
+                case 'comida':
+                    button.querySelector('i').style.color = '#A9ED4A';
+                    button.querySelector('span').style.color = '#A9ED4A';
+                    break;
+                case 'massa':
+                    button.querySelector('i').style.color = '#dbd70096';
+                    button.querySelector('span').style.color = '#dbd70096';
+                    break;
+                case 'bebida':
+                    button.querySelector('i').style.color = '#009ddb96';
+                    button.querySelector('span').style.color = '#009ddb96';
+                    break;
+                case 'sobremesa':
+                    button.querySelector('i').style.color = '#db000096';
+                    button.querySelector('span').style.color = '#db000096';
+                    break;
+            }
         });
     });
 });
