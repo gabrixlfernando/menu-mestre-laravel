@@ -301,9 +301,15 @@ main{
 }
 
 .pratos-elemento-detalhes p{
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--gray);
-    font-weight: 300;
+    font-weight: 400;
+}
+
+.pratos-elemento-detalhes p span{
+    font-size: 18px;
+    font-weight: bold;
+    color: #121212;
 }
 .pratos-elemento span{
     font-size: 1rem;
@@ -313,7 +319,7 @@ main{
 }
 
 .pratos-elemento-price{
-    align-self: flex-start;
+    align-self: center;
 }
 
 
@@ -325,7 +331,7 @@ main{
     background-color: #17da52;
     font-weight: 500;
     padding: 7px;
-    width: 90px;
+    width: 110px;
     text-align: center;
 }
 

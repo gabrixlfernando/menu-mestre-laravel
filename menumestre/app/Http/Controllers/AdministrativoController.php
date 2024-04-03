@@ -30,11 +30,40 @@ class AdministrativoController extends Controller
 
         $totalMensagens = Contato::count();
 
-        $totalMesas = Mesa::count();
+        $totalMesas = Mesa::where('status', 'disponivel')->count();
 
         $totalComandas = Comanda::sum('total');
 
-        $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(5)->get(); // mostra até 6 primeiros pratos
+        // $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(5)->get(); // mostra até 6 primeiros pratos
+
+
+        // Consultar a tabela pedidos e contar quantas vezes cada produto foi pedido
+        $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
+            ->groupBy('produto_id')
+            ->orderByDesc('total_pedidos')
+            ->take(5)
+            ->get();
+
+        // Verificar se há produtos mais pedidos
+        if ($produtos_mais_pedidos->isNotEmpty()) {
+            // Pegar os IDs dos produtos mais pedidos
+            $ids_produtos_mais_pedidos = $produtos_mais_pedidos->pluck('produto_id');
+
+            // Consultar os detalhes desses produtos na tabela tblprodutos (Cardapio)
+            $produtos_cardapio = Cardapio::whereIn('idProduto', $ids_produtos_mais_pedidos)
+                ->get();
+        } else {
+            $produtos_cardapio = collect(); // Retorna uma coleção vazia se não houver produtos mais pedidos
+        }
+
+
+
+
+
+
+
+
+
 
         // Recupera o número de acessos por dia nos últimos 7 dias
         $acessosDia = DB::table('log_acessos')
@@ -79,7 +108,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalComandas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'cardapio'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalComandas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'produtos_mais_pedidos'));
     }
 
     public function cardapio()
@@ -613,29 +642,29 @@ class AdministrativoController extends Controller
 
 
     public function removerProduto(Request $request)
-{
-    $mesaId = $request->input('mesa_id');
-    $index = $request->input('index');
+    {
+        $mesaId = $request->input('mesa_id');
+        $index = $request->input('index');
 
-    // Recupere os produtos da sessão
-    $mesa_session_key = 'mesa_' . $mesaId;
-    $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+        // Recupere os produtos da sessão
+        $mesa_session_key = 'mesa_' . $mesaId;
+        $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
 
-    // Verifique se o índice é válido
-    if (isset($produtosMesa[$index])) {
-        // Remova o produto do array
-        unset($produtosMesa[$index]);
+        // Verifique se o índice é válido
+        if (isset($produtosMesa[$index])) {
+            // Remova o produto do array
+            unset($produtosMesa[$index]);
 
-        // Atualize a sessão com os produtos atualizados
-        session()->put($mesa_session_key . '.produtos', $produtosMesa);
+            // Atualize a sessão com os produtos atualizados
+            session()->put($mesa_session_key . '.produtos', $produtosMesa);
 
-        // Retorne uma resposta de sucesso
-        return response()->json(['success' => 'Produto removido com sucesso.']);
-    } else {
-        // Retorne uma resposta de erro se o índice não for válido
-        return response()->json(['error' => 'Ocorreu um erro ao tentar remover o produto.']);
+            // Retorne uma resposta de sucesso
+            return response()->json(['success' => 'Produto removido com sucesso.']);
+        } else {
+            // Retorne uma resposta de erro se o índice não for válido
+            return response()->json(['error' => 'Ocorreu um erro ao tentar remover o produto.']);
+        }
     }
-}
 
 
 
