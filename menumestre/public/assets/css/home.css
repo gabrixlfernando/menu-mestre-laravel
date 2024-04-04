@@ -80,8 +80,10 @@ main{
     display: flex;
     align-items: center;
     padding: 5px 15px;
-    max-height: 200px;
-    min-height: 200px;
+    max-height: 330px;
+    /* 200 */
+    min-height: 330px;
+    /* 200 */
     box-shadow: var(--shadow-card);
     width: calc(50% - 7.5px);
 }

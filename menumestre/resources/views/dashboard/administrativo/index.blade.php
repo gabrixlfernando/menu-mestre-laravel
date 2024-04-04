@@ -51,7 +51,14 @@
                 <!-- Estatísticas de vendas -->
                 <div class="estatisticas">
                     <div class="estatisticas-info">
-                        <h4>R$ {{ $totalComandas }}</h4>
+
+                         <p>R$ {{$totalComandasPorDia}} DIA</p>
+                         <p>R$ {{$totalComandasPorSemana}} SEMANA</p>
+                         <p>R$ {{$totalComandasPorMes}} MES</p>
+                         <p>R$ {{$totalComandasPorAno}} ANO</p>
+
+                         <h4>R$ {{$totalComandas}}</h4>
+
                         <span>Vendas Totais</span>
                         <p>Vendas totais realizadas.</p>
                     </div>

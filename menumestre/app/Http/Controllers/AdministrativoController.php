@@ -34,6 +34,37 @@ class AdministrativoController extends Controller
 
         $totalComandas = Comanda::sum('total');
 
+        $diaAtual = date('Y-m-d');
+
+        // Consulta para obter o total de pedidos para o dia atual
+        $totalComandasPorDia = Comanda::whereDate('created_at', $diaAtual)->sum('total');
+
+
+        $inicioSemana = date('Y-m-d', strtotime('monday this week')); // Obtém a data de início da semana atual
+        $fimSemana = date('Y-m-d', strtotime('sunday this week')); // Obtém a data de término da semana atual
+
+        // Consulta para obter o total de pedidos para a semana atual
+        $totalComandasPorSemana = Comanda::whereDate('created_at', '>=', $inicioSemana)
+            ->whereDate('created_at', '<=', $fimSemana)
+            ->sum('total');
+
+        // Obtém o ano e mês atual no formato 'YYYY-MM'
+        $anoMesAtual = date('Y-m');
+
+        // Consulta para obter o total de pedidos para o mês atual
+        $totalComandasPorMes = Comanda::whereYear('created_at', '=', date('Y'))
+            ->whereMonth('created_at', '=', date('m'))
+            ->sum('total');
+
+        // Obtém o ano atual
+        $anoAtual = date('Y');
+
+        // Consulta para obter o total de pedidos para o ano atual
+        $totalComandasPorAno = Comanda::whereYear('created_at', $anoAtual)
+            ->sum('total');
+
+
+
         // $cardapio = Cardapio::orderBy('idProduto', 'desc')->take(5)->get(); // mostra até 6 primeiros pratos
 
 
@@ -41,7 +72,7 @@ class AdministrativoController extends Controller
         $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
             ->groupBy('produto_id')
             ->orderByDesc('total_pedidos')
-            ->take(5)
+            ->take(8)
             ->get();
 
         // Verificar se há produtos mais pedidos
@@ -55,15 +86,6 @@ class AdministrativoController extends Controller
         } else {
             $produtos_cardapio = collect(); // Retorna uma coleção vazia se não houver produtos mais pedidos
         }
-
-
-
-
-
-
-
-
-
 
         // Recupera o número de acessos por dia nos últimos 7 dias
         $acessosDia = DB::table('log_acessos')
@@ -108,7 +130,7 @@ class AdministrativoController extends Controller
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
-        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalComandas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'produtos_mais_pedidos'));
+        return view('dashboard.administrativo.index', compact('funcionario', 'totalFuncionarios', 'totalPratos', 'totalMesas', 'totalComandas', 'totalMensagens', 'totalAcessosDia', 'totalAcessosSemana', 'totalAcessos', 'produtos_mais_pedidos', 'totalComandasPorDia', 'totalComandasPorSemana', 'totalComandasPorMes', 'totalComandasPorAno'));
     }
 
     public function cardapio()
