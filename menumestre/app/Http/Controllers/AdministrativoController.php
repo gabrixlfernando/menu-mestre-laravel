@@ -126,7 +126,6 @@ class AdministrativoController extends Controller
             abort(404, 'Funcionario não encontrado!');
         }
 
-
         //passando o objeto $funcionario para view
 
         //dd($funcionario);
@@ -786,4 +785,114 @@ class AdministrativoController extends Controller
             return response()->json(['error' => 'Contato não encontrado'], 404);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getDashboard()
+{
+    // Recuperando o total de funcionários
+    $totalFuncionarios = Funcionario::count();
+
+    $totalPratos = Cardapio::count();
+
+    $totalMensagens = Contato::count();
+
+    $totalMesas = Mesa::where('status', 'disponivel')->count();
+
+    $totalComandas = Comanda::sum('total');
+
+    $diaAtual = date('Y-m-d');
+
+    // Consulta para obter o total de pedidos para o dia atual
+    $totalComandasPorDia = Comanda::whereDate('created_at', $diaAtual)->sum('total');
+
+    $inicioSemana = date('Y-m-d', strtotime('monday this week')); // Obtém a data de início da semana atual
+    $fimSemana = date('Y-m-d', strtotime('sunday this week')); // Obtém a data de término da semana atual
+
+    // Consulta para obter o total de pedidos para a semana atual
+    $totalComandasPorSemana = Comanda::whereDate('created_at', '>=', $inicioSemana)
+        ->whereDate('created_at', '<=', $fimSemana)
+        ->sum('total');
+
+    // Obtém o ano e mês atual no formato 'YYYY-MM'
+    $anoMesAtual = date('Y-m');
+
+    // Consulta para obter o total de pedidos para o mês atual
+    $totalComandasPorMes = Comanda::whereYear('created_at', '=', date('Y'))
+        ->whereMonth('created_at', '=', date('m'))
+        ->sum('total');
+
+    // Obtém o ano atual
+    $anoAtual = date('Y');
+
+    // Consulta para obter o total de pedidos para o ano atual
+    $totalComandasPorAno = Comanda::whereYear('created_at', $anoAtual)
+        ->sum('total');
+
+    // Consultar a tabela pedidos e contar quantas vezes cada produto foi pedido
+    $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
+        ->groupBy('produto_id')
+        ->orderByDesc('total_pedidos')
+        ->take(8)
+        ->get();
+
+    // Recupera o número de acessos por dia nos últimos 7 dias
+    $acessosDia = DB::table('log_acessos')
+        ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+        ->where('created_at', '>=', Carbon::now()->subDays(7))
+        ->where('log', 'like', '%/ %')
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+    $totalAcessosDia = $acessosDia->sum('total');
+
+    // Recupera o número de acessos por semana nos últimos 8 semanas
+    $acessosSemana = DB::table('log_acessos')
+        ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('count(*) as total'))
+        ->where('created_at', '>=', Carbon::now()->subWeeks(8))
+        ->where('log', 'like', '%/ %')
+        ->groupBy('year', 'week')
+        ->orderBy('year')
+        ->orderBy('week')
+        ->get();
+    $totalAcessosSemana = $acessosSemana->sum('total');
+
+    // Recupera o número total de acessos à página '/'
+    $totalAcessos = DB::table('log_acessos')
+        ->where('log', 'like', '%/ %')
+        ->count();
+
+    // Construir array com os dados
+    $data = [
+        'totalFuncionarios' => $totalFuncionarios,
+        'totalPratos' => $totalPratos,
+        'totalMensagens' => $totalMensagens,
+        'totalMesas' => $totalMesas,
+        'totalComandas' => $totalComandas,
+        'totalComandasPorDia' => $totalComandasPorDia,
+        'totalComandasPorSemana' => $totalComandasPorSemana,
+        'totalComandasPorMes' => $totalComandasPorMes,
+        'totalComandasPorAno' => $totalComandasPorAno,
+        'produtos_mais_pedidos' => $produtos_mais_pedidos,
+        'totalAcessosDia' => $totalAcessosDia,
+        'totalAcessosSemana' => $totalAcessosSemana,
+        'totalAcessos' => $totalAcessos,
+    ];
+
+    // Retornar os dados em formato JSON
+    return response()->json($data);
+}
+
 }
