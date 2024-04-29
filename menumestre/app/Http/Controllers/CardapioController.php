@@ -9,7 +9,8 @@ class CardapioController extends Controller
 {
     public function index()
     {
-        $cardapios = Cardapio::all();
+        // $cardapios = Cardapio::all();
+         $cardapios = Cardapio::orderBy('idProduto', 'desc')->get();
         return response()->json($cardapios);
     }
 

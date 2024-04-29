@@ -9,8 +9,23 @@ class FuncionarioController extends Controller
 {
     public function index()
     {
-        $funcionarios = Funcionario::all();
-        return response()->json($funcionarios);
+        // $funcionarios = Funcionario::all();
+        // return response()->json($funcionarios);
+
+        // Consulta todos os funcionários do tipo "administrativo"
+        $administradores = Funcionario::where('tipoFuncionario', 'administrativo')->get();
+
+        // Consulta todos os funcionários do tipo "atendente"
+        $atendentes = Funcionario::where('tipoFuncionario', 'atendente')->get();
+
+        // Construir array com os dados
+        $data = [
+            'administradores' => $administradores,
+            'atendentes' => $atendentes,
+        ];
+
+        // Retornar os dados em formato JSON
+        return response()->json($data);
     }
 
     public function show($id)
