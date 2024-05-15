@@ -28,15 +28,22 @@ Route::prefix('adm')->group(function () {
     // Cardapio
     Route::get('/cardapio', [CardapioController::class, 'index']);
     Route::get('/cardapio/{id}', [CardapioController::class, 'show']);
+    Route::put('/cardapio/{idProduto}/desativar', [CardapioController::class, 'desativarProduto']);
+    Route::put('/cardapio/{idProduto}/ativar', [CardapioController::class, 'ativarProduto']);
 
 
     // Mesa
     Route::get('/mesa', [MesaController::class, 'index']);
     Route::get('/mesa/{id}', [MesaController::class, 'show']);
+    Route::post('/mesa', [MesaController::class, 'createMesa']);
+    Route::put('/mesa/{id}/desativar', [MesaController::class, 'desativarMesa']);
+    Route::put('/mesa/{id}/ativar', [MesaController::class, 'ativarMesa']);
 
     // Funcionario
     Route::get('/funcionario', [FuncionarioController::class, 'index']);
     Route::get('/funcionario/{id}', [FuncionarioController::class, 'show']);
+    Route::put('/funcionario/{idFuncionario}', [FuncionarioController::class, 'update']);
+    
 
     // Contato
     Route::get('/contato', [ContatoController::class, 'index']);
