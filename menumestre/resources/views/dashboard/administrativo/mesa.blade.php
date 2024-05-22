@@ -123,6 +123,8 @@
                 <a class="card-ativo-btn" title="Ativo (Clique para desativar)"
                     href="{{ route('mesa.desativar', ['id' => $mesa->id]) }}"><i class="ri-eye-line"></i></a>
             </div>
+
+
         @endforeach
     </div>
     </div>
