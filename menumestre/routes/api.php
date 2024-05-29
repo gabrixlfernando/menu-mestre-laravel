@@ -38,12 +38,16 @@ Route::prefix('adm')->group(function () {
     Route::post('/mesa', [MesaController::class, 'createMesa']);
     Route::put('/mesa/{id}/desativar', [MesaController::class, 'desativarMesa']);
     Route::put('/mesa/{id}/ativar', [MesaController::class, 'ativarMesa']);
+    // essa rota tem que funcionar com put mas só atualiza com post
+    Route::post('/mesa/{id}', [MesaController::class, 'store']);
 
     // Funcionario
     Route::get('/funcionario', [FuncionarioController::class, 'index']);
     Route::get('/funcionario/{id}', [FuncionarioController::class, 'show']);
-    Route::put('/funcionario/{idFuncionario}', [FuncionarioController::class, 'update']);
-    
+    // essa rota tem que funcionar com put mas só atualiza com post
+    Route::post('/funcionario/{idFuncionario}', [FuncionarioController::class, 'store']);
+
+
 
     // Contato
     Route::get('/contato', [ContatoController::class, 'index']);

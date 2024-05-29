@@ -454,8 +454,8 @@ class AdministrativoController extends Controller
 
             // Remover a foto antiga se existir
             if ($funcionario->fotoFuncionario) {
-                if (file_exists(public_path($funcionario->fotoFuncionario))) {
-                    unlink(public_path($funcionario->fotoFuncionario));
+                if (file_exists(public_path('assets/images/funcionarios/' . $funcionario->fotoFuncionario))) {
+                    unlink(public_path('assets/images/funcionarios/' . $funcionario->fotoFuncionario));
                 }
             }
 
@@ -464,8 +464,8 @@ class AdministrativoController extends Controller
 
             // Atualizar o caminho da foto no modelo
             $funcionario->fotoFuncionario = $nomeArquivo;
+            $funcionario->save();
         }
-
         $funcionario->save();
 
         Alert::success('Funcionario Atualizado!', 'O funcionario foi atualizado com sucesso.');

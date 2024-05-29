@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mesa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MesaController extends Controller
 {
@@ -87,5 +88,41 @@ class MesaController extends Controller
         }
     }
 
-    
+    public function store(Request $request, $id)
+    {
+        // Validação dos dados recebidos
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:disponivel,ocupada,reservada',
+            'pessoas_sentadas' => 'required_if:status,ocupada|integer|min:0',
+        ]);
+
+        // Se a validação falhar, retorne a mensagem de erro
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        // Encontre a mesa pelo ID
+        $mesa = Mesa::findOrFail($id);
+
+        // Verifique se o número de pessoas sentadas não excede a capacidade máxima
+        if ($request->input('pessoas_sentadas') > $mesa->capacidade) {
+            return response()->json(['error' => 'O número de pessoas sentadas excede a capacidade máxima da mesa.'], 400);
+        }
+
+        // Atualize os dados da mesa
+        $mesa->status = $request->input('status');
+
+        // Se o status for "disponível", defina pessoas_sentadas como 0, caso contrário, obtenha o valor do formulário
+        if ($mesa->status === 'disponivel') {
+            $mesa->pessoas_sentadas = 0;
+        } else {
+            $mesa->pessoas_sentadas = $request->input('pessoas_sentadas');
+        }
+
+        // Salve as alterações no banco de dados
+        $mesa->save();
+
+        // Retorne os dados da mesa atualizados em formato JSON
+        return response()->json(['message' => 'Mesa atualizada com sucesso', 'mesa' => $mesa], 200);
+    }
 }

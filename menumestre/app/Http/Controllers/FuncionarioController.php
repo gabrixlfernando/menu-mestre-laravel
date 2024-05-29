@@ -38,9 +38,10 @@ class FuncionarioController extends Controller
         return response()->json($funcionario);
     }
 
-    public function update(Request $request, $idFuncionario)
+    public function store(Request $request, $idFuncionario)
 {
 
+    // ValidFuncionarioação dos campos
     $request->validate([
         'nomeFuncionario'       => 'string|max:255',
         'email'                 => 'email|max:255',
@@ -58,10 +59,13 @@ class FuncionarioController extends Controller
         'fotoFuncionario'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
+    // Encontrar o funcionário pelo ID
     $funcionario = Funcionario::findOrFail($idFuncionario);
 
+
+
     // Atualizar apenas os campos fornecidos no request
-    $funcionario->update($request->only([
+    $funcionario->fill($request->only([
         'nomeFuncionario',
         'email',
         'dataNascimento',
@@ -77,8 +81,6 @@ class FuncionarioController extends Controller
         'statusFuncionario',
     ]));
 
-
-
     // Verificar se uma nova imagem foi enviada
     if ($request->hasFile('fotoFuncionario')) {
         $fotoFuncionario = $request->file('fotoFuncionario');
@@ -87,8 +89,8 @@ class FuncionarioController extends Controller
 
         // Remover a foto antiga se existir
         if ($funcionario->fotoFuncionario) {
-            if (file_exists(public_path($funcionario->fotoFuncionario))) {
-                unlink(public_path($funcionario->fotoFuncionario));
+            if (file_exists(public_path('assets/images/funcionarios/' . $funcionario->fotoFuncionario))) {
+                unlink(public_path('assets/images/funcionarios/' . $funcionario->fotoFuncionario));
             }
         }
 
@@ -96,10 +98,11 @@ class FuncionarioController extends Controller
         $fotoFuncionario->move($caminhoDestino, $nomeArquivo);
 
         // Atualizar o caminho da foto no modelo
-        $funcionario->update(['fotoFuncionario' => $nomeArquivo]);
+        $funcionario->fotoFuncionario = $nomeArquivo;
+        $funcionario->save();
     }
-
-    // die(var_dump($request->all()));
+    // Salvar as mudanças
+    $funcionario->save();
 
     // Criar uma resposta em JSON
     return response()->json([
@@ -107,5 +110,6 @@ class FuncionarioController extends Controller
         'funcionario' => $funcionario
     ], 200);
 }
+
 
 }
