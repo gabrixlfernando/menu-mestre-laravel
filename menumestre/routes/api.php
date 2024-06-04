@@ -30,6 +30,8 @@ Route::prefix('adm')->group(function () {
     Route::get('/cardapio/{id}', [CardapioController::class, 'show']);
     Route::put('/cardapio/{idProduto}/desativar', [CardapioController::class, 'desativarProduto']);
     Route::put('/cardapio/{idProduto}/ativar', [CardapioController::class, 'ativarProduto']);
+    Route::post('/cardapio', [CardapioController::class, 'createProduto']);
+    Route::post('/cardapio/{idProduto}', [CardapioController::class, 'store']);
 
 
     // Mesa
@@ -38,13 +40,14 @@ Route::prefix('adm')->group(function () {
     Route::post('/mesa', [MesaController::class, 'createMesa']);
     Route::put('/mesa/{id}/desativar', [MesaController::class, 'desativarMesa']);
     Route::put('/mesa/{id}/ativar', [MesaController::class, 'ativarMesa']);
-    // essa rota tem que funcionar com put mas só atualiza com post
+   //atualizar
     Route::post('/mesa/{id}', [MesaController::class, 'store']);
 
     // Funcionario
     Route::get('/funcionario', [FuncionarioController::class, 'index']);
     Route::get('/funcionario/{id}', [FuncionarioController::class, 'show']);
-    // essa rota tem que funcionar com put mas só atualiza com post
+    Route::post('/funcionario', [FuncionarioController::class, 'createFuncionario']);
+    //atualizar
     Route::post('/funcionario/{idFuncionario}', [FuncionarioController::class, 'store']);
 
 
