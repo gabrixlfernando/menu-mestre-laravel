@@ -66,10 +66,13 @@
                         <span>{{ $contato->assuntoContato }}: </span>
                         <span>{{ Str::limit($contato->mensContato, 25, '...') }}</span>
                     </div>
-                    @if($contato->lidoContato == '0')
-                    <p class="card-new-item" data-id="{{ $contato->id }}">Novo!</p>
-                    @endif
+
+                    {{-- tava aq --}}
+
                     <div class="cont-info-data">
+                        @if($contato->lidoContato == '0')
+                        <p class="card-new-item" data-id="{{ $contato->id }}">Novo!</p>
+                        @endif
                         <span>{{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }}</span>
                     </div>
                 </li>
