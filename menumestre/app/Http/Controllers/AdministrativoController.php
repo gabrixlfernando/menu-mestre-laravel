@@ -151,8 +151,6 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.cardapio', compact('funcionario', 'cardapio'));
     }
 
-
-
     public function desativarProduto($idProduto)
     {
         // Encontre o produto pelo ID
@@ -480,8 +478,6 @@ class AdministrativoController extends Controller
         return redirect()->route('dashboard.administrativo.funcionario', compact('funcionario'));
     }
 
-
-
     // lista todas as mesas
     public function mesa()
     {
@@ -591,7 +587,6 @@ class AdministrativoController extends Controller
         }
     }
 
-
     public function ativarMesa($id)
     {
         $mesa = mesa::find($id);
@@ -610,8 +605,6 @@ class AdministrativoController extends Controller
             return redirect()->route('dashboard.administrativo.mesa');
         }
     }
-
-
 
     public function showMesa($id)
     {
@@ -686,8 +679,6 @@ class AdministrativoController extends Controller
             return response()->json(['error' => 'Ocorreu um erro ao tentar remover o produto.']);
         }
     }
-
-
 
     public function fecharMesa(Request $request, $id)
     {
@@ -786,20 +777,8 @@ class AdministrativoController extends Controller
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+// API Referente aos dados dos relatório
     public function getDashboard()
 {
     // Recuperando o total de funcionários
