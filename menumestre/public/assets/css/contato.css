@@ -105,6 +105,28 @@ main{
     width: 45%;
     font-size: 1rem;
 }
+
+/* Inicialmente, esconda a lixeira */
+.cont-info-lixeira {
+    display: none;
+    transition: color 0.3s;
+    color: #000;
+    width: 5%;
+}
+
+.cont-info-lixeira i{
+    font-size: 1.5rem;
+}
+
+.cont-list-contato:hover .cont-info-lixeira {
+    display: block;
+    text-align: center;
+}
+
+.cont-info-lixeira:hover {
+    color: red;
+    cursor: pointer;
+}
 .card-new-item{
     border: solid 3p #17da52;
     border-radius: 15px;
@@ -135,9 +157,7 @@ main{
     width: 50px;
     height: 50px;
 }
-.cont-info-contato div{
 
-}
 .cont-info-contato div span{
     font-size: 1rem;
     color: var(--fundo);
