@@ -23,8 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('adm')->group(function () {
+Route::post('login', [FuncionarioController::class, 'login']);
 
+// Route::prefix('adm')->group(function ()
+
+Route::middleware('auth:sanctum', 'funcionario')->group(function ()
+{
     // Cardapio
     Route::get('/cardapio', [CardapioController::class, 'index']);
     Route::get('/cardapio/{id}', [CardapioController::class, 'show']);
