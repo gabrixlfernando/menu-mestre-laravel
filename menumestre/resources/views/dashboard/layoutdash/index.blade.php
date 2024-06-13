@@ -57,25 +57,26 @@
                     <!-- Notificações -->
                     <div class="notification-link">
                         <i class="ri-notification-2-line"></i>
-                        @if($naoLidas > 0)
-                        <div class="notification-ativo" title="Notificações">
+                        @if ($naoLidas > 0)
+                            <div class="notification-ativo" title="Notificações">
 
                                 <span>{{ $naoLidas }}</span>
 
-                        </div>
+                            </div>
                         @endif
                         <!-- Dropdown de notificações -->
                         <div class="notification-dropdown" id="notificationDropdown">
 
-                                <div class="notification-item">
-                                    <a href="{{ url('dashboard/administrativo/contato') }}">
-                                        @if($naoLidas > 0)
-                                        <span>{{ $naoLidas }} {{ $naoLidas == '1' ? 'Mensagem': 'Mensagens'}} {{ $naoLidas == '1' ? 'nova': 'novas'}} </span>
-                                        @else
+                            <div class="notification-item">
+                                <a href="{{ url('dashboard/administrativo/contato') }}">
+                                    @if ($naoLidas > 0)
+                                        <span>{{ $naoLidas }} {{ $naoLidas == '1' ? 'Mensagem' : 'Mensagens' }}
+                                            {{ $naoLidas == '1' ? 'nova' : 'novas' }} </span>
+                                    @else
                                         <span>Nenhuma mensagem nova</span>
-                                        @endif
-                                    </a>
-                                </div>
+                                    @endif
+                                </a>
+                            </div>
 
                         </div>
                     </div>
@@ -114,10 +115,10 @@
                         <a href="{{ url('dashboard/administrativo/contato') }}">
                             <span class="nav-icon notification-message">
                                 <i class="ri-question-answer-fill"></i>
-                                @if($naoLidas > 0)
-                                <div class="notification-ativo" title="Notificações">
-                                    <span>{{ $naoLidas }}</span>
-                                </div>
+                                @if ($naoLidas > 0)
+                                    <div class="notification-ativo" title="Notificações">
+                                        <span>{{ $naoLidas }}</span>
+                                    </div>
                                 @endif
                             </span>
                             <span class="nav-title">Mensagens</span></a>
@@ -142,63 +143,96 @@
     <script src="{{ asset('../assets/js/main.js') }}"></script>
 
     <script>
+        // Controle das notificações
+        document.addEventListener("DOMContentLoaded", function() {
+            var notificationLink = document.querySelector(".notification-link");
+            var notificationDropdown = document.querySelector(".notification-dropdown");
 
-
-    // Controle das notificações
-    document.addEventListener("DOMContentLoaded", function() {
-        var notificationLink = document.querySelector(".notification-link");
-        var notificationDropdown = document.querySelector(".notification-dropdown");
-
-        // Função para atualizar o conteúdo do dropdown
-        function updateNotificationDropdown() {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.count > 0) {
-                            notificationDropdown.textContent = response.count + " Mensagens novas";
+            // Função para atualizar o conteúdo do dropdown
+            function updateNotificationDropdown() {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.count > 0) {
+                                notificationDropdown.textContent = response.count + " Mensagens novas";
+                            } else {
+                                notificationDropdown.textContent = "Nenhuma mensagem nova";
+                            }
                         } else {
-                            notificationDropdown.textContent = "Nenhuma mensagem nova";
+                            console.error('Erro ao buscar as mensagens: ' + xhr.status);
                         }
-                    } else {
-                        console.error('Erro ao buscar as mensagens: ' + xhr.status);
                     }
-                }
-            };
+                };
 
-            xhr.open('GET', '/notifications', true);
-            xhr.send();
-        }
+                xhr.open('GET', '/notifications', true);
+                xhr.send();
+            }
 
-        // Atualizar o conteúdo do dropdown ao passar o mouse sobre o ícone de sino
-        notificationLink.addEventListener("mouseover", function() {
-            // Atualizar o conteúdo do dropdown
-            updateNotificationDropdown();
+            // Atualizar o conteúdo do dropdown ao passar o mouse sobre o ícone de sino
+            notificationLink.addEventListener("mouseover", function() {
+                // Atualizar o conteúdo do dropdown
+                updateNotificationDropdown();
 
-            // Exibir o dropdown
-            notificationDropdown.classList.add("show");
+                // Exibir o dropdown
+                notificationDropdown.classList.add("show");
+            });
+
+            // Ocultar o dropdown ao remover o mouse do ícone de sino
+            notificationLink.addEventListener("mouseout", function() {
+                notificationDropdown.classList.remove("show");
+            });
+
+            // Marcar mensagem como lida e atualizar contagem de notificações
+            $('.cont-list-contato').on('click', function() {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: '/atualizar-lido/' + id,
+                    type: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Certifique-se de incluir o token CSRF
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Atualizar a contagem de notificações no frontend
+                            var naoLidas = response.naoLidas;
+                            if (naoLidas > 0) {
+                                $('.notification-ativo span').text(naoLidas);
+                                $('#notificationDropdown .notification-item a span').text(
+                                    naoLidas + ' ' + (naoLidas == 1 ? 'Mensagem nova' :
+                                        'Mensagens novas')
+                                );
+                            } else {
+                                $('.notification-ativo')
+                            .hide(); // Esconder o ícone se não houver mensagens
+                                $('#notificationDropdown .notification-item a span').text(
+                                    'Nenhuma mensagem nova');
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao atualizar mensagem como lida:', error);
+                    }
+                });
+            });
+
         });
-
-        // Ocultar o dropdown ao remover o mouse do ícone de sino
-        notificationLink.addEventListener("mouseout", function() {
-            notificationDropdown.classList.remove("show");
-        });
-    });
     </script>
 
-     {{-- Vlibras --}}
+    {{-- Vlibras --}}
 
-     <div vw class="enabled">
+    <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
-          <div class="vw-plugin-top-wrapper"></div>
+            <div class="vw-plugin-top-wrapper"></div>
         </div>
-      </div>
-      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-      <script>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
-      </script>
+    </script>
 
 </body>
 

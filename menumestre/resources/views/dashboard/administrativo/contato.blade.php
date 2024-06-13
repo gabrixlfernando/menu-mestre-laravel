@@ -67,43 +67,44 @@
                                 <span>{{ $contato->assuntoContato }}: </span>
                                 <span>{{ Str::limit($contato->mensContato, 25, '...') }}</span>
                             </div>
-
-                            {{-- tava aq --}}
-
                             <div class="cont-info-data">
                                 @if ($contato->lidoContato == '0')
                                     <p class="card-new-item" data-id="{{ $contato->id }}">Novo!</p>
                                 @endif
-                                <span>
-                                     {{-- {{ \Carbon\Carbon::parse($contato->created_at)->isoFormat('DD [de] MMMM') }} --}}
-                                     @php
-                                     $created_at = \Carbon\Carbon::parse($contato->created_at);
 
-                                     if ($created_at->isToday()) {
-                                         $formatted_date = $created_at->format('H:i');
-                                     } elseif ($created_at->isSameWeek(\Carbon\Carbon::now())) {
-                                         $formatted_date = $created_at->isoFormat('ddd, H:mm');
-                                     } elseif ($created_at->diffInWeeks(\Carbon\Carbon::now()) == 1) {
-                                         $formatted_date = $created_at->isoFormat('ddd, DD/MM');
-                                     } else {
-                                         $formatted_date = $created_at->isoFormat('ddd, DD/MM');
-                                     }
-                                 @endphp
+                                @php
+                                    $created_at = \Carbon\Carbon::parse($contato->created_at);
 
-                                 <span>{{ $formatted_date }}</span>
-                                </span>
+                                    if ($created_at->isToday()) {
+                                        $formatted_date = $created_at->format('H:i');
+                                    } elseif ($created_at->isSameWeek(\Carbon\Carbon::now())) {
+                                        $formatted_date = $created_at->isoFormat('ddd, H:mm');
+                                    } elseif ($created_at->diffInWeeks(\Carbon\Carbon::now()) == 1) {
+                                        $formatted_date = $created_at->isoFormat('ddd, DD/MM');
+                                    } else {
+                                        $formatted_date = $created_at->isoFormat('ddd, DD/MM');
+                                    }
+                                @endphp
+
+                                <span class="span-font">{{ $formatted_date }}</span>
                             </div>
 
-                            <div class="cont-info-lixeira">
+                            <div class="cont-info-lixeira" data-id="{{ $contato->id }}">
                                 <i class="fa-regular fa-trash-can"></i>
                             </div>
                         </li>
+
                         @include('dashboard.administrativo.contato.show', ['id' => $contato->id])
+                        @include('dashboard.administrativo.contato.disable', ['id' => $contato->id])
                     @endforeach
                 </ul>
             </div>
         </div>
     </div>
+
+
+
+
     @include('sweetalert::alert')
 @endsection
 
@@ -157,4 +158,40 @@
             });
         });
     });
+
+
+    $(document).ready(function() {
+        // Função para abrir o modal da mensagem ao clicar na lista, exceto no ícone da lixeira
+        $('.cont-list-contato').click(function(event) {
+            if (!$(event.target).closest('.cont-info-lixeira').length) {
+                const targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            }
+        });
+
+        // Evento de clique no ícone da lixeira
+        $('.cont-info-lixeira i').click(function(event) {
+            // Impede que o evento de clique se propague para o li pai
+            event.stopPropagation();
+
+            // Obter o ID do contato associado ao ícone da lixeira
+            const contatoElement = $(this).closest('.cont-info-lixeira');
+            const contatoIdParaExcluir = contatoElement.data('id');
+
+            // Definir o valor do campo oculto no formulário de exclusão
+            $('#contatoIdParaExcluir').val(contatoIdParaExcluir);
+
+            // Exibir o modal de confirmação de exclusão
+            $('#modalLixeira').modal('show');
+        });
+
+        // Evento de clique no botão de confirmação de exclusão
+        $('#confirmDelete').click(function() {
+            if ($('#contatoIdParaExcluir').val()) {
+                // Submeter o formulário de exclusão
+                $('#formDelete').submit();
+            }
+        });
+    });
+
 </script>

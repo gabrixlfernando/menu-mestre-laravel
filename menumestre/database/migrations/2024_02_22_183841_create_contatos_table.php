@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('assuntoContato', 100)->default('Contato Site');
             $table->text('mensContato');
             $table->boolean('lidoContato')->default(false); // Campo para indicar se o contato foi lido
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
             $table->timestamps();
         });
     }

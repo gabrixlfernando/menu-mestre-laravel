@@ -612,6 +612,7 @@ class AdministrativoController extends Controller
         $funcionario = Funcionario::findOrFail($idFuncionario);
         $mesa = Mesa::findOrFail($id);
         $cardapio = Cardapio::all();
+        $categorias = Cardapio::select('categoriaProduto')->distinct()->pluck('categoriaProduto');
 
         if ($mesa->status === 'ocupada') {
             $comandaExistente = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
@@ -624,7 +625,7 @@ class AdministrativoController extends Controller
             }
         }
 
-        return view('dashboard.administrativo.mesa.show', compact('funcionario', 'mesa', 'cardapio'));
+        return view('dashboard.administrativo.mesa.show', compact('funcionario', 'mesa', 'cardapio', 'categorias'));
     }
 
     public function adicionarProduto(Request $request)
@@ -740,7 +741,9 @@ class AdministrativoController extends Controller
     public function contato()
     {
         // $contatos = Contato::all();
-        $contatos = Contato::orderBy('id', 'desc')->paginate(5); // Retorna 5 contatos por página
+        $contatos = Contato::where('status', 'ativo')
+            ->orderBy('id', 'desc')
+            ->paginate(5); // Retorna 5 contatos por página
         $id = session('id');
 
         // Buscando o funcionário pelo id no banco de dados
@@ -761,7 +764,15 @@ class AdministrativoController extends Controller
         $contato = Contato::find($id);
         if ($contato) {
             $contato->update(['lidoContato' => true]);
-            return response()->json(['success' => true, 'message' => 'Contato marcado como lido com sucesso']);
+
+            // Contar as mensagens não lidas restantes
+            $naoLidas = Contato::where('lidoContato', false)->count();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Contato marcado como lido com sucesso',
+                'naoLidas' => $naoLidas
+            ]);
         } else {
             return response()->json(['success' => false, 'message' => 'Contato não encontrado'], 404);
         }
@@ -777,101 +788,117 @@ class AdministrativoController extends Controller
         }
     }
 
-    
-// API Referente aos dados dos relatório
+    public function desativar(Request $request)
+    {
+        // Validação do ID da mensagem
+        $request->validate([
+            'contato_id' => 'required|exists:contatos,id',
+        ]);
+
+        // Encontrar a mensagem pelo ID e atualizar seu status
+        $contato = Contato::findOrFail($request->input('contato_id'));
+        $contato->status = 'inativo'; // Supondo que 'status' seja o campo e 'inativo' o valor desejado
+        $contato->save();
+
+        // Redirecionar de volta com uma mensagem de sucesso
+        Alert::success('Mensagem Excluída!', 'A mensagem foi excluída com sucesso.');
+        return redirect()->route('dashboard.administrativo.contato')->with('success', 'Mensagem excluída com sucesso.');
+    }
+
+
+    // API Referente aos dados dos relatório
     public function getDashboard()
-{
-    // Recuperando o total de funcionários
-    $totalFuncionarios = Funcionario::count();
+    {
+        // Recuperando o total de funcionários
+        $totalFuncionarios = Funcionario::count();
 
-    $totalPratos = Cardapio::count();
+        $totalPratos = Cardapio::count();
 
-    $totalMensagens = Contato::count();
+        $totalMensagens = Contato::count();
 
-    $totalMesas = Mesa::where('status', 'disponivel')->count();
+        $totalMesas = Mesa::where('status', 'disponivel')->count();
 
-    $totalComandas = Comanda::sum('total');
+        $totalComandas = Comanda::sum('total');
 
-    $diaAtual = date('Y-m-d');
+        $diaAtual = date('Y-m-d');
 
-    // Consulta para obter o total de pedidos para o dia atual
-    $totalComandasPorDia = Comanda::whereDate('created_at', $diaAtual)->sum('total');
+        // Consulta para obter o total de pedidos para o dia atual
+        $totalComandasPorDia = Comanda::whereDate('created_at', $diaAtual)->sum('total');
 
-    $inicioSemana = date('Y-m-d', strtotime('monday this week')); // Obtém a data de início da semana atual
-    $fimSemana = date('Y-m-d', strtotime('sunday this week')); // Obtém a data de término da semana atual
+        $inicioSemana = date('Y-m-d', strtotime('monday this week')); // Obtém a data de início da semana atual
+        $fimSemana = date('Y-m-d', strtotime('sunday this week')); // Obtém a data de término da semana atual
 
-    // Consulta para obter o total de pedidos para a semana atual
-    $totalComandasPorSemana = Comanda::whereDate('created_at', '>=', $inicioSemana)
-        ->whereDate('created_at', '<=', $fimSemana)
-        ->sum('total');
+        // Consulta para obter o total de pedidos para a semana atual
+        $totalComandasPorSemana = Comanda::whereDate('created_at', '>=', $inicioSemana)
+            ->whereDate('created_at', '<=', $fimSemana)
+            ->sum('total');
 
-    // Obtém o ano e mês atual no formato 'YYYY-MM'
-    $anoMesAtual = date('Y-m');
+        // Obtém o ano e mês atual no formato 'YYYY-MM'
+        $anoMesAtual = date('Y-m');
 
-    // Consulta para obter o total de pedidos para o mês atual
-    $totalComandasPorMes = Comanda::whereYear('created_at', '=', date('Y'))
-        ->whereMonth('created_at', '=', date('m'))
-        ->sum('total');
+        // Consulta para obter o total de pedidos para o mês atual
+        $totalComandasPorMes = Comanda::whereYear('created_at', '=', date('Y'))
+            ->whereMonth('created_at', '=', date('m'))
+            ->sum('total');
 
-    // Obtém o ano atual
-    $anoAtual = date('Y');
+        // Obtém o ano atual
+        $anoAtual = date('Y');
 
-    // Consulta para obter o total de pedidos para o ano atual
-    $totalComandasPorAno = Comanda::whereYear('created_at', $anoAtual)
-        ->sum('total');
+        // Consulta para obter o total de pedidos para o ano atual
+        $totalComandasPorAno = Comanda::whereYear('created_at', $anoAtual)
+            ->sum('total');
 
-    // Consultar a tabela pedidos e contar quantas vezes cada produto foi pedido
-    $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
-        ->groupBy('produto_id')
-        ->orderByDesc('total_pedidos')
-        ->take(8)
-        ->get();
+        // Consultar a tabela pedidos e contar quantas vezes cada produto foi pedido
+        $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
+            ->groupBy('produto_id')
+            ->orderByDesc('total_pedidos')
+            ->take(8)
+            ->get();
 
-    // Recupera o número de acessos por dia nos últimos 7 dias
-    $acessosDia = DB::table('log_acessos')
-        ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-        ->where('created_at', '>=', Carbon::now()->subDays(7))
-        ->where('log', 'like', '%/ %')
-        ->groupBy('date')
-        ->orderBy('date')
-        ->get();
-    $totalAcessosDia = $acessosDia->sum('total');
+        // Recupera o número de acessos por dia nos últimos 7 dias
+        $acessosDia = DB::table('log_acessos')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+            ->where('created_at', '>=', Carbon::now()->subDays(7))
+            ->where('log', 'like', '%/ %')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+        $totalAcessosDia = $acessosDia->sum('total');
 
-    // Recupera o número de acessos por semana nos últimos 8 semanas
-    $acessosSemana = DB::table('log_acessos')
-        ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('count(*) as total'))
-        ->where('created_at', '>=', Carbon::now()->subWeeks(8))
-        ->where('log', 'like', '%/ %')
-        ->groupBy('year', 'week')
-        ->orderBy('year')
-        ->orderBy('week')
-        ->get();
-    $totalAcessosSemana = $acessosSemana->sum('total');
+        // Recupera o número de acessos por semana nos últimos 8 semanas
+        $acessosSemana = DB::table('log_acessos')
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('count(*) as total'))
+            ->where('created_at', '>=', Carbon::now()->subWeeks(8))
+            ->where('log', 'like', '%/ %')
+            ->groupBy('year', 'week')
+            ->orderBy('year')
+            ->orderBy('week')
+            ->get();
+        $totalAcessosSemana = $acessosSemana->sum('total');
 
-    // Recupera o número total de acessos à página '/'
-    $totalAcessos = DB::table('log_acessos')
-        ->where('log', 'like', '%/ %')
-        ->count();
+        // Recupera o número total de acessos à página '/'
+        $totalAcessos = DB::table('log_acessos')
+            ->where('log', 'like', '%/ %')
+            ->count();
 
-    // Construir array com os dados
-    $data = [
-        'totalFuncionarios' => $totalFuncionarios,
-        'totalPratos' => $totalPratos,
-        'totalMensagens' => $totalMensagens,
-        'totalMesas' => $totalMesas,
-        'totalComandas' => $totalComandas,
-        'totalComandasPorDia' => $totalComandasPorDia,
-        'totalComandasPorSemana' => $totalComandasPorSemana,
-        'totalComandasPorMes' => $totalComandasPorMes,
-        'totalComandasPorAno' => $totalComandasPorAno,
-        'produtos_mais_pedidos' => $produtos_mais_pedidos,
-        'totalAcessosDia' => $totalAcessosDia,
-        'totalAcessosSemana' => $totalAcessosSemana,
-        'totalAcessos' => $totalAcessos,
-    ];
+        // Construir array com os dados
+        $data = [
+            'totalFuncionarios' => $totalFuncionarios,
+            'totalPratos' => $totalPratos,
+            'totalMensagens' => $totalMensagens,
+            'totalMesas' => $totalMesas,
+            'totalComandas' => $totalComandas,
+            'totalComandasPorDia' => $totalComandasPorDia,
+            'totalComandasPorSemana' => $totalComandasPorSemana,
+            'totalComandasPorMes' => $totalComandasPorMes,
+            'totalComandasPorAno' => $totalComandasPorAno,
+            'produtos_mais_pedidos' => $produtos_mais_pedidos,
+            'totalAcessosDia' => $totalAcessosDia,
+            'totalAcessosSemana' => $totalAcessosSemana,
+            'totalAcessos' => $totalAcessos,
+        ];
 
-    // Retornar os dados em formato JSON
-    return response()->json($data);
-}
-
+        // Retornar os dados em formato JSON
+        return response()->json($data);
+    }
 }
