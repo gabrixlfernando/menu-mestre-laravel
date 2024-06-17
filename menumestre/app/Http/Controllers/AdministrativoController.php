@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -628,32 +629,70 @@ class AdministrativoController extends Controller
         return view('dashboard.administrativo.mesa.show', compact('funcionario', 'mesa', 'cardapio', 'categorias'));
     }
 
+    // public function adicionarProduto(Request $request)
+    // {
+    //     $request->validate([
+    //         'produto' => 'required|exists:tblprodutos,idProduto',
+    //         'quantidade' => 'required|integer|min:1',
+    //     ]);
+
+    //     $produto = Cardapio::findOrFail($request->produto);
+    //     $pedido = [
+    //         'produto' => $produto,
+    //         'quantidade' => $request->quantidade,
+    //         'preco_unitario' => $produto->valorProduto,
+    //         'total_item' => $produto->valorProduto * $request->quantidade,
+    //     ];
+
+    //     $mesa_id = $request->input('mesa_id'); // Certifique-se de que 'mesa_id' está sendo enviado no formulário
+    //     $mesa_session_key = 'mesa_' . $mesa_id;
+
+    //     if ($request->session()->has($mesa_session_key)) {
+    //         $produtos = $request->session()->get($mesa_session_key . '.produtos', []);
+    //         $produtos[] = $pedido;
+    //         $request->session()->put($mesa_session_key . '.produtos', $produtos);
+    //     }
+
+    //     return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
+    // }
+
     public function adicionarProduto(Request $request)
     {
-        $request->validate([
-            'produto' => 'required|exists:tblprodutos,idProduto',
-            'quantidade' => 'required|integer|min:1',
-        ]);
-
-        $produto = Cardapio::findOrFail($request->produto);
-        $pedido = [
-            'produto' => $produto,
-            'quantidade' => $request->quantidade,
-            'preco_unitario' => $produto->valorProduto,
-            'total_item' => $produto->valorProduto * $request->quantidade,
-        ];
-
         $mesa_id = $request->input('mesa_id'); // Certifique-se de que 'mesa_id' está sendo enviado no formulário
         $mesa_session_key = 'mesa_' . $mesa_id;
 
-        if ($request->session()->has($mesa_session_key)) {
-            $produtos = $request->session()->get($mesa_session_key . '.produtos', []);
-            $produtos[] = $pedido;
-            $request->session()->put($mesa_session_key . '.produtos', $produtos);
+        // Adicionar logs para verificar os dados recebidos
+        Log::info('Produtos recebidos:', $request->all());
+
+        // Processar múltiplos produtos
+        $produtosParaAdicionar = $request->input('produtos', []);
+
+        foreach ($produtosParaAdicionar as $produto) {
+            $produto_id = $produto['id']; // Acesse a chave correta
+            $quantidade = $produto['quantidade']; // Acesse a chave correta
+
+            $produtoInfo = Cardapio::findOrFail($produto_id);
+            $pedido = [
+                'produto' => $produtoInfo,
+                'quantidade' => $quantidade,
+                'preco_unitario' => $produtoInfo->valorProduto,
+                'total_item' => $produtoInfo->valorProduto * $quantidade,
+            ];
+
+            if ($request->session()->has($mesa_session_key)) {
+                $produtos = $request->session()->get($mesa_session_key . '.produtos', []);
+                $produtos[] = $pedido;
+                $request->session()->put($mesa_session_key . '.produtos', $produtos);
+            } else {
+                // Se a chave de sessão não existe, crie-a com o primeiro produto
+                $request->session()->put($mesa_session_key . '.produtos', [$pedido]);
+            }
         }
 
-        return redirect()->back()->with('success', 'Produto adicionado à mesa com sucesso.');
+        return redirect()->back()->with('success', 'Produtos adicionados à mesa com sucesso.');
     }
+
+
 
 
     public function removerProduto(Request $request)
