@@ -1,0 +1,85 @@
+/* tela de adição de produto */
+
+.card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    border: none;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+    align-items: center;
+}
+
+.card-body .card-text {
+    flex-grow: 1;
+}
+
+.card-body .btn {
+    margin-top: auto;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.produto-card {
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.form-control {
+    width: 70%;
+}
+
+.form-control2 {
+    display: block;
+    width: 38%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-align: center;
+}
+
+.form-group2 {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+
+.modal-lg, .modal-xl{
+    max-width: 1250px;
+}
+
+.modal-body{
+    padding: 2rem;
+}
+
+.form-group3{
+
+}

@@ -1,124 +1,11 @@
-{{-- <div class="modal fade" id="AdicionarProduto{{ $mesa->id}}" tabindex="-1" role="dialog" aria-labelledby="modalAdicionarProdutoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAdicionarProdutoLabel">Adicionar Produto à Mesa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Conteúdo do formulário -->
-                <form action="{{ route('mesa.adicionar', ['id' => $mesa->id]) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="produto">Selecione o Produto:</label>
-                        <select class="form-control" id="produto" name="produto">
-                            @foreach ($cardapio as $item)
-                                <option value="{{ $item->idProduto }}">{{ $item->idProduto }} - {{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantidade">Quantidade:</label>
-                        <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" value="1">
-                        <input type="number" class="form-control" id="mesa_id" name="mesa_id"  value="{{ $mesa -> id }}" style="display: none;">
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-                        </div>
-                        <button type="submit" class="btn btn-success">Adicionar Produto</button>
-
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div> --}}
-
-
-
-<!-- Modal para Adicionar Produto à Mesa -->
-{{-- <div class="modal fade" id="AdicionarProduto{{ $mesa->id }}" tabindex="-1" role="dialog" aria-labelledby="modalAdicionarProdutoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAdicionarProdutoLabel">Adicionar Produto à Mesa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Formulário de Adicionar Produto -->
-                <form action="{{ route('mesa.adicionar', ['id' => $mesa->id]) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="categoria">Filtrar por Categoria:</label>
-                        <select class="form-control" id="categoria" name="categoria">
-                            <option value="">Todas as categorias</option>
-                            <option value="massa">Massa</option>
-                            <option value="comida">Comida</option>
-                            <option value="sobremesa">Sobremesa</option>
-                            <option value="bebida">Bebida</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="produto">Selecione o Produto:</label>
-                        <select class="form-control" id="produto" name="produto">
-                            <option value="">Selecione um Produto</option>
-                            @foreach ($cardapio as $item)
-                                <option class="categoria-{{ strtolower($item->categoriaProduto) }}" value="{{ $item->idProduto }}">{{ $item->idProduto }} - {{ $item->nomeProduto }} - R$ {{ $item->valorProduto }}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="quantidade">Quantidade:</label>
-                        <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" value="1">
-                        <input type="hidden" class="form-control" id="mesa_id" name="mesa_id" value="{{ $mesa->id }}">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-success">Adicionar Produto</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Script para Filtrar Produtos por Categoria -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#categoria').change(function() {
-            var categoria_selecionada = $(this).val();
-
-            // Mostrar todos os produtos e depois filtrar pela categoria selecionada
-            $('#produto option').hide();
-
-            if (categoria_selecionada) {
-                $('.categoria-' + categoria_selecionada).show();
-            } else {
-                $('#produto option').show();
-            }
-        });
-    });
-</script>
-
-
-
- --}}
 
 
 
 
+ <link rel="stylesheet" href="{{ asset('../assets/css/mesaadicionar.css') }}">
 
 
-<!-- Modal para Adicionar Produtos -->
+
 <!-- Modal para Adicionar Produtos -->
 <div class="modal fade" id="AdicionarProduto{{ $mesa->id }}" tabindex="-1" role="dialog"
     aria-labelledby="modalAdicionarProdutoLabel" aria-hidden="true">
@@ -144,46 +31,64 @@
                 </div>
 
                 <!-- Listagem de Produtos -->
-                <div class="row" id="listaProdutos">
+<div class="row" id="listaProdutos">
+    @php
+        // Agrupar os produtos por categoria
+        $categorias = [];
+        foreach ($cardapio as $item) {
+            $categorias[$item->categoriaProduto][] = $item;
+        }
 
-                    @foreach ($cardapio as $item)
-                        @php
-                            $cor = '';
-                            switch ($item->categoriaProduto) {
-                                case 'comida':
-                                    $cor = '#A9ED4A';
-                                    break;
-                                case 'massa':
-                                    $cor = '#dbd70096';
-                                    break;
-                                case 'bebida':
-                                    $cor = '#009ddb96';
-                                    break;
-                                case 'sobremesa':
-                                    $cor = '#db000096';
-                                    break;
-                                default:
-                                    $cor = 'rgba(0, 0, 0, 0.5)'; // Preto como padrão
-                            }
-                        @endphp
-                        <div class="col-md-4 mb-3 produto-card categoria-{{ strtolower($item->categoriaProduto) }}">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $item->nomeProduto }}</h5>
-                                    <p class="card-text">{{ $item->descricao }}</p>
-                                    <p class="card-text">R$ {{ $item->valorProduto }}</p>
-                                    <div class="form-group">
-                                        <label for="quantidade{{ $item->idProduto }}">Quantidade:</label>
-                                        <input type="number" class="form-control" id="quantidade{{ $item->idProduto }}"
-                                            min="1" value="1">
-                                    </div>
-                                    <button type="button" class="btn  btn-block" style="background-color: {{ $cor }}; color: white;"
-                                        onclick="adicionarProduto({{ $item->idProduto }}, '{{ $item->nomeProduto }}', {{ $item->valorProduto }})">Adicionar</button>
-                                </div>
+        // Definir a ordem de exibição das categorias
+        $ordemCategorias = ['comida', 'massa', 'bebida', 'sobremesa'];
+    @endphp
+
+    <!-- Exibir produtos na ordem desejada -->
+    @foreach ($ordemCategorias as $categoria)
+        @if (isset($categorias[$categoria]))
+            @foreach ($categorias[$categoria] as $produto)
+                @php
+                    // Definir a cor do botão com base na categoria
+                    switch ($categoria) {
+                        case 'comida':
+                            $cor = '#A9ED4A';
+                            break;
+                        case 'massa':
+                            $cor = '#dbd70096';
+                            break;
+                        case 'bebida':
+                            $cor = '#009ddb96';
+                            break;
+                        case 'sobremesa':
+                            $cor = '#db000096';
+                            break;
+                        default:
+                            $cor = 'rgba(0, 0, 0, 0.5)'; // Preto como padrão
+                    }
+                @endphp
+                <div class="col-md-3 mb-3 produto-card categoria-{{ strtolower($categoria) }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $produto->nomeProduto }}</h5>
+                            <img src="{{ asset('../assets/images/cardapio/'. $produto['fotoProduto']) }}" style="border: 4px solid{{ $cor }}; width: 130px; height: 130px; border-radius: 50%; margin-bottom: 20px; " >
+                            <p class="card-text">{{ $produto->descricaoProduto }}</p>
+                            <p class="card-text" style="text-align: center; font-weight: bold; color: black;">R$ {{ $produto->valorProduto }}</p>
+                            <div class="form-group2">
+                                <label for="quantidade{{ $produto->idProduto }}">Quantidade:</label>
+                                <input type="number" class="form-control2"
+                                       id="quantidade{{ $produto->idProduto }}" min="1" value="1">
                             </div>
+                            <button type="button" class="btn btn-block"
+                                    style="background-color: {{ $cor }}; color: white;"
+                                    onclick="adicionarProduto({{ $produto->idProduto }}, '{{ $produto->nomeProduto }}', {{ $produto->valorProduto }})">Adicionar</button>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
+            @endforeach
+        @endif
+    @endforeach
+</div>
+
 
                 <!-- Formulário para Submissão -->
                 <form id="formAdicionarProdutos" action="{{ route('mesa.adicionar', ['id' => $mesa->id]) }}"
@@ -201,7 +106,7 @@
 
                     <div class="modal-footer">
                         <div class="col">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                         </div>
                         <button type="submit" class="btn btn-success">Adicionar à Mesa</button>
                     </div>
@@ -210,6 +115,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Script para Filtrar Produtos por Categoria -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

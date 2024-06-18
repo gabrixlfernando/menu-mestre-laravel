@@ -147,10 +147,14 @@ class AdministrativoController extends Controller
 
 
 
+
+
         // return view('dashboard.administrativo.cardapio', compact('funcionario'), ['cardapio' => $cardapio]);
 
         return view('dashboard.administrativo.cardapio', compact('funcionario', 'cardapio'));
     }
+
+
 
     public function desativarProduto($idProduto)
     {
@@ -691,6 +695,9 @@ class AdministrativoController extends Controller
 
         return redirect()->back()->with('success', 'Produtos adicionados à mesa com sucesso.');
     }
+
+
+
 
 
 

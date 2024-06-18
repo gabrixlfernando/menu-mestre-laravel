@@ -19,7 +19,7 @@ class UserlsFuncionario
     {
         $user = Auth::user();
 
-        if ($user && $user->tipo_usuario_type === 'Aluno'){
+        if ($user && $user->tipo_usuario_type === 'funcionario'){
             return $next($request);
         }
 

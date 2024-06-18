@@ -32,7 +32,7 @@
                         <p>Total com Taxa Garçom: R$ <span
                                 id="total-com-taxa">{{ number_format($totalComTaxaGarcom, 2, ',', '.') }}</span></p>
                     @endif
-                    <div class="form-group">
+                    <div class="form-group" style="display: block">
                         <label for="valor_dado_cliente">Valor Dado pelo Cliente:</label>
                         <input type="number" class="form-control" id="valor_dado_cliente" name="valor_dado_cliente"
                             min="{{ $mesa->preco }}" step="0.01">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="display: block;">
                         <label for="pagar-taxa">Deseja pagar a taxa de serviço de 10%?</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="pagar-taxa" name="pagar_taxa" checked>
