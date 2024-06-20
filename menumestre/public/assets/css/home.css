@@ -82,7 +82,7 @@ main{
     padding: 5px 15px;
     max-height: 330px;
     /* 200 */
-    min-height: 330px;
+    min-height: 265px;
     /* 200 */
     box-shadow: var(--shadow-card);
     width: calc(50% - 7.5px);

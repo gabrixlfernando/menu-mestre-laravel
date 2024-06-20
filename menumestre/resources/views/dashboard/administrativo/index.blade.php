@@ -4,6 +4,22 @@
 
 @section('conteudo')
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .grafico-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        #ganhosGrafico {
+            max-width: 100%;
+            height: 400px;
+        }
+    </style>
+
 
     <div class="home-container">
         <!-- Container das estatísticas -->
@@ -49,22 +65,16 @@
                     </div>
                 </div>
                 <!-- Estatísticas de vendas -->
-                <div class="estatisticas">
-                    <div class="estatisticas-info">
+                <div class="estatisticas" style="flex-direction: column; justify-content: center;">
+                        <div>
+                            <canvas id="graficoVendas" ></canvas>
+                        </div>
+                        
 
-                         <p>R$ {{$totalComandasPorDia}} DIA</p>
-                         <p>R$ {{$totalComandasPorSemana}} SEMANA</p>
-                         <p>R$ {{$totalComandasPorMes}} MES</p>
-                         <p>R$ {{$totalComandasPorAno}} ANO</p>
+                        <span style="font-size: 1.3rem;
+                        color: var(--fundo); ">Vendas Totais</span>
+                        <p style=" font-size: 1rem; color: var(--gray); font-weight: 400;">Vendas totais realizadas.</p>
 
-                         <h4>R$ {{$totalComandas}}</h4>
-
-                        <span>Vendas Totais</span>
-                        <p>Vendas totais realizadas.</p>
-                    </div>
-                    <div class="estatisticas-icon" style="background-color: rgba(61, 236, 38, 0.568);">
-                        <i class="ri-money-dollar-circle-fill" style="color: rgb(61, 236, 38);"></i>
-                    </div>
                 </div>
                 <!-- Estatísticas de mesas -->
                 <div class="estatisticas">
@@ -106,35 +116,36 @@
                     @php
                         $detalhe_produto = \App\Models\Cardapio::find($produto->produto_id);
                     @endphp
-                     @if ($detalhe_produto)
-                    {{-- Determinar a cor com base na categoria --}}
-                    @php
-                        $cor = '';
-                        switch ($detalhe_produto['categoriaProduto']) {
-                            case 'comida':
-                                $cor = '#A9ED4A';
-                                break;
-                            case 'massa':
-                                $cor = '#dbd70096';
-                                break;
-                            case 'bebida':
-                                $cor = '#009ddb96';
-                                break;
-                            case 'sobremesa':
-                                $cor = '#db000096';
-                                break;
-                            default:
-                                $cor = 'rgba(0, 0, 0, 0.5)'; // Preto como padrão
-                        }
-                    @endphp
+                    @if ($detalhe_produto)
+                        {{-- Determinar a cor com base na categoria --}}
+                        @php
+                            $cor = '';
+                            switch ($detalhe_produto['categoriaProduto']) {
+                                case 'comida':
+                                    $cor = '#A9ED4A';
+                                    break;
+                                case 'massa':
+                                    $cor = '#dbd70096';
+                                    break;
+                                case 'bebida':
+                                    $cor = '#009ddb96';
+                                    break;
+                                case 'sobremesa':
+                                    $cor = '#db000096';
+                                    break;
+                                default:
+                                    $cor = 'rgba(0, 0, 0, 0.5)'; // Preto como padrão
+                            }
+                        @endphp
 
-                    {{-- Consultar o detalhe do produto a partir do modelo Cardapio --}}
+                        {{-- Consultar o detalhe do produto a partir do modelo Cardapio --}}
 
-                    {{-- Verificar se o produto foi encontrado --}}
+                        {{-- Verificar se o produto foi encontrado --}}
 
                         <div class="pratos-elemento">
                             <div>
-                                <img class="categoria-{{ $detalhe_produto['categoriaProduto'] }}" style="border: 4px solid {{ $cor }};"
+                                <img class="categoria-{{ $detalhe_produto['categoriaProduto'] }}"
+                                    style="border: 4px solid {{ $cor }};"
                                     src="{{ asset('../assets/images/cardapio/' . $detalhe_produto['fotoProduto']) }}"
                                     alt="teste">
                             </div>
@@ -146,7 +157,9 @@
 
 
                             <div class="pratos-elemento-price">
-                                <p class="card-new-item categoria-{{ $detalhe_produto['categoriaProduto'] }}" style="background-color:{{ $cor }};">{{ ucwords($detalhe_produto->categoriaProduto) }}</p>
+                                <p class="card-new-item categoria-{{ $detalhe_produto['categoriaProduto'] }}"
+                                    style="background-color:{{ $cor }};">
+                                    {{ ucwords($detalhe_produto->categoriaProduto) }}</p>
                             </div>
 
 
@@ -161,6 +174,49 @@
         </div>
 
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('graficoVendas').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Diário', 'Semanal', 'Mensal', 'Anual'],
+                    datasets: [{
+                        label: 'Relatório de Vendas',
+                        data: [
+                            {{ $totalComandasPorDia }},     // Substitua pelos valores corretos do backend
+                            {{ $totalComandasPorSemana }},  // Substitua pelos valores corretos do backend
+                            {{ $totalComandasPorMes }},     // Substitua pelos valores corretos do backend
+                            {{ $totalComandasPorAno }}      // Substitua pelos valores corretos do backend
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        </script>
 
 
 @endsection

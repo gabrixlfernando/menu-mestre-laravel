@@ -73,7 +73,7 @@ class AdministrativoController extends Controller
         $produtos_mais_pedidos = Pedido::select('produto_id', DB::raw('SUM(quantidade) as total_pedidos'))
             ->groupBy('produto_id')
             ->orderByDesc('total_pedidos')
-            ->take(8)
+            ->take(7)
             ->get();
 
         // Verificar se há produtos mais pedidos
@@ -695,6 +695,7 @@ class AdministrativoController extends Controller
 
         return redirect()->back()->with('success', 'Produtos adicionados à mesa com sucesso.');
     }
+
 
 
 
