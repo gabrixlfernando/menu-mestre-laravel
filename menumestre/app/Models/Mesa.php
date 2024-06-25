@@ -14,4 +14,9 @@ class Mesa extends Model
     protected $fillable = [
         'numero_mesa', 'capacidade', 'status','pessoas_sentadas'
     ];
+
+    public function comandas()
+{
+    return $this->hasMany(Comanda::class, 'mesa_id', 'id');
+}
 }

@@ -22,6 +22,8 @@ class Comanda extends Model
         return $this->hasMany(Pedido::class);
     }
 
-
-
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class, 'funcionario_id', 'idFuncionario');
+    }
 }

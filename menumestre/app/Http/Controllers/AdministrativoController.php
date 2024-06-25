@@ -625,6 +625,7 @@ class AdministrativoController extends Controller
                 session()->put('mesa_' . $id, ['produtos' => []]);
                 $comanda = new Comanda();
                 $comanda->mesa_id = $id;
+                $comanda->funcionario_id = $idFuncionario;
                 $comanda->status = 'aberta';
                 $comanda->save();
             }
@@ -746,28 +747,35 @@ class AdministrativoController extends Controller
 
             // Calcular o total com ou sem taxa de serviço
             if ($pagarTaxa) {
-                $totalComTaxa = $totalMesa * 1.1; // Adiciona 10% de taxa de serviço
+                $valorTaxa = $totalMesa * 0.1; // Calcula 10% da taxa de serviço
+                $totalComTaxa = $totalMesa + $valorTaxa; // Adiciona taxa de serviço ao total
             } else {
-                $totalComTaxa = $totalMesa; // Sem taxa de serviço
+                $valorTaxa = 0.00; // Sem taxa de serviço
+                $totalComTaxa = $totalMesa; // Total sem taxa de serviço
             }
 
-            // Gravar os produtos na tabela de pedidos
-            foreach ($produtosMesa as $pedido) {
-                Pedido::create([
-                    'mesa_id' => $id,
-                    'produto_id' => $pedido['produto']->idProduto,
-                    'quantidade' => $pedido['quantidade'],
-                    'preco_unitario' => $pedido['preco_unitario'],
-                    'total_item' => $pedido['total_item'],
-                ]);
-            }
-
-            // Atualizar o status da comanda para "fechada" e salvar o total da mesa
+            // Atualizar o status da comanda para "fechada" e salvar o total e a taxa da mesa
             $comanda = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
             if ($comanda) {
+                // Registrar o funcionário que fechou a comanda
+                $idFuncionario = session('id');
                 $comanda->status = 'fechada';
                 $comanda->total = $totalComTaxa; // Atualiza o total da comanda com ou sem a taxa de serviço
+                $comanda->valorTaxa = $valorTaxa; // Armazena o valor da taxa de serviço
+                $comanda->funcionario_id = $idFuncionario; // Associar o fechamento ao funcionário atual
                 $comanda->save();
+
+                // Gravar os produtos na tabela de pedidos, associando ao funcionário da comanda
+                foreach ($produtosMesa as $pedido) {
+                    Pedido::create([
+                        'mesa_id' => $id,
+                        'produto_id' => $pedido['produto']->idProduto,
+                        'quantidade' => $pedido['quantidade'],
+                        'preco_unitario' => $pedido['preco_unitario'],
+                        'total_item' => $pedido['total_item'],
+                        'comanda_id' => $comanda->id, // Associar o pedido à comanda fechada
+                    ]);
+                }
             }
 
             // Limpar a sessão

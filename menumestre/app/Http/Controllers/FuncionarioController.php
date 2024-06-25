@@ -41,6 +41,50 @@ class FuncionarioController extends Controller
         return response()->json($funcionario);
     }
 
+    public function dadosVendas($id)
+    {
+        $funcionario = Funcionario::findOrFail($id);
+
+        // Definindo o período mensal (mês atual)
+        $inicioMes = now()->startOfMonth();
+        $fimMes = now()->endOfMonth();
+
+        // Total faturado com as vendas (valorTaxa) no mês atual
+        $totalFaturado = $funcionario->comandas()
+                                     ->whereBetween('created_at', [$inicioMes, $fimMes])
+                                     ->sum('valorTaxa');
+
+        // Total vendido em comandas com valorTaxa maior que zero no mês atual
+        $totalVendido = $funcionario->comandas()
+                                    ->where('valorTaxa', '>', 0)
+                                    ->whereBetween('created_at', [$inicioMes, $fimMes])
+                                    ->sum('total');
+
+        // Contar o número de pedidos realizados pelo funcionário no mês atual
+        $numPedidos = $funcionario->pedidos()
+                                  ->whereBetween('created_at', [$inicioMes, $fimMes])
+                                  ->count();
+
+        // Contar o número de mesas atendidas pelo funcionário no mês atual
+        $numMesasAtendidas = $funcionario->comandas()
+                                         ->whereBetween('created_at', [$inicioMes, $fimMes])
+                                         ->distinct('mesa_id')
+                                         ->count('mesa_id');
+
+        return response()->json([
+            'funcionario' => [
+                'id' => $funcionario->idFuncionario,
+                'nome' => $funcionario->nomeFuncionario,
+                'email' => $funcionario->email,
+                'totalFaturado' => $totalFaturado,
+                'totalVendido' => $totalVendido,
+                'numPedidos' => $numPedidos,
+                'numMesasAtendidas' => $numMesasAtendidas,
+            ]
+        ]);
+    }
+
+
     public function createFuncionario(Request $request)
     {
         $request->merge([

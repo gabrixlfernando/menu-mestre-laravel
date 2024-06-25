@@ -31,7 +31,18 @@ class Funcionario extends Model
     ];
     public $timestamps = false;
 
-    public function usuario(){
+    public function usuario()
+    {
         return $this->morphOne(Usuario::class, 'tipo_usuario'); //morphOne permite fazer uma relação com outra tabela em especifico
     }
+
+    public function comandas()
+    {
+        return $this->hasMany(Comanda::class, 'funcionario_id', 'idFuncionario');
+    }
+     // Método para acessar os pedidos através das comandas do funcionário
+   public function pedidos()
+   {
+       return Pedido::whereIn('comanda_id', $this->comandas()->pluck('id'))->get();
+   }
 }

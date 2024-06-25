@@ -23,4 +23,9 @@ class Pedido extends Model
         return $this->belongsTo(Cardapio::class, 'produto_id', 'idProduto');
     }
 
+    public function comanda()
+    {
+        return $this->belongsTo(Comanda::class, 'comanda_id', 'id');
+    }
+
 }

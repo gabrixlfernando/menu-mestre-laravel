@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum', 'funcionario')->group(function ()
     // Funcionario
     Route::get('/funcionario', [FuncionarioController::class, 'index']);
     Route::get('/funcionario/{id}', [FuncionarioController::class, 'show']);
+    Route::get('/funcionario/vendas/{id}', [FuncionarioController::class, 'dadosVendas']);
     Route::post('/funcionario', [FuncionarioController::class, 'createFuncionario']);
     //atualizar
     Route::post('/funcionario/{idFuncionario}', [FuncionarioController::class, 'store']);
