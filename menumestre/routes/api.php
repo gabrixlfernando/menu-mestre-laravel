@@ -27,8 +27,7 @@ Route::post('login', [FuncionarioController::class, 'login']);
 
 // Route::prefix('adm')->group(function ()
 
-Route::middleware('auth:sanctum', 'funcionario')->group(function ()
-{
+Route::middleware('auth:sanctum', 'funcionario')->group(function () {
     // Cardapio
     Route::get('/cardapio', [CardapioController::class, 'index']);
     Route::get('/cardapio/{id}', [CardapioController::class, 'show']);
@@ -44,7 +43,11 @@ Route::middleware('auth:sanctum', 'funcionario')->group(function ()
     Route::post('/mesa', [MesaController::class, 'createMesa']);
     Route::put('/mesa/{id}/desativar', [MesaController::class, 'desativarMesa']);
     Route::put('/mesa/{id}/ativar', [MesaController::class, 'ativarMesa']);
-   //atualizar
+    // Rotas para Gerenciamento de Produtos nas Mesas
+    Route::post('/mesa/{id}/produtos', [MesaController::class, 'adicionarProduto']); // Adiciona produtos a uma mesa específica
+    Route::post('/mesa/{id}/remover-produto', [MesaController::class, 'removerProduto']); // Remove um produto específico de uma mesa
+    Route::post('/mesa/{id}/fechar', [MesaController::class, 'fecharMesa']); // Fecha uma mesa específica
+    //atualizar
     Route::post('/mesa/{id}', [MesaController::class, 'store']);
 
     // Funcionario

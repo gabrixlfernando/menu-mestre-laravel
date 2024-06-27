@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cardapio;
+use App\Models\Comanda;
 use App\Models\Mesa;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,14 +17,142 @@ class MesaController extends Controller
         return response()->json($mesas);
     }
 
-    public function show($id)
+     // Retorna uma mesa específica e seus produtos
+     public function show($id)
+     {
+         $mesa = Mesa::findOrFail($id);
+         $produtosMesa = session()->get('mesa_' . $id . '.produtos', []);
+
+         return response()->json([
+             'mesa' => $mesa,
+             'produtos' => $produtosMesa
+         ]);
+     }
+
+     // Adiciona produtos a uma mesa
+    public function adicionarProduto(Request $request, $id)
     {
-        $mesa = Mesa::find($id);
-        if (!$mesa) {
-            return response()->json(['error' => 'Mesa não encontrada'], 404);
+        $mesa_session_key = 'mesa_' . $id;
+
+        // Processar múltiplos produtos
+        $produtosParaAdicionar = $request->input('produtos', []);
+
+        foreach ($produtosParaAdicionar as $produto) {
+            $produto_id = $produto['id'];
+            $quantidade = $produto['quantidade'];
+
+            $produtoInfo = Cardapio::findOrFail($produto_id);
+            $pedido = [
+                'produto' => $produtoInfo,
+                'quantidade' => $quantidade,
+                'preco_unitario' => $produtoInfo->valorProduto,
+                'total_item' => $produtoInfo->valorProduto * $quantidade,
+            ];
+
+            $produtos = session()->get($mesa_session_key . '.produtos', []);
+            $produtos[] = $pedido;
+            session()->put($mesa_session_key . '.produtos', $produtos);
         }
-        return response()->json($mesa);
+
+        return response()->json(['message' => 'Produtos adicionados à mesa com sucesso.']);
     }
+
+    // Remove um produto de uma mesa
+    public function removerProduto(Request $request, $id)
+    {
+        $mesaId = $id;
+        $index = $request->input('index');
+
+        // Chave da sessão associada à mesa
+        $mesa_session_key = 'mesa_' . $mesaId;
+
+        // Recupere os produtos da sessão
+        $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+
+        // Verifique se o índice é válido
+        if (isset($produtosMesa[$index])) {
+            // Remova o produto do array
+            unset($produtosMesa[$index]);
+
+            // Reindexa o array para manter a consistência
+            $produtosMesa = array_values($produtosMesa);
+
+            // Atualize a sessão com os produtos atualizados
+            session()->put($mesa_session_key . '.produtos', $produtosMesa);
+
+            // Retorne uma resposta de sucesso com os produtos atualizados
+            return response()->json([
+                'success' => true,
+                'message' => 'Produto removido com sucesso.',
+                'produtos_atualizados' => $produtosMesa
+            ]);
+        } else {
+            // Retorne uma resposta de erro se o índice não for válido
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocorreu um erro ao tentar remover o produto. Índice inválido.'
+            ]);
+        }
+    }
+
+
+    // Fecha a mesa
+    public function fecharMesa(Request $request, $id)
+    {
+        $mesa_session_key = 'mesa_' . $id;
+
+        if (session()->has($mesa_session_key)) {
+            $produtosMesa = session()->get($mesa_session_key . '.produtos', []);
+            $totalMesa = 0;
+
+            foreach ($produtosMesa as $pedido) {
+                $totalMesa += $pedido['total_item'];
+            }
+
+            $pagarTaxa = $request->input('pagar_taxa', false);
+
+            $valorTaxa = $pagarTaxa ? $totalMesa * 0.1 : 0.00;
+            $totalComTaxa = $totalMesa + $valorTaxa;
+
+            $comanda = Comanda::where('mesa_id', $id)->where('status', 'aberta')->first();
+
+            if ($comanda) {
+                $idFuncionario = session('id');
+                $comanda->status = 'fechada';
+                $comanda->total = $totalComTaxa;
+                $comanda->valorTaxa = $valorTaxa;
+                $comanda->funcionario_id = $idFuncionario;
+                $comanda->save();
+
+                foreach ($produtosMesa as $pedido) {
+                    Pedido::create([
+                        'mesa_id' => $id,
+                        'produto_id' => $pedido['produto']->idProduto,
+                        'quantidade' => $pedido['quantidade'],
+                        'preco_unitario' => $pedido['preco_unitario'],
+                        'total_item' => $pedido['total_item'],
+                        'comanda_id' => $comanda->id,
+                    ]);
+                }
+            }
+
+            session()->forget($mesa_session_key);
+        }
+
+        $mesa = Mesa::findOrFail($id);
+        $mesa->update(['status' => 'disponivel', 'pessoas_sentadas' => 0]);
+
+        return response()->json(['message' => 'Mesa fechada com sucesso.']);
+    }
+
+    // public function show($id)
+    // {
+    //     $mesa = Mesa::find($id);
+    //     if (!$mesa) {
+    //         return response()->json(['error' => 'Mesa não encontrada'], 404);
+    //     }
+    //     return response()->json($mesa);
+    // }
 
     public function createMesa(Request $request)
     {
