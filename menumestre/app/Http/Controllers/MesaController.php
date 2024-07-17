@@ -7,6 +7,7 @@ use App\Models\Comanda;
 use App\Models\Mesa;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class MesaController extends Controller
@@ -23,39 +24,48 @@ class MesaController extends Controller
          $mesa = Mesa::findOrFail($id);
          $produtosMesa = session()->get('mesa_' . $id . '.produtos', []);
 
+         // Log para verificar os dados da mesa e produtos
+         Log::info('Dados da mesa e produtos:', ['mesa' => $mesa, 'produtos' => $produtosMesa]);
+
          return response()->json([
              'mesa' => $mesa,
              'produtos' => $produtosMesa
          ]);
      }
 
+
      // Adiciona produtos a uma mesa
-    public function adicionarProduto(Request $request, $id)
-    {
-        $mesa_session_key = 'mesa_' . $id;
+     public function adicionarProduto(Request $request, $id)
+     {
+         $mesa_session_key = 'mesa_' . $id;
 
-        // Processar múltiplos produtos
-        $produtosParaAdicionar = $request->input('produtos', []);
+         // Processar múltiplos produtos
+         $produtosParaAdicionar = $request->input('produtos', []);
 
-        foreach ($produtosParaAdicionar as $produto) {
-            $produto_id = $produto['id'];
-            $quantidade = $produto['quantidade'];
+         foreach ($produtosParaAdicionar as $produto) {
+             $produto_id = $produto['id'];
+             $quantidade = $produto['quantidade'];
 
-            $produtoInfo = Cardapio::findOrFail($produto_id);
-            $pedido = [
-                'produto' => $produtoInfo,
-                'quantidade' => $quantidade,
-                'preco_unitario' => $produtoInfo->valorProduto,
-                'total_item' => $produtoInfo->valorProduto * $quantidade,
-            ];
+             $produtoInfo = Cardapio::findOrFail($produto_id);
+             $pedido = [
+                 'produto' => $produtoInfo,
+                 'quantidade' => $quantidade,
+                 'preco_unitario' => $produtoInfo->valorProduto,
+                 'total_item' => $produtoInfo->valorProduto * $quantidade,
+             ];
 
-            $produtos = session()->get($mesa_session_key . '.produtos', []);
-            $produtos[] = $pedido;
-            session()->put($mesa_session_key . '.produtos', $produtos);
-        }
+             $produtos = session()->get($mesa_session_key . '.produtos', []);
+             $produtos[] = $pedido;
+             session()->put($mesa_session_key . '.produtos', $produtos);
 
-        return response()->json(['message' => 'Produtos adicionados à mesa com sucesso.']);
-    }
+             // Adicione um log para verificar o conteúdo da sessão
+             Log::info("Produtos na sessão após adição:", $produtos);
+         }
+
+         return response()->json(['message' => 'Produtos adicionados à mesa com sucesso.']);
+     }
+
+
 
     // Remove um produto de uma mesa
     public function removerProduto(Request $request, $id)
@@ -219,7 +229,7 @@ class MesaController extends Controller
         }
     }
 
-    public function store(Request $request, $id)
+    public function updateMesa(Request $request, $id)
     {
         // Validação dos dados recebidos
         $validator = Validator::make($request->all(), [
@@ -227,9 +237,12 @@ class MesaController extends Controller
             'pessoas_sentadas' => 'required_if:status,ocupada|integer|min:0',
         ]);
 
-        // Se a validação falhar, retorne a mensagem de erro
+        // Se a validação falhar, retorne a mensagem de erro detalhada
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
+            return response()->json([
+                'error' => $validator->errors(),
+                'input' => $request->all()
+            ], 400);
         }
 
         // Encontre a mesa pelo ID
@@ -247,7 +260,7 @@ class MesaController extends Controller
         if ($mesa->status === 'disponivel') {
             $mesa->pessoas_sentadas = 0;
         } else {
-            $mesa->pessoas_sentadas = $request->input('pessoas_sentadas');
+            $mesa->pessoas_sentadas = $request->input('pessoas_sentadas', 0); // Valor padrão 0 se não for fornecido
         }
 
         // Salve as alterações no banco de dados
@@ -256,4 +269,6 @@ class MesaController extends Controller
         // Retorne os dados da mesa atualizados em formato JSON
         return response()->json(['message' => 'Mesa atualizada com sucesso', 'mesa' => $mesa], 200);
     }
+
+
 }

@@ -867,7 +867,7 @@ class AdministrativoController extends Controller
         // Recuperando o total de funcionários
         $totalFuncionarios = Funcionario::count();
 
-        $totalPratos = Cardapio::count();
+        $totalPratos = Cardapio::where('statusProduto', 'ativo')->count();
 
         $totalMensagens = Contato::count();
 

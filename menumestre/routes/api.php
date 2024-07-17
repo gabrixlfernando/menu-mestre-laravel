@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum', 'funcionario')->group(function () {
     Route::post('/mesa/{id}/remover-produto', [MesaController::class, 'removerProduto']); // Remove um produto específico de uma mesa
     Route::post('/mesa/{id}/fechar', [MesaController::class, 'fecharMesa']); // Fecha uma mesa específica
     //atualizar
-    Route::post('/mesa/{id}', [MesaController::class, 'store']);
+    Route::put('/mesa/{id}', [MesaController::class, 'updateMesa']);
 
     // Funcionario
     Route::get('/funcionario', [FuncionarioController::class, 'index']);

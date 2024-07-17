@@ -34,14 +34,7 @@ $(document).ready(function() {
     $('select').niceSelect();
   });
 
-/** google_map js **/
-function myMap() {
-    var mapProp = {
-        center: new google.maps.LatLng(40.712775, -74.005973),
-        zoom: 18,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-}
+
 
 // client section owl carousel
 $(".client_owl-carousel").owlCarousel({
@@ -91,19 +84,18 @@ function displayError(erros) {
     }
 }
 
-
-function formContato(e){
+function formContato(e) {
     e.preventDefault();
     e.stopPropagation();
 
-     // Validar os campos do formulário
-     var nomeContato = document.getElementById('nomeContato').value.trim();
-     var emailContato = document.getElementById('emailContato').value.trim();
-     var foneContato = document.getElementById('foneContato').value.trim();
-     var assuntoContato = document.getElementById('assuntoContato').value.trim();
-     var mensContato = document.getElementById('mensContato').value.trim();
+    // Validar os campos do formulário
+    var nomeContato = document.getElementById('nomeContato').value.trim();
+    var emailContato = document.getElementById('emailContato').value.trim();
+    var foneContato = document.getElementById('foneContato').value.trim();
+    var assuntoContato = document.getElementById('assuntoContato').value.trim();
+    var mensContato = document.getElementById('mensContato').value.trim();
 
-     var camposVazios = [];
+    var camposVazios = [];
 
     if (!nomeContato) {
         camposVazios.push("Nome");
@@ -126,19 +118,18 @@ function formContato(e){
         return; // Impede o envio do formulário se algum campo estiver vazio
     }
 
-
     var data = {
-        nomeContato : document.getElementById('nomeContato').value,
-        emailContato : document.getElementById('emailContato').value,
-        foneContato : document.getElementById('foneContato').value,
-        assuntoContato : document.getElementById('assuntoContato').value,
-        mensContato : document.getElementById('mensContato').value
+        nomeContato: nomeContato,
+        emailContato: emailContato,
+        foneContato: foneContato,
+        assuntoContato: assuntoContato,
+        mensContato: mensContato
     };
 
+    var formSection = document.getElementById('contato');
+    var contatoUrl = formSection.getAttribute('data-contato-url');
 
-
-
-    fetch('/', {
+    fetch(contatoUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -158,10 +149,10 @@ function formContato(e){
         if (data.success) {
             showAlert(
                 `<div class="alert alert-success">${data.success}</div>`,
-                 "contatoMensagem"
+                "contatoMensagem"
             );
             document.getElementById('formContato').reset();
-        } else{
+        } else {
             showAlert(
                 `<div class="alert alert-danger">Erro ao enviar email.</div>`,
                 "contatoMensagem"
@@ -177,6 +168,9 @@ function formContato(e){
         } else if (error.message) {
             // Se houver uma mensagem de erro geral, exiba essa mensagem
             errorMessage = error.message;
+        } else if (typeof error === 'object') {
+            // Exibir detalhes do erro caso seja um objeto
+            errorMessage = JSON.stringify(error);
         }
 
         showAlert(
@@ -185,6 +179,9 @@ function formContato(e){
         );
     });
 }
+
+
+
 
 
 $(document).ready(function() {

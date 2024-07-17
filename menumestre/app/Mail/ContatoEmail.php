@@ -23,7 +23,7 @@ class ContatoEmail extends Mailable
     }
 
     public function build(){
-        return $this->from('webdequebrada@smpsistema.com.br')
+        return $this->from('cybercompany@smpsistema.com.br')
         ->subject("Contato via site")
         ->view('site.mail.contato');
     }

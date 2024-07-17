@@ -7,7 +7,7 @@
 
 
 
-    <section id="our_menu" class="pt-5 pb-5">
+    <section id="our_menu" class="pt-5 pb-5 menu">
         <div class="container" id="menu">
             <div class="row">
                 <div class="col-lg-12">
@@ -52,7 +52,7 @@
                                             <img src="{{ asset('../assets/images/cardapio/' . $prato['fotoProduto']) }}"
                                                 alt="burger">
                                             <div class="menu_content">
-                                                <h4>{{ $prato['nomeProduto'] }} <span style="font-weight: 400;">{{ $prato['valorProduto'] }}</span>
+                                                <h4>{{ $prato['nomeProduto'] }} <span>{{ $prato['valorProduto'] }}</span>
                                                 </h4>
                                                 <p>{{ $prato['descricaoProduto'] }}</p>
                                             </div>
@@ -78,7 +78,7 @@
                                             <img src="{{ asset('../assets/images/cardapio/' . $massa['fotoProduto']) }}"
                                                 alt="massa">
                                             <div class="menu_content">
-                                                <h4>{{ $massa['nomeProduto'] }} <span>R${{ $massa['valorProduto'] }}</span>
+                                                <h4>{{ $massa['nomeProduto'] }} <span>{{ $massa['valorProduto'] }}</span>
                                                 </h4>
                                                 <p>{{ $massa['descricaoProduto'] }}</p>
                                             </div>
@@ -105,7 +105,7 @@
                                                 alt="bebida">
                                             <div class="menu_content">
                                                 <h4>{{ $bebida['nomeProduto'] }}
-                                                    <span>R${{ $bebida['valorProduto'] }}</span></h4>
+                                                    <span>{{ $bebida['valorProduto'] }}</span></h4>
                                                 <p>{{ $bebida['descricaoProduto'] }}</p>
                                             </div>
                                         </div>
@@ -131,7 +131,7 @@
                                                 alt="sobremesa">
                                             <div class="menu_content">
                                                 <h4>{{ $sobremesa['nomeProduto'] }}
-                                                    <span>R${{ $sobremesa['valorProduto'] }}</span></h4>
+                                                    <span>{{ $sobremesa['valorProduto'] }}</span></h4>
                                                 <p>{{ $sobremesa['descricaoProduto'] }}</p>
                                             </div>
                                         </div>
@@ -179,71 +179,58 @@
     <!-- fim sobre section -->
 
     <!-- contato section -->
-    <section class="book_section layout_padding" id="contato">
-        <div class="container">
-            <div class="heading_container">
-                <h2>
-                    Entre Em Contato
-                </h2>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form_container">
-                        <form action="{{ route('contato.enviar') }}" method="POST" id="formContato">
-                            @csrf
-                            <div>
-                                <input type="text" name="nomeContato" id="nomeContato" class="form-control"
-                                    placeholder="Seu Nome" value="{{ old('nomeContato') }}">
-                                <div id="nomeContatoError" class="error-mensagem"></div>
-                            </div>
-                            <div>
-                                <input type="email" name="emailContato" id="emailContato" class="form-control"
-                                    placeholder="Seu Email" value="{{ old('emailContato') }}">
-                                <div id="emailContatoError" class="error-mensagem"></div>
-                            </div>
-                            <div>
-                                <input type="text" name="foneContato" id="foneContato" class="form-control"
-                                    placeholder="Telefone" value="{{ old('foneContato') }}">
-                            </div>
-
-                            {{-- opção de selecionar o tipo de assunto do contato --}}
-
-                            <div>
-                                <select name="assuntoContato" id="assuntoContato" class="form-control"
-                                    value="{{ old('assuntoContato') }}">
-                                    <option value="" disabled="" selected="" hidden="">Selecione o
-                                        assunto</option>
-                                    <option value="Feedback">Feedback</option>
-                                    <option value="Pedidos e consultas sobre o cardápio">Pedidos e consultas sobre o
-                                        cardápio</option>
-                                    <option value="Suporte ao cliente">Suporte ao cliente</option>
-                                    <option value="Trabalhe conosco">Trabalhe conosco</option>
-                                </select>
-                                <div id="assuntoContatoError" class="error-mensagem"></div>
-                            </div>
-                            <div>
-                                <textarea name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea"
-                                    placeholder="Digite a sua mensagem">{{ old('mensContato') }}</textarea>
-                                <div id="mensContatoError" class="error-mensagem"></div>
-                            </div>
-                            <div class="btn_box">
-                                <button type="submit" onclick="formContato(event)">Enviar via e-mail</button>
-                                <div id="contatoMensagem" class="msgContato"></div>
-                            </div>
-                        </form>
-                    </div>
+    <!-- contato section -->
+<section class="book_section layout_padding" id="contato" data-contato-url="{{ route('contato.enviar') }}">
+    <div class="container">
+        <div class="heading_container">
+            <h2>Entre Em Contato</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form method="POST" id="formContato">
+                        @csrf
+                        <div>
+                            <input type="text" name="nomeContato" id="nomeContato" class="form-control" placeholder="Seu Nome" value="{{ old('nomeContato') }}">
+                            <div id="nomeContatoError" class="error-mensagem"></div>
+                        </div>
+                        <div>
+                            <input type="email" name="emailContato" id="emailContato" class="form-control" placeholder="Seu Email" value="{{ old('emailContato') }}">
+                            <div id="emailContatoError" class="error-mensagem"></div>
+                        </div>
+                        <div>
+                            <input type="text" name="foneContato" id="foneContato" class="form-control" placeholder="Telefone" value="{{ old('foneContato') }}">
+                        </div>
+                        <div>
+                            <select name="assuntoContato" id="assuntoContato" class="form-control" value="{{ old('assuntoContato') }}">
+                                <option value="" disabled="" selected="" hidden="">Selecione o assunto</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Pedidos e consultas sobre o cardápio">Pedidos e consultas sobre o cardápio</option>
+                                <option value="Suporte ao cliente">Suporte ao cliente</option>
+                                <option value="Trabalhe conosco">Trabalhe conosco</option>
+                            </select>
+                            <div id="assuntoContatoError" class="error-mensagem"></div>
+                        </div>
+                        <div>
+                            <textarea name="mensContato" id="mensContato" cols="30" rows="10" class="form-control textarea" placeholder="Digite a sua mensagem">{{ old('mensContato') }}</textarea>
+                            <div id="mensContatoError" class="error-mensagem"></div>
+                        </div>
+                        <div class="btn_box">
+                            <button type="submit" onclick="formContato(event)">Enviar via e-mail</button>
+                            <div id="contatoMensagem" class="msgContato"></div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-6">
-                    <div class="map_container ">
-                        <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.0254648900777!2d-46.43443702376172!3d-23.49559225918106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce63dda7be6fb9%3A0xa74e7d5a53104311!2sSenac%20S%C3%A3o%20Miguel%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1718821879391!5m2!1spt-BR!2sbr"
-                        frameborder="0" style="border:0; width: 100%; height: 400px;"
-                        allowfullscreen></iframe>
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map_container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.0254648900777!2d-46.43443702376172!3d-23.49559225918106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce63dda7be6fb9%3A0xa74e7d5a53104311!2sSenac%20S%C3%A3o%20Miguel%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1718821879391!5m2!1spt-BR!2sbr" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     <!-- fim contato section -->
 
 

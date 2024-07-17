@@ -17,48 +17,31 @@ class HomeController extends Controller
     }
 
     public function salvarNoBanco(Request $request)
-    {
-        //dd($request->all());
-        // Extrai os dados JSON da requisição
-        $dados = $request->json()->all();
+{
+    $dados = $request->all();
 
+    $validarDados = Validator::make($dados, [
+        'nomeContato' => 'required|max:100',
+        'emailContato' => 'required|email|max:100',
+        'foneContato' => 'required|max:15',
+        'assuntoContato' => 'required|max:100',
+        'mensContato' => 'required',
+    ]);
 
-        // dd($request);
+    if ($validarDados->fails()) {
+        return response()->json(['erros' => $validarDados->errors()], 422);
+    } else {
+        $contato = Contato::create($validarDados->validated());
 
-
-        // Valida os dados recebidos
-        $validarDados = Validator::make($dados, [
-            'nomeContato'       => 'required|max:100',
-            'emailContato'      => 'required|email|max:100',
-            'foneContato'       => 'required|max:15',
-            'assuntoContato'    => 'required|max:100',
-            'mensContato'       => 'required',
-        ]);
-        // dd($dados);
-
-
-        // Verifica se houve falha na validação
-        if ($validarDados->fails()) {
-
-            return response()->json(['erros' => $validarDados->errors()], 422);
-        } else {
-            // Cria um novo registro de contato no banco de dados
-            $contato = Contato::create($validarDados->validated());
-
-            // Envia e-mail
-            try {
-                Mail::to('webdequebrada@smpsistema.com.br')->send(new ContatoEmail($contato));
-            } catch (\Exception $e) {
-                // Em caso de erro no envio do e-mail, retorna uma resposta de erro
-                return response()->json(['error' => 'Erro ao enviar e-mail.'], 500);
-            }
-
-            // Retorna uma resposta de sucesso
-            return response()->json(['success' => 'E-mail registrado com sucesso!']);
+        try {
+            Mail::to('cybercompany@smpsistema.com.br')->send(new ContatoEmail($contato));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao enviar e-mail: ' . $e->getMessage()], 500);
         }
+
+        return response()->json(['success' => 'E-mail registrado com sucesso!']);
     }
-
-
+}
     public function exibirCardapio()
     {
         // $cardapio = Cardapio::all();

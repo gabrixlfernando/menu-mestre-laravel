@@ -100,11 +100,7 @@
                                         Bem-vindo ao Menu Mestre
                                     </h1>
                                     <p style="font-size: 20px; font-weight: 300; line-height: 33px;">
-                                        Descubra uma experiência gastronômica única, onde cada prato é uma obra-prima.
-                                        Saboreie nossas delícias preparadas com os melhores ingredientes, cuidadosamente
-                                        selecionados para proporcionar uma explosão de sabores. Venha viver momentos
-                                        inesquecíveis e se encantar com o nosso menu especial, elaborado para
-                                        surpreender até os paladares mais exigentes.
+                                        Desfrute de uma experiência gastronômica única no Menu Mestre. Pratos feitos com os melhores ingredientes, preparados para surpreender seu paladar. Momentos inesquecíveis aguardam você.
                                     </p>
                                     <div class="btn-box">
                                         <a href="#menu" class="btn btn-primary">
@@ -240,9 +236,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
     <!-- custom js -->
     <script src="{{ asset('../assets/js/custom.js') }}"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-    </script>
-    <!-- End Google Map -->
 
 </body>
