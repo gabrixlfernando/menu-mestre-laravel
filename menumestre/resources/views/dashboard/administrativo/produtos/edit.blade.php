@@ -35,7 +35,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="descricaoProduto">Descrição do Produto:</label>
-                                            <textarea class="form-control" id="descricaoProduto" name="descricaoProduto" rows="4" maxlength="100" placeholder="Descrição do produto" required>{{ $item->descricaoProduto }}</textarea>
+                                            <textarea class="form-control" style="resize: none;" id="descricaoProduto" name="descricaoProduto" rows="4" maxlength="100" placeholder="Descrição do produto" required>{{ $item->descricaoProduto }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="altProduto">Descrição Alternativa do Produto:</label>
+                                            <textarea class="form-control" style="resize: none;" id="altProduto" name="altProduto" rows="2" maxlength="250" placeholder="Descrição alternativa do produto" required>{{ $item->altProduto }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="valorProduto">Preço do Produto:</label>
@@ -67,12 +71,10 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
             <!-- Botão de fechar o modal -->
-
         </div>
     </div>
 </div>

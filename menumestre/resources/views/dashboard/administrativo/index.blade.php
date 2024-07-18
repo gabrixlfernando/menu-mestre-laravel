@@ -69,7 +69,7 @@
                         <div>
                             <canvas id="graficoVendas" ></canvas>
                         </div>
-                        
+
 
                         <span style="font-size: 1.3rem;
                         color: var(--fundo); ">Vendas Totais</span>
@@ -88,7 +88,7 @@
                 </div>
                 <!-- Estatísticas de pratos -->
                 <div class="estatisticas">
-                    <img src="{{ asset('../assets//images/icones/burguer.png') }}" alt="">
+                    <img src="{{ asset('../assets//images/icones/cardapio1.png') }}" alt="">
                     <div class="estatisticas-info">
                         <h4>{{ $totalPratos }}</h4>
                         <span>Pratos</span>

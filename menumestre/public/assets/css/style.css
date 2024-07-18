@@ -14,7 +14,7 @@ html {
 
 /* Estilos para a barra de rolagem */
 ::-webkit-scrollbar {
-    width: 5px; /* largura da barra de rolagem */
+    width: 7px; /* largura da barra de rolagem */
 }
 
 /* Estilos para o track (trilha) da barra de rolagem */
@@ -30,7 +30,7 @@ html {
 
 /* Estilos para o thumb (alça) da barra de rolagem quando passar o mouse por cima */
 ::-webkit-scrollbar-thumb:hover {
-    background: #cc0000; /* cor do thumb quando passar o mouse por cima */
+    background: #8f6b60; /* cor do thumb quando passar o mouse por cima */
 }
 
 
@@ -775,6 +775,7 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   margin-bottom: 10px;
+  font-weight: bold;
 
 }
 
@@ -1042,10 +1043,11 @@ a:focus {
   height: 40px;
   border-radius: 100%;
   background-color: #5D4037;
+  border: solid 1px #5D4037;
   border-radius: 100%;
   margin: 0 2.5px;
   font-size: 18px;
-  transition: all 0.9s;
+  transition: all 0.7s;
 }
 
 .footer_section .footer_social a:hover {

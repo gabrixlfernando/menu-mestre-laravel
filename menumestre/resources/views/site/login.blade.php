@@ -26,15 +26,15 @@
                     </p>
                 </div>
                 <div>
-                    <img class="hamburguer-img" src="{{ asset('../assets/images/login/hamburguer-img.png') }}" alt="Hamburguer">
+                    <img class="hamburguer-img" src="{{ asset('../assets/images/login/bandeja.png') }}" alt="Hamburguer">
                 </div>
-                <img class="bola-icon" src="{{ asset('../assets/images/login/bola-icon.png') }}" alt="Pattern">
+                {{-- <img class="bola-icon" src="{{ asset('../assets/images/login/bola-icon.png') }}" alt="Pattern"> --}}
             </div>
 
             <div class="form-content">
                 <div class="form-title">
                     <div>
-                        <a href="{{ route('sair') }}" title="Voltar ao site"><i class="ri-restaurant-fill"></i></a>
+                        <a href="{{ route('sair') }}" title="Voltar ao site"><i class="ri-arrow-left-circle-line"></i></a>
                     </div>
                     <div>
                         <h2>Login</h2>

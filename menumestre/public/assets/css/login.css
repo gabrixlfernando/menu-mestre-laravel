@@ -27,7 +27,7 @@
             display: grid;
             place-items: center;
             height: 100vh;
-            width: 100vw;       
+            width: 100vw;
         }
 
         .container{
@@ -38,12 +38,12 @@
             height: 600px;
             border-radius: 10px;
         }
-        .form-img{  
+        .form-img{
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;    
+            align-items: center;
             background-color: var(--fundo);
             border-radius: 10px;
             width: 50%;
@@ -55,7 +55,7 @@
             flex-direction: column;
             align-items: center;
             height: 250px;
-    
+
         }
         .form-img div:nth-child(1) .logo{
             width: 200px;
@@ -75,14 +75,15 @@
         }
         .form-img .hamburguer-img{
             z-index: 1;
-            width: 250px;
+            width: 350px;
+            height: 330px;
         }
         .form-img .bola-icon{
             position: absolute;
             right: 10px;
             bottom: 10px;
             height: 250px;
-   
+
         }
         .form-content{
             display: flex;
@@ -94,7 +95,7 @@
             border-radius: 0px 10px 10px 0px;
             box-shadow: var(--shadow-card);
             height: 600px;
-         
+
         }
 
         .form-title {
@@ -110,11 +111,11 @@
             display: flex;
             justify-content: center;
             width: 100%;
-            flex-grow: 1;   
-     
+            flex-grow: 1;
+
         }
         .form-title div i{
-            font-size: 1.5rem;
+            font-size: 4.5rem;
             color: var(--white);
             text-decoration: none;
         }
@@ -138,7 +139,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-    
+
             height: 250px;
             width: 70%;
         }
@@ -157,16 +158,16 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        
+
         }
         form .inputs div i{
-            font-size: 1.2rem;  
-        } 
+            font-size: 1.2rem;
+        }
         form .inputs div:nth-child(3){
             display: flex;
             justify-content: flex-end;
 
-        }  
+        }
 
 
         input[type="email"], input[type="password"]{

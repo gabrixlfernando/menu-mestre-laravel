@@ -1,6 +1,6 @@
 
-  <!-- Modal -->
-  <div class="modal fade" id="createFuncionario" tabindex="-1" aria-labelledby="createFuncionarioLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="createFuncionario" tabindex="-1" aria-labelledby="createFuncionarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,9 +46,15 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col">
+                            <label for="cepFuncionario" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario" onblur="pesquisacep(this.value);" />
+                        </div>
+                        <div class="col">
                             <label for="enderecoFuncionario" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="enderecoFuncionario" name="enderecoFuncionario">
                         </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cidadeFuncionario" class="form-label">Cidade</label>
                             <input type="text" class="form-control" id="cidadeFuncionario" name="cidadeFuncionario">
@@ -59,10 +65,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col">
-                            <label for="cepFuncionario" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario">
-                        </div>
                         <div class="col">
                             <label for="cargo" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="cargo" name="cargo">
@@ -119,4 +121,70 @@
            filename.style.display = 'none';
        }
    }
+
+   function limpa_formulário_cep() {
+        document.getElementById('enderecoFuncionario').value = ("");
+        document.getElementById('cidadeFuncionario').value = ("");
+        document.getElementById('estadoFuncionario').value = ("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            document.getElementById('enderecoFuncionario').value = (conteudo.logradouro);
+            document.getElementById('cidadeFuncionario').value = (conteudo.localidade);
+            document.getElementById('estadoFuncionario').value = (conteudo.uf);
+        } else {
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+
+    function pesquisacep(valor) {
+        var cep = valor.replace(/\D/g, '');
+
+        if (cep != "") {
+            var validacep = /^[0-9]{8}$/;
+
+            if (validacep.test(cep)) {
+                document.getElementById('enderecoFuncionario').value = "...";
+                document.getElementById('cidadeFuncionario').value = "...";
+                document.getElementById('estadoFuncionario').value = "...";
+
+                var script = document.createElement('script');
+
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                document.body.appendChild(script);
+            } else {
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } else {
+            limpa_formulário_cep();
+        }
+    }
+
+    function previewFile() {
+        var preview = document.getElementById('preview');
+        var file = document.querySelector('input[type=file]').files[0];
+        var filename = document.getElementById('filename');
+
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            filename.textContent = file.name;
+            filename.style.display = 'block';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            filename.textContent = '';
+            preview.style.display = 'none';
+            filename.style.display = 'none';
+        }
+    }
 </script>

@@ -163,19 +163,19 @@
                         </a>
                         <p>Obrigado por escolher o Menu Mestre. Aqui, combinamos tradição e inovação para oferecer uma experiência gastronômica única e inesquecível.</p>
                         <div class="footer_social">
-                            <a href="">
+                            <a href="https://www.facebook.com/" target="_blank">
                                 <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                             </a>
-                            <a href="">
+                            <a href="https://x.com/" target="_blank">
                                 <i class="fa-brands fa-twitter" aria-hidden="true"></i>
                             </a>
-                            <a href="">
+                            <a href="https://www.linkedin.com/" target="_blank">
                                 <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                             </a>
-                            <a href="">
+                            <a href="https://www.instagram.com/" target="_blank">
                                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                             </a>
-                            <a href="">
+                            <a href="https://www.pinterest.com" target="_blank">
                                 <i class="fa-brands fa-pinterest" aria-hidden="true"></i>
                             </a>
                         </div>
@@ -195,7 +195,7 @@
             <div class="footer-info">
                 <p>
                     &copy; <span id="displayYear"></span> Todos os direitos reservados por
-                    <a href="#">Cyber Company</a>
+                    <a href="https://cybercompany.smpsistema.com.br/" target="_blank">Cyber Company</a>
                 </p>
             </div>
         </div>

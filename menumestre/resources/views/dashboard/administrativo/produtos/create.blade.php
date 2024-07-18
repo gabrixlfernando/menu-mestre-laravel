@@ -35,18 +35,19 @@
                                             <p id="filename" style="display: none;"></p>
                                         </div>
                                         <div class="form-group">
-
                                             <input type="text" class="form-control" id="nomeProduto"
                                                 name="nomeProduto" maxlength="20" placeholder="Título do produto"
                                                 required>
                                         </div>
                                         <div class="form-group">
-
-                                            <textarea class="form-control" id="descricaoProduto" name="descricaoProduto" rows="4" maxlength="100"
+                                            <textarea class="form-control" id="descricaoProduto" style="resize: none;" name="descricaoProduto" rows="4" maxlength="100"
                                                 placeholder="Descrição do produto" required></textarea>
                                         </div>
                                         <div class="form-group">
-
+                                            <textarea class="form-control" id="altProduto" name="altProduto" style="resize: none;" rows="2" maxlength="250"
+                                                placeholder="Descrição alternativa do produto" required></textarea>
+                                        </div>
+                                        <div class="form-group">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" id="comida"
                                                     name="categoriaProduto" value="comida" required>
@@ -72,7 +73,6 @@
                                                     for="sobremesa">Sobremesa</label>
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -83,11 +83,8 @@
                                                     placeholder="Preço do produto" required>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
                             <div class="modal-footer">
                                 <div class="col">
@@ -96,7 +93,6 @@
                                 <button type="submit" class="btn btn-primary">Confirmar</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
