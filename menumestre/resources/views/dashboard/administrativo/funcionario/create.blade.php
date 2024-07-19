@@ -1,4 +1,3 @@
-
 <!-- Modal -->
 <div class="modal fade" id="createFuncionario" tabindex="-1" aria-labelledby="createFuncionarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -66,6 +65,16 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col">
+                            <label for="bairroFuncionario" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairroFuncionario" name="bairroFuncionario">
+                        </div>
+                        <div class="col">
+                            <label for="numeroFuncionario" class="form-label">Número</label>
+                            <input type="text" class="form-control" id="numeroFuncionario" name="numeroFuncionario">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
                             <label for="cargo" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="cargo" name="cargo">
                         </div>
@@ -95,37 +104,37 @@
     </div>
 </div>
 
-
-  <script>
+<script>
     // Função para exibir a miniatura da imagem selecionada
     function previewFile() {
-       var preview = document.getElementById('preview');
-       var file = document.querySelector('input[type=file]').files[0];
-       var filename = document.getElementById('filename');
+        var preview = document.getElementById('preview');
+        var file = document.querySelector('input[type=file]').files[0];
+        var filename = document.getElementById('filename');
 
-       var reader = new FileReader();
+        var reader = new FileReader();
 
-       reader.onloadend = function () {
-           preview.src = reader.result;
-           preview.style.display = 'block';
-           filename.textContent = file.name; // Exibe o nome real do arquivo
-           filename.style.display = 'block';
-       }
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            filename.textContent = file.name; // Exibe o nome real do arquivo
+            filename.style.display = 'block';
+        }
 
-       if (file) {
-           reader.readAsDataURL(file);
-       } else {
-           preview.src = '';
-           filename.textContent = '';
-           preview.style.display = 'none';
-           filename.style.display = 'none';
-       }
-   }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            filename.textContent = '';
+            preview.style.display = 'none';
+            filename.style.display = 'none';
+        }
+    }
 
-   function limpa_formulário_cep() {
+    function limpa_formulário_cep() {
         document.getElementById('enderecoFuncionario').value = ("");
         document.getElementById('cidadeFuncionario').value = ("");
         document.getElementById('estadoFuncionario').value = ("");
+        document.getElementById('bairroFuncionario').value = ("");
     }
 
     function meu_callback(conteudo) {
@@ -133,6 +142,7 @@
             document.getElementById('enderecoFuncionario').value = (conteudo.logradouro);
             document.getElementById('cidadeFuncionario').value = (conteudo.localidade);
             document.getElementById('estadoFuncionario').value = (conteudo.uf);
+            document.getElementById('bairroFuncionario').value = (conteudo.bairro);
         } else {
             limpa_formulário_cep();
             alert("CEP não encontrado.");
@@ -149,6 +159,7 @@
                 document.getElementById('enderecoFuncionario').value = "...";
                 document.getElementById('cidadeFuncionario').value = "...";
                 document.getElementById('estadoFuncionario').value = "...";
+                document.getElementById('bairroFuncionario').value = "...";
 
                 var script = document.createElement('script');
 
@@ -161,30 +172,6 @@
             }
         } else {
             limpa_formulário_cep();
-        }
-    }
-
-    function previewFile() {
-        var preview = document.getElementById('preview');
-        var file = document.querySelector('input[type=file]').files[0];
-        var filename = document.getElementById('filename');
-
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-            preview.src = reader.result;
-            preview.style.display = 'block';
-            filename.textContent = file.name;
-            filename.style.display = 'block';
-        }
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '';
-            filename.textContent = '';
-            preview.style.display = 'none';
-            filename.style.display = 'none';
         }
     }
 </script>

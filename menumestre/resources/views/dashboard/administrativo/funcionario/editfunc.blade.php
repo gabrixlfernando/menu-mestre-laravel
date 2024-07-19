@@ -1,5 +1,5 @@
-
-  <div class="modal fade" id="editFuncionarioatd{{ $atendente->idFuncionario }}" tabindex="-1" aria-labelledby="editFuncionarioatdLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="editFuncionarioatd{{ $atendente->idFuncionario }}" tabindex="-1" aria-labelledby="editFuncionarioatdLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,13 +13,13 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label for="fotoFuncionario" class="form-label">Foto do Funcionário</label>
+                        <label for="fotoFuncionario{{ $atendente->idFuncionario }}" class="form-label">Foto do Funcionário</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="fotoFuncionario{{ $atendente->idFuncionario }}" name="fotoFuncionario" onchange="exibirNovaImagemAtendente(this, {{ $atendente->idFuncionario }})">
                             <label class="custom-file-label" for="fotoFuncionario{{ $atendente->idFuncionario }}">Escolha uma imagem</label>
                         </div>
                         <div class="mt-3 text-center">
-                            <img id="imagemAtendente{{ $atendente->idFuncionario }}" src="{{ asset('assets/images/funcionarios/' . $atendente->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Funcionário">
+                            <img id="imagemAtendente{{ $atendente->idFuncionario }}" src="{{ asset('../assets/images/funcionarios/' . $atendente->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Funcionário">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -42,11 +42,27 @@
                             <input type="text" class="form-control" id="foneFuncionario" name="foneFuncionario" value="{{ $atendente->foneFuncionario }}">
                         </div>
                     </div>
+
                     <div class="row mb-3">
+                        <div class="col">
+                            <label for="cepFuncionario" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario" value="{{ $atendente->cepFuncionario }}" onblur="pesquisacep(this.value)">
+                        </div>
                         <div class="col">
                             <label for="enderecoFuncionario" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="enderecoFuncionario" name="enderecoFuncionario" value="{{ $atendente->enderecoFuncionario }}">
                         </div>
+                        <div class="col">
+                            <label for="bairroFuncionario" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairroFuncionario" name="bairroFuncionario" value="{{ $atendente->bairroFuncionario }}">
+                        </div>
+                        <div class="col">
+                            <label for="numeroFuncionario" class="form-label">Número</label>
+                            <input type="text" class="form-control" id="numeroFuncionario" name="numeroFuncionario" value="{{ $atendente->numeroFuncionario }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cidadeFuncionario" class="form-label">Cidade</label>
                             <input type="text" class="form-control" id="cidadeFuncionario" name="cidadeFuncionario" value="{{ $atendente->cidadeFuncionario }}">
@@ -56,11 +72,8 @@
                             <input type="text" class="form-control" id="estadoFuncionario" name="estadoFuncionario" value="{{ $atendente->estadoFuncionario }}">
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <div class="col">
-                            <label for="cepFuncionario" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario" value="{{ $atendente->cepFuncionario }}">
-                        </div>
                         <div class="col">
                             <label for="dataContratacao" class="form-label">Data de Contratação</label>
                             <input type="date" class="form-control" id="dataContratacao" name="dataContratacao" value="{{ $atendente->dataContratacao }}">
@@ -69,8 +82,6 @@
                             <label for="cargo" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="cargo" name="cargo" value="{{ $atendente->cargo }}">
                         </div>
-                    </div>
-                    <div class="row mb-3">
                         <div class="col">
                             <label for="salario" class="form-label">Salário</label>
                             <input type="text" class="form-control" id="salario" name="salario" value="{{ $atendente->salario }}">
@@ -100,9 +111,6 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="modal-footer d-flex justify-content-between">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success">Atualizar</button>
@@ -113,31 +121,75 @@
     </div>
 </div>
 
-
-
-  <script>
-
-
+<script>
+    // Função para exibir a miniatura da imagem selecionada
     function exibirNovaImagemAtendente(input, idFuncionario) {
-    // Verifica se um arquivo foi selecionado
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        // Define a função que será chamada quando o arquivo for lido
-        reader.onload = function(e) {
-            // Obtém a URL da imagem carregada
-            var novaImagemURL = e.target.result;
+            reader.onload = function(e) {
+                var novaImagemURL = e.target.result;
+                var idImagem = 'imagemAtendente' + idFuncionario;
+                document.getElementById(idImagem).src = novaImagemURL;
+            }
 
-            // Monta o ID específico da tag img para o atendente
-            var idImagem = 'imagemAtendente' + idFuncionario;
-
-            // Atualiza a src da tag img com a nova imagem
-            document.getElementById(idImagem).src = novaImagemURL;
+            reader.readAsDataURL(input.files[0]);
         }
-
-        // Lê o conteúdo do arquivo como uma URL de dados
-        reader.readAsDataURL(input.files[0]);
     }
-}
 
+    // Função para limpar os campos de endereço
+    function limpa_formulário_cep() {
+        document.getElementById('enderecoFuncionario').value = "";
+        document.getElementById('cidadeFuncionario').value = "";
+        document.getElementById('estadoFuncionario').value = "";
+        document.getElementById('bairroFuncionario').value = "";
+    }
+
+    // Função de callback da API ViaCEP
+    function meu_callback(conteudo) {
+        console.log(conteudo); // Adicione este log para depuração
+        if (!("erro" in conteudo)) {
+            document.getElementById('enderecoFuncionario').value = conteudo.logradouro || "";
+            document.getElementById('bairroFuncionario').value = conteudo.bairro || "";
+            document.getElementById('cidadeFuncionario').value = conteudo.localidade || "";
+            document.getElementById('estadoFuncionario').value = conteudo.uf || "";
+        } else {
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+
+    // Função para pesquisar o CEP
+    function pesquisacep(valor) {
+        var cep = valor.replace(/\D/g, '');
+
+        if (cep !== "") {
+            var validacep = /^[0-9]{8}$/;
+
+            if (validacep.test(cep)) {
+                // Exibe texto de carregamento
+                document.getElementById('enderecoFuncionario').value = "...";
+                document.getElementById('bairroFuncionario').value = "...";
+                document.getElementById('cidadeFuncionario').value = "...";
+                document.getElementById('estadoFuncionario').value = "...";
+
+                // Remove o script existente, se houver
+                var existingScript = document.getElementById('viaCepScript');
+                if (existingScript) {
+                    existingScript.parentNode.removeChild(existingScript);
+                }
+
+                // Adiciona o script da API ViaCEP
+                var script = document.createElement('script');
+                script.id = 'viaCepScript'; // Adiciona um ID para facilitar a remoção
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+                document.body.appendChild(script);
+            } else {
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } else {
+            limpa_formulário_cep();
+        }
+    }
 </script>

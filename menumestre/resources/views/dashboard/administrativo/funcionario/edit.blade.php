@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="mt-3 text-center">
-                            <img id="imagemFuncionario{{ $administrador->idFuncionario }}" src="{{ asset('assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Funcionário">
+                            <img id="imagemFuncionario{{ $administrador->idFuncionario }}" src="{{ asset('../assets/images/funcionarios/' . $administrador->fotoFuncionario) }}" class="img-fluid" alt="Imagem do Funcionário">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -45,9 +45,23 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col">
+                            <label for="cepFuncionario" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario" value="{{ $administrador->cepFuncionario }}" onblur="buscarCEP(this.value)">
+                        </div>
+                        <div class="col">
                             <label for="enderecoFuncionario" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="enderecoFuncionario" name="enderecoFuncionario" value="{{ $administrador->enderecoFuncionario }}">
                         </div>
+                        <div class="col">
+                            <label for="bairroFuncionario" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairroFuncionario" name="bairroFuncionario" value="{{ $administrador->bairroFuncionario }}">
+                        </div>
+                        <div class="col">
+                            <label for="numeroFuncionario" class="form-label">Número</label>
+                            <input type="text" class="form-control" id="numeroFuncionario" name="numeroFuncionario" value="{{ $administrador->numeroFuncionario }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cidadeFuncionario" class="form-label">Cidade</label>
                             <input type="text" class="form-control" id="cidadeFuncionario" name="cidadeFuncionario" value="{{ $administrador->cidadeFuncionario }}">
@@ -59,10 +73,6 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col">
-                            <label for="cepFuncionario" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cepFuncionario" name="cepFuncionario" value="{{ $administrador->cepFuncionario }}">
-                        </div>
-                        <div class="col">
                             <label for="dataContratacao" class="form-label">Data de Contratação</label>
                             <input type="date" class="form-control" id="dataContratacao" name="dataContratacao" value="{{ $administrador->dataContratacao }}">
                         </div>
@@ -70,8 +80,6 @@
                             <label for="cargo" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="cargo" name="cargo" value="{{ $administrador->cargo }}">
                         </div>
-                    </div>
-                    <div class="row mb-3">
                         <div class="col">
                             <label for="salario" class="form-label">Salário</label>
                             <input type="text" class="form-control" id="salario" name="salario" value="{{ $administrador->salario }}">
@@ -111,10 +119,8 @@
     </div>
 </div>
 
-
-
-  <script>
-     function exibirNovaImagem(input, idFuncionario) {
+<script>
+    function exibirNovaImagem(input, idFuncionario) {
         // Verifica se um arquivo foi selecionado
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -136,5 +142,30 @@
         }
     }
 
+    function buscarCEP(cep) {
+        // Remove caracteres não numéricos
+        cep = cep.replace(/\D/g, '');
 
+        // Verifica se o CEP possui 8 dígitos
+        if (cep.length === 8) {
+            var url = 'https://viacep.com.br/ws/' + cep + '/json/';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (!("erro" in data)) {
+                        document.getElementById('enderecoFuncionario').value = data.logradouro;
+                        document.getElementById('bairroFuncionario').value = data.bairro;
+                        document.getElementById('cidadeFuncionario').value = data.localidade;
+                        document.getElementById('estadoFuncionario').value = data.uf;
+                    } else {
+                        alert("CEP não encontrado.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar o CEP:', error);
+                    alert('Erro ao buscar o CEP.');
+                });
+        }
+    }
 </script>

@@ -147,7 +147,7 @@
                                 <img class="categoria-{{ $detalhe_produto['categoriaProduto'] }}"
                                     style="border: 4px solid {{ $cor }};"
                                     src="{{ asset('../assets/images/cardapio/' . $detalhe_produto['fotoProduto']) }}"
-                                    alt="teste">
+                                    alt="{{ $detalhe_produto['altProduto'] }}">
                             </div>
                             <div class="pratos-elemento-detalhes">
                                 <h4>{{ $detalhe_produto->idProduto }} - {{ $detalhe_produto->nomeProduto }}</h4>

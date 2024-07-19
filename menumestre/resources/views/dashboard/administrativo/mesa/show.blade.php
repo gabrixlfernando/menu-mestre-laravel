@@ -43,7 +43,7 @@
                 @forelse ($produtosMesa as $index => $pedido)
                     <tr>
                         <td>{{ $pedido['produto']->nomeProduto }}</td>
-                        <td>R$ {{ $pedido['preco_unitario'] }}</td>
+                        <td style="font-weight: bold;">R$ {{ $pedido['preco_unitario'] }}</td>
                         <td>{{ $pedido['quantidade'] }}</td>
                         <td>
                             <button class="btn btn-danger remover-produto" data-index="{{ $index }}">Remover</button>
@@ -69,10 +69,10 @@
                 $totalComTaxaGarcom = $totalPedidos + $taxaGarcom;
             @endphp
 
-            <p>Total dos Pedidos: R$ <span id="total-pedidos">{{ number_format($totalPedidos, 2, ',', '.') }}</span></p>
-            <p>Taxa Garçom (10%): R$ <span id="taxa-garcom">{{ number_format($taxaGarcom, 2, ',', '.') }}</span></p>
-            <p>Total com Taxa Garçom: R$ <span
-                    id="total-com-taxa">{{ number_format($totalComTaxaGarcom, 2, ',', '.') }}</span></p>
+            <p>Total dos Pedidos:  <span style=" font-size: 19px; font-weight: bold;" id="total-pedidos">R$ {{ number_format($totalPedidos, 2, ',', '.') }}</span></p>
+            <p>Taxa Garçom (10%):  <span style=" font-size: 19px; font-weight: bold;" id="taxa-garcom">R$ {{ number_format($taxaGarcom, 2, ',', '.') }}</span></p>
+            <p>Total com Taxa Garçom: <span style=" font-size: 19px; font-weight: bold;"
+                    id="total-com-taxa"> R$ {{ number_format($totalComTaxaGarcom, 2, ',', '.') }}</span></p>
         @endif
 
         <div id="mensagem-remocao" class="alert alert-success" style="display: none;">

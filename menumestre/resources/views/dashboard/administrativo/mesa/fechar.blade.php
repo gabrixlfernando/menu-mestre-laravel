@@ -25,12 +25,12 @@
                             $totalComTaxaGarcom = $totalPedidos + $taxaGarcom;
                         @endphp
 
-                        <p>Total dos Pedidos: R$ <span
-                                id="total-pedidos">{{ number_format($totalPedidos, 2, ',', '.') }}</span></p>
-                        <p>Taxa Garçom (10%): R$ <span
-                                id="taxa-garcom">{{ number_format($taxaGarcom, 2, ',', '.') }}</span></p>
-                        <p>Total com Taxa Garçom: R$ <span
-                                id="total-com-taxa">{{ number_format($totalComTaxaGarcom, 2, ',', '.') }}</span></p>
+                        <p>Total dos Pedidos:  <span style=" font-size: 20px; font-weight: bold;"
+                                id="total-pedidos">R$ {{ number_format($totalPedidos, 2, ',', '.') }}</span></p>
+                        <p>Taxa Garçom (10%):  <span style=" font-size: 20px; font-weight: bold;"
+                                id="taxa-garcom">R$ {{ number_format($taxaGarcom, 2, ',', '.') }}</span></p>
+                        <p>Total com Taxa Garçom:  <span style=" font-size: 20px; font-weight: bold;"
+                                id="total-com-taxa">R$ {{ number_format($totalComTaxaGarcom, 2, ',', '.') }}</span></p>
                     @endif
                     <div class="form-group" style="display: block">
                         <label for="valor_dado_cliente">Valor Dado pelo Cliente:</label>
@@ -45,7 +45,7 @@
                     <div class="container mt-3 text-center" id="div-troco" style="display: none;">
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <div id="troco"></div>
+                                <div style=" font-size: 22px; font-weight: bold;" id="troco"></div>
                             </div>
                         </div>
                     </div>
